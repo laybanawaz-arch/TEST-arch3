@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HennaLink | Local Artist & Pop-Up Radar</title>
+    
+    <!-- Leaflet CSS for the Interactive Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    
     <style>
         :root {
             --primary: #8b0000;
@@ -57,52 +61,13 @@
             border-bottom: 2px solid #f9f2f2;
             padding-bottom: 10px;
         }
-        /* Search & Map Mockup */
-        .search-bar-box {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .search-bar-box input {
-            flex: 1;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            font-size: 1rem;
-            outline: none;
-        }
-        .search-bar-box button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 0 20px;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .map-mockup {
-            background: #e9e5de;
-            height: 220px;
+        /* Real Interactive Map Styling */
+        #map {
+            height: 350px;
+            width: 100%;
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-            color: #555;
-            font-weight: 500;
-        }
-        .map-pin-badge {
-            position: absolute;
-            background: white;
-            padding: 8px 12px;
-            border-radius: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            margin-top: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
         /* Artist Cards Grid */
         .artist-grid {
@@ -175,7 +140,7 @@
             font-size: 0.9rem;
             margin-top: 12px;
         }
-        /* Artist Submission Form */
+        /* Form Styling */
         form {
             display: flex;
             flex-direction: column;
@@ -215,26 +180,18 @@
 
     <div class="container">
 
-        <!-- Section 1: Interactive Radar Search & Map -->
+        <!-- Section 1: Real Interactive Leaflet Map -->
         <div class="section-card">
-            <h2>📍 Live Area Radar</h2>
-            <div class="search-bar-box">
-                <input type="text" placeholder="Enter your city or zip code (e.g., Ronkonkoma, NY)..." id="searchInput">
-                <button onclick="alert('Radar centered on your search area!')">Search</button>
-            </div>
-            <div class="map-mockup">
-                <span>🗺️ Interactive Map View (Suffolk County & Surrounding Areas)</span>
-                <div class="map-pin-badge" style="top: 20px; left: 20px;">
-                    🔴 <strong>Henna By BiBi</strong><br><span style="font-size:0.75rem;">Active Pop-Up: Local Market (Until 4 PM)</span>
-                </div>
-            </div>
+            <h2>📍 Live Area Radar Map</h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Explore live pop-up markers across the region. Tap any pin to see artist details.</p>
+            
+            <!-- This container turns into a fully interactive map -->
+            <div id="map"></div>
         </div>
 
-        <!-- Section 2: Browse Local Artists & Portfolios -->
+        <!-- Section 2: Featured Local Artists & Portfolios -->
         <div class="section-card">
             <h2>✨ Featured Local Artists & Portfolios</h2>
-            <p style="font-size: 0.9rem; color: var(--text-muted);">Browse nearby artist profiles, view flash sheets, read client reviews, and book directly.</p>
-            
             <div class="artist-grid">
                 <!-- Artist 1 -->
                 <div class="artist-card">
@@ -251,7 +208,7 @@
                         <div class="thumb">Mandala</div>
                         <div class="thumb">Bridal</div>
                     </div>
-                    <a href="https://linktr.ee" class="target-blank" class="book-btn">Book Appointment / View Flash</a>
+                    <a href="https://linktr.ee" target="_blank" class="book-btn">Book Appointment / View Flash</a>
                 </div>
 
                 <!-- Artist 2 -->
@@ -274,21 +231,21 @@
             </div>
         </div>
 
-        <!-- Section 3: Artist Pop-Up & Portfolio Submission Form -->
+        <!-- Section 3: Artist Pop-Up Submission Form -->
         <div class="section-card">
             <h2>🎨 Are You a Henna Artist? Broadcast Your Pop-Up</h2>
-            <p style="font-size: 0.9rem; color: var(--text-muted);">Add your location, upload your flash designs, and let local clients find you instantly.</p>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Fill out your pop-up details to instantly add your pin to the live map radar.</p>
             
-            <form onsubmit="event.preventDefault(); alert('Your pop-up location has been broadcasted to the HennaLink radar!');">
-                <input type="text" placeholder="Artist / Business Name" required>
-                <input type="text" placeholder="Current Location / Booth Name (e.g., Smithtown Street Fair - Booth 4)" required>
-                <select required>
+            <form id="popupForm">
+                <input type="text" id="artistName" placeholder="Artist / Business Name" required>
+                <input type="text" id="locationName" placeholder="Location Name (e.g., Ronkonkoma Park - Booth 3)" required>
+                <select id="popupType" required>
                     <option value="">Select Status</option>
                     <option value="active">Active Pop-Up Right Now (🔴)</option>
                     <option value="weekend">Weekend Market / Fair (🔵)</option>
                     <option value="walkin">Salon / Studio Walk-Ins Open (🟣)</option>
                 </select>
-                <textarea rows="3" placeholder="Paste your Booking Link (Linktree / Instagram DM / Website URL)" required></textarea>
+                <textarea id="bookingLink" rows="2" placeholder="Paste your Booking Link or Instagram Handle" required></textarea>
                 <button type="submit" class="submit-btn">Publish My Live Radar Pin</button>
             </form>
         </div>
@@ -299,5 +256,47 @@
         &copy; 2026 HennaLink &bull; Connecting Communities Through Body Art
     </footer>
 
+    <!-- Leaflet JS Script for Interactive Map Logic -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        // Initialize map centered around Ronkonkoma / Suffolk County area
+        var map = L.map('map').setView([40.8173, -73.1251], 11);
+
+        // Add clean open-source map tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Default Artist Pins
+        var marker1 = L.marker([40.8173, -73.1251]).addTo(map);
+        marker1.bindPopup("<b>Henna By BiBi</b><br>📍 Ronkonkoma, NY<br>Status: Active Pop-Up!<br><a href='https://linktr.ee' target='_blank'>Book Appointment</a>");
+
+        var marker2 = L.marker([40.7289, -73.2161]).addTo(map);
+        marker2.bindPopup("<b>Island Henna Studio</b><br>📍 Islip, NY<br>Status: Walk-Ins Open<br><a href='https://linktr.ee' target='_blank'>Book Appointment</a>");
+
+        // Handle Form Submission to dynamically add a new pin on the map
+        document.getElementById('popupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            var name = document.getElementById('artistName').value;
+            var loc = document.getElementById('locationName').value;
+            var link = document.getElementById('bookingLink').value;
+
+            // For demonstration when submitting from a mobile device without exact GPS lat/long input, 
+            // we place it slightly offset near the center so it appears immediately on the map!
+            var randomLat = 40.8173 + (Math.random() - 0.5) * 0.05;
+            var randomLng = -73.1251 + (Math.random() - 0.5) * 0.05;
+
+            var newMarker = L.marker([randomLat, randomLng]).addTo(map);
+            newMarker.bindPopup("<b>" + name + "</b><br>📍 " + loc + "<br>Status: Live Pop-Up!<br><a href='" + link + "' target='_blank'>Book / Visit</a>").openPopup();
+
+            // Center map on the newly added pin
+            map.setView([randomLat, randomLng], 13);
+
+            alert('Success! Your pop-up has been broadcasted and pinned to the live map radar.');
+            document.getElementById('popupForm').reset();
+        });
+    </script>
 </body>
 </html>
