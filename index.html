@@ -61,9 +61,33 @@
             border-bottom: 2px solid #f9f2f2;
             padding-bottom: 10px;
         }
+        /* Filter Bar */
+        .filter-bar {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .filter-chip {
+            background: var(--accent);
+            border: 1px solid #e0d4c3;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            white-space: nowrap;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+        .filter-chip.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
         /* Real Interactive Map Styling */
         #map {
-            height: 350px;
+            height: 330px;
             width: 100%;
             border-radius: 12px;
             margin-top: 15px;
@@ -111,6 +135,16 @@
             font-weight: bold;
             color: #d4a373;
         }
+        .paste-badge {
+            display: inline-block;
+            background: #e6dfd5;
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 6px;
+            margin-top: 4px;
+            font-weight: 600;
+            color: #555;
+        }
         .portfolio-preview {
             display: flex;
             gap: 8px;
@@ -125,11 +159,17 @@
             align-items: center;
             justify-content: center;
             font-size: 0.75rem;
-            color: #666;
+            color: #555;
             text-align: center;
+            font-weight: 500;
+        }
+        .action-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
         }
         .book-btn {
-            display: block;
+            flex: 1;
             background-color: var(--primary);
             color: white;
             text-align: center;
@@ -137,8 +177,51 @@
             border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 0.9rem;
-            margin-top: 12px;
+            font-size: 0.85rem;
+        }
+        .claim-btn {
+            background-color: #d4a373;
+            color: white;
+            border: none;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+        /* Healed Stain Gallery Feed */
+        .stain-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .stain-card {
+            background: var(--accent);
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #f0e6dc;
+        }
+        .stain-img-placeholder {
+            height: 90px;
+            background: #d8c9bc;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: #555;
+            margin-bottom: 6px;
+        }
+        /* QR Generator Box */
+        .qr-box {
+            background: var(--accent);
+            border: 2px dashed #d8c9bc;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 15px;
         }
         /* Form Styling */
         form {
@@ -180,35 +263,45 @@
 
     <div class="container">
 
-        <!-- Section 1: Real Interactive Leaflet Map -->
+        <!-- Section 1: Live Area Radar Map with Filters -->
         <div class="section-card">
             <h2>📍 Live Area Radar Map</h2>
-            <p style="font-size: 0.9rem; color: var(--text-muted);">Explore live pop-up markers across the region. Tap any pin to see artist details.</p>
             
-            <!-- This container turns into a fully interactive map -->
+            <!-- Paste & Feature Filters -->
+            <div class="filter-bar">
+                <div class="filter-chip active" onclick="alert('Showing All Active Pop-Ups')">🌐 All Artists</div>
+                <div class="filter-chip" onclick="alert('Filtered: 100% Organic Henna')">🌿 Organic Henna</div>
+                <div class="filter-chip" onclick="alert('Filtered: Jagua Dark Stain')">🫐 Jagua Stain</div>
+                <div class="filter-chip" onclick="alert('Filtered: Walk-Ins Open Now')">⚡ Walk-Ins Open</div>
+            </div>
+
             <div id="map"></div>
         </div>
 
-        <!-- Section 2: Featured Local Artists & Portfolios -->
+        <!-- Section 2: Featured Local Artists, Portfolios & Quick Claim -->
         <div class="section-card">
-            <h2>✨ Featured Local Artists & Portfolios</h2>
+            <h2>✨ Featured Local Artists & Flash Menus</h2>
             <div class="artist-grid">
                 <!-- Artist 1 -->
                 <div class="artist-card">
                     <div class="artist-header">
                         <div>
                             <p class="artist-name">Henna By BiBi</p>
-                            <span class="artist-location">📍 Ronkonkoma, NY (Pop-Up Active)</span>
+                            <span class="artist-location">📍 Ronkonkoma, NY (Active)</span>
+                            <div><span class="paste-badge">🌿 100% Organic Henna</span></div>
                         </div>
                         <div class="rating">⭐ 5.0 (48)</div>
                     </div>
-                    <p style="font-size: 0.85rem; margin: 5px 0;">Specializes in bridal botanicals, geometric cuffs, and fine-line mandalas.</p>
+                    <p style="font-size: 0.85rem; margin: 5px 0;">Specializes in bridal botanicals and geometric cuffs.</p>
                     <div class="portfolio-preview">
                         <div class="thumb">Floral</div>
                         <div class="thumb">Mandala</div>
                         <div class="thumb">Bridal</div>
                     </div>
-                    <a href="https://linktr.ee" target="_blank" class="book-btn">Book Appointment / View Flash</a>
+                    <div class="action-row">
+                        <a href="https://linktr.ee" target="_blank" class="book-btn">Book Appointment</a>
+                        <button class="claim-btn" onclick="alert('Flash Design #1 Reserved! Show this code to BiBi at the booth.')">Claim Flash</button>
+                    </div>
                 </div>
 
                 <!-- Artist 2 -->
@@ -216,37 +309,79 @@
                     <div class="artist-header">
                         <div>
                             <p class="artist-name">Island Henna Studio</p>
-                            <span class="artist-location">📍 Islip, NY (Walk-Ins Open)</span>
+                            <span class="artist-location">📍 Islip, NY (Walk-Ins)</span>
+                            <div><span class="paste-badge">🫐 Jagua Dark Stain</span></div>
                         </div>
                         <div class="rating">⭐ 4.9 (32)</div>
                     </div>
-                    <p style="font-size: 0.85rem; margin: 5px 0;">Organic natural henna paste, custom finger bands, and weekend market stalls.</p>
+                    <p style="font-size: 0.85rem; margin: 5px 0;">Organic paste, custom finger bands, and weekend market stalls.</p>
                     <div class="portfolio-preview">
                         <div class="thumb">Stain</div>
                         <div class="thumb">Cuffs</div>
                         <div class="thumb">Stripes</div>
                     </div>
-                    <a href="https://linktr.ee" target="_blank" class="book-btn">Book Appointment / View Flash</a>
+                    <div class="action-row">
+                        <a href="https://linktr.ee" target="_blank" class="book-btn">Book Appointment</a>
+                        <button class="claim-btn" onclick="alert('Flash Design #2 Reserved!')">Claim Flash</button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Section 3: Artist Pop-Up Submission Form -->
+        <!-- Section 3: Healed Stain Gallery Feed (Social Proof) -->
         <div class="section-card">
-            <h2>🎨 Are You a Henna Artist? Broadcast Your Pop-Up</h2>
-            <p style="font-size: 0.9rem; color: var(--text-muted);">Fill out your pop-up details to instantly add your pin to the live map radar.</p>
+            <h2>🌿 Community Healed Stain Feed</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Real 48-hour dark stain results uploaded by local clients!</p>
+            
+            <div class="stain-grid">
+                <div class="stain-card">
+                    <div class="stain-img-placeholder">Stain Photo</div>
+                    <span style="font-size: 0.8rem; font-weight: bold;">@ Henna By BiBi</span>
+                </div>
+                <div class="stain-card">
+                    <div class="stain-img-placeholder">Stain Photo</div>
+                    <span style="font-size: 0.8rem; font-weight: bold;">@ Island Henna</span>
+                </div>
+                <div class="stain-card">
+                    <div class="stain-img-placeholder">Stain Photo</div>
+                    <span style="font-size: 0.8rem; font-weight: bold;">@ Henna By BiBi</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Artist QR Code Generator Tool -->
+        <div class="section-card">
+            <h2>📱 Artist Tool: Print Your Table QR Code</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Artists can generate a unique QR code to display on their farmers market or booth table so clients can scan and view live flash menus instantly.</p>
+            <div class="qr-box">
+                <div style="font-size: 2.5rem; margin-bottom: 5px;">📷 [ QR CODE ]</div>
+                <p style="font-size: 0.85rem; margin: 0 0 10px 0; font-weight: bold;">Scan to View Live Radar & Flash Sheet</p>
+                <button class="claim-btn" onclick="alert('Generating printable QR code sheet...')">Download Printable QR Sign</button>
+            </div>
+        </div>
+
+        <!-- Section 5: Artist Pop-Up Submission Form -->
+        <div class="section-card">
+            <h2>🎨 Broadcast Your Pop-Up & Upload Stain Photos</h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Fill out your details to drop your live pin and showcase your healed stain portfolio.</p>
             
             <form id="popupForm">
                 <input type="text" id="artistName" placeholder="Artist / Business Name" required>
-                <input type="text" id="locationName" placeholder="Location Name (e.g., Ronkonkoma Park - Booth 3)" required>
+                <input type="text" id="locationName" placeholder="Location Name (e.g., Ronkonkoma Street Fair)" required>
+                <select id="pasteType" required>
+                    <option value="">Select Paste Type</option>
+                    <option value="organic">100% Organic Natural Henna (Red-Brown)</option>
+                    <option value="jagua">Jagua Gel (Blue-Black Stain)</option>
+                    <option value="both">Both Organic & Jagua</option>
+                </select>
                 <select id="popupType" required>
                     <option value="">Select Status</option>
                     <option value="active">Active Pop-Up Right Now (🔴)</option>
                     <option value="weekend">Weekend Market / Fair (🔵)</option>
                     <option value="walkin">Salon / Studio Walk-Ins Open (🟣)</option>
                 </select>
-                <textarea id="bookingLink" rows="2" placeholder="Paste your Booking Link or Instagram Handle" required></textarea>
-                <button type="submit" class="submit-btn">Publish My Live Radar Pin</button>
+                <textarea id="bookingLink" rows="2" placeholder="Paste your Booking Link (Linktree / Instagram)" required></textarea>
+                <button type="submit" class="submit-btn">Publish My Live Radar Pin & QR Code</button>
             </form>
         </div>
 
@@ -259,23 +394,19 @@
     <!-- Leaflet JS Script for Interactive Map Logic -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
-        // Initialize map centered around Ronkonkoma / Suffolk County area
         var map = L.map('map').setView([40.8173, -73.1251], 11);
 
-        // Add clean open-source map tiles
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
 
-        // Default Artist Pins
         var marker1 = L.marker([40.8173, -73.1251]).addTo(map);
-        marker1.bindPopup("<b>Henna By BiBi</b><br>📍 Ronkonkoma, NY<br>Status: Active Pop-Up!<br><a href='https://linktr.ee' target='_blank'>Book Appointment</a>");
+        marker1.bindPopup("<b>Henna By BiBi</b><br>📍 Ronkonkoma, NY<br>🌿 Organic Henna<br><a href='https://linktr.ee' target='_blank'>Book Appointment</a>");
 
         var marker2 = L.marker([40.7289, -73.2161]).addTo(map);
-        marker2.bindPopup("<b>Island Henna Studio</b><br>📍 Islip, NY<br>Status: Walk-Ins Open<br><a href='https://linktr.ee' target='_blank'>Book Appointment</a>");
+        marker2.bindPopup("<b>Island Henna Studio</b><br>📍 Islip, NY<br>🫐 Jagua Stain<br><a href='https://linktr.ee' target='_blank'>Book Appointment</a>");
 
-        // Handle Form Submission to dynamically add a new pin on the map
         document.getElementById('popupForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -283,18 +414,15 @@
             var loc = document.getElementById('locationName').value;
             var link = document.getElementById('bookingLink').value;
 
-            // For demonstration when submitting from a mobile device without exact GPS lat/long input, 
-            // we place it slightly offset near the center so it appears immediately on the map!
             var randomLat = 40.8173 + (Math.random() - 0.5) * 0.05;
             var randomLng = -73.1251 + (Math.random() - 0.5) * 0.05;
 
             var newMarker = L.marker([randomLat, randomLng]).addTo(map);
             newMarker.bindPopup("<b>" + name + "</b><br>📍 " + loc + "<br>Status: Live Pop-Up!<br><a href='" + link + "' target='_blank'>Book / Visit</a>").openPopup();
 
-            // Center map on the newly added pin
             map.setView([randomLat, randomLng], 13);
 
-            alert('Success! Your pop-up has been broadcasted and pinned to the live map radar.');
+            alert('Success! Your pop-up is live on the radar map and your table QR code profile has been created.');
             document.getElementById('popupForm').reset();
         });
     </script>
