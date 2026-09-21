@@ -380,9 +380,11 @@
             max-width: 520px; width: 100%;
             border: 1px solid var(--border-warm);
             text-align: center;
+            max-height: 90vh;
+            overflow-y: auto;
         }
         .role-choice-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 25px 0;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0;
         }
         .role-option-card {
             background: var(--gold-light);
@@ -426,13 +428,14 @@
 </head>
 <body>
 
-    <!-- Onboarding Modal -->
+    <!-- Onboarding Modal with Instant Promo & Notification Opt-In -->
     <div class="onboarding-overlay" id="onboardingModal">
         <div class="onboarding-card">
             <h2>Welcome to HennaLink</h2>
-            <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 20px;">Connect with local artists or manage your studio.</p>
+            <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 15px;">Connect with local artists or manage your studio.</p>
             <form id="signupForm" style="text-align: left;">
                 <input type="email" id="signupEmail" placeholder="Enter your email address" required style="margin-bottom: 15px;">
+                
                 <div class="role-choice-grid">
                     <div class="role-option-card" id="customerCard" onclick="selectRoleChoice('customer')">
                         <h4 style="margin:0 0 5px 0; color:var(--primary-maroon);">👤 Customer</h4>
@@ -444,6 +447,15 @@
                     </div>
                 </div>
                 <input type="hidden" id="selectedRole" value="">
+
+                <!-- Instant Notification & Promo Consent Checkbox -->
+                <div style="background: var(--gold-light); padding: 12px 15px; border-radius: 12px; border: 1px solid var(--gold-accent); margin-bottom: 20px; font-size: 0.82rem;">
+                    <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; color: var(--primary-dark); font-weight: 600;">
+                        <input type="checkbox" id="promoConsent" checked style="width: auto; margin-top: 2px;">
+                        <span>🔔 Yes! Send me exclusive artist promotions, local event alerts, and automated appointment reminders to my email.</span>
+                    </label>
+                </div>
+
                 <button type="submit" class="btn-primary">Enter HennaLink</button>
             </form>
         </div>
@@ -469,6 +481,37 @@
         <!-- ================= CUSTOMER PORTAL ================= -->
         <div id="customerPortalView" class="portal-view active-view">
             
+            <!-- Notifications & Promotions Live Banner -->
+            <div class="content-card" style="background: linear-gradient(135deg, var(--gold-light) 0%, #fff 100%); border-color: var(--gold-accent);">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h3 class="section-title" style="margin-bottom: 4px;">🎉 Active Promotions & Event Updates</h3>
+                        <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted);">Subscribed to alerts for: <strong id="subscribedEmailDisplay" style="color:var(--primary-maroon);">user@email.com</strong></p>
+                    </div>
+                    <span style="background: var(--primary-maroon); color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: bold;">Notifications ON</span>
+                </div>
+                <div style="margin-top: 15px; font-size: 0.88rem; border-top: 1px solid var(--border-warm); padding-top: 12px;">
+                    ✨ <strong>Special Offer:</strong> Use code <code>HENNALINK15</code> for 15% off your first booking with any featured artist this month!<br>
+                    📍 <strong>Upcoming Pop-Up:</strong> Suffolk County Street Fair Pop-Up this Saturday from 10:00 AM – 4:00 PM.
+                </div>
+            </div>
+
+            <!-- Customer "My Bookings & Session Countdown" Card -->
+            <div class="content-card">
+                <h3 class="section-title">📅 My Bookings & Session Countdown</h3>
+                <p class="section-subtitle">Track your upcoming appointments, countdowns, and deposit receipts.</p>
+                <div id="customerMyBookingsList" style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="background: var(--gold-light); border: 1px solid var(--gold-accent); padding: 16px; border-radius: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <div>
+                            <strong style="color: var(--primary-dark); font-size: 1.05rem;">Henna By BiBi &bull; Mandala Palm ($40)</strong>
+                            <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">Scheduled: Sept 22, 2:00 PM (Deposit: $15 Confirmed)</div>
+                            <div style="font-size: 0.82rem; color: var(--primary-maroon); font-weight: bold; margin-top: 4px;">⏳ Session Countdown: 2 Days to Go!</div>
+                        </div>
+                        <button onclick="if(confirm('Cancel or reschedule this appointment?')) { alert('Request submitted to artist.'); this.parentElement.remove(); }" style="background: #c0392b; color: white; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 0.8rem;">Cancel / Reschedule</button>
+                    </div>
+                </div>
+            </div>
+
             <div class="content-card">
                 <h3 class="section-title">📍 Live Area Radar Map</h3>
                 <p class="section-subtitle">Artists currently broadcasting live walk-in availability or scheduled pop-ups.</p>
@@ -498,9 +541,9 @@
                     <div class="artist-card">
                         <div class="artist-header">
                             <div>
-                                <h4 class="artist-name">Henna By BiBi</h4>
-                                <span class="artist-location">📍 Ronkonkoma, NY</span>
-                                <div><span class="paste-tag">🌿 100% Organic Natural Henna</span></div>
+                                <h4 class="artist-name" id="displayArtistName">Henna By BiBi</h4>
+                                <span class="artist-location" id="displayArtistLocation">📍 Ronkonkoma, NY</span>
+                                <div><span class="paste-tag" id="displayArtistPaste">🌿 100% Organic Natural Henna</span></div>
                             </div>
                             <div class="rating-badge">⭐ 5.0</div>
                         </div>
@@ -523,12 +566,22 @@
                         
                         <button class="btn-primary" style="margin-top: 10px;" onclick="openBookingModal('Henna By BiBi')">Book & Consultation Wizard</button>
                         
-                        <!-- Verified Reviews -->
+                        <!-- Verified Reviews & Healed Stain Upload -->
                         <div style="margin-top: 20px; border-top: 1px solid var(--border-warm); padding-top: 15px;">
                             <p style="font-size: 0.85rem; font-weight: bold; margin: 0 0 8px 0;">Verified Client Reviews & Healed Stains:</p>
-                            <div class="review-card">
-                                <strong>Aisha M.</strong> ⭐⭐⭐⭐⭐<br>
-                                "The organic stain developed into such a rich mahogany color by day two! BiBi was so gentle."
+                            <div id="reviewsFeedContainer">
+                                <div class="review-card">
+                                    <strong>Aisha M.</strong> ⭐⭐⭐⭐⭐<br>
+                                    "The organic stain developed into such a rich mahogany color by day two! BiBi was so gentle."
+                                </div>
+                            </div>
+
+                            <!-- Client Healed Stain Upload Form -->
+                            <div style="margin-top: 15px; background: #fff; padding: 12px; border-radius: 10px; border: 1px solid var(--border-warm);">
+                                <p style="font-size: 0.8rem; font-weight: bold; margin: 0 0 6px 0; color: var(--primary-maroon);">📸 Upload Your 48-Hour Healed Stain Photo:</p>
+                                <input type="text" id="clientReviewName" placeholder="Your Name" style="margin-bottom: 8px; font-size: 0.82rem; padding: 8px 12px;">
+                                <textarea id="clientReviewText" placeholder="Write review & describe your stain result..." style="margin-bottom: 8px; font-size: 0.82rem; padding: 8px 12px; height: 60px;"></textarea>
+                                <button onclick="submitClientReview()" class="btn-primary" style="padding: 8px; font-size: 0.82rem;">Submit Review & Healed Stain</button>
                             </div>
                         </div>
                     </div>
@@ -550,6 +603,29 @@
                     <span id="statusIndicatorBadge" class="status-badge-live">🟢 Accepting Walk-Ins Today</span>
                     <button class="btn-primary" style="padding: 8px 14px; font-size: 0.8rem; margin-top: 8px;" onclick="toggleArtistWalkInStatus()">Toggle Status</button>
                 </div>
+            </div>
+
+            <!-- Artist Studio Profile & Bio Customization Editor -->
+            <div class="content-card">
+                <h3 class="section-title">⚙️ Studio Profile & Bio Customization</h3>
+                <p class="section-subtitle">Update your public business branding, location, and paste specialties displayed to customers.</p>
+                <form id="artistProfileForm">
+                    <div class="form-grid two-col" style="margin-bottom: 15px;">
+                        <div>
+                            <label style="font-size: 0.82rem; font-weight: bold; display: block; margin-bottom: 4px;">Business Name:</label>
+                            <input type="text" id="editArtistName" value="Henna By BiBi" required>
+                        </div>
+                        <div>
+                            <label style="font-size: 0.82rem; font-weight: bold; display: block; margin-bottom: 4px;">Studio Location:</label>
+                            <input type="text" id="editArtistLocation" value="Ronkonkoma, NY" required>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="font-size: 0.82rem; font-weight: bold; display: block; margin-bottom: 4px;">Paste Specialty Tag:</label>
+                        <input type="text" id="editArtistPaste" value="🌿 100% Organic Natural Henna" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Save Profile Changes</button>
+                </form>
             </div>
 
             <div class="content-card">
@@ -694,9 +770,13 @@
 
         window.onload = function() {
             var savedRole = localStorage.getItem('hennaLinkRole');
+            var savedEmail = localStorage.getItem('hennaLinkEmail');
             if (savedRole) {
                 document.getElementById('onboardingModal').style.display = 'none';
                 applyUserRole(savedRole);
+                if (savedEmail) {
+                    document.getElementById('subscribedEmailDisplay').innerText = savedEmail;
+                }
             }
         };
 
@@ -710,9 +790,17 @@
         document.getElementById('signupForm').addEventListener('submit', function(e) {
             e.preventDefault();
             var role = document.getElementById('selectedRole').value;
+            var email = document.getElementById('signupEmail').value;
+            var promoOptIn = document.getElementById('promoConsent').checked;
+
             if (!role) { alert('Please select a role.'); return; }
+            
             localStorage.setItem('hennaLinkRole', role);
+            localStorage.setItem('hennaLinkEmail', email);
+            localStorage.setItem('hennaLinkPromoOptIn', promoOptIn);
+
             document.getElementById('onboardingModal').style.display = 'none';
+            document.getElementById('subscribedEmailDisplay').innerText = email;
             applyUserRole(role);
         });
 
@@ -773,17 +861,56 @@
             var date = document.getElementById('appointmentDate').value;
             var time = document.getElementById('appointmentTime').value;
 
+            // Add to artist dashboard table
             var tableBody = document.getElementById('artistDashboardTableBody');
             var newRow = document.createElement('tr');
-            newRow.innerHTML = '<td>' + name + '<br><span style="font-size:0.75rem; color:var(--text-muted)">(' + phone + ')</span></td>' +
+            newRow.innerHTML = '<td>' + name + '<br><span style="font-size:0.75rem; color:var(--text-muted)>( ' + phone + ')</span></td>' +
                                '<td>' + design + '<br><span style="font-size:0.75rem; color:#27ae60">Deposit Confirmed</span></td>' +
                                '<td>' + date + ', ' + time + '</td>' +
                                '<td><span style="background:var(--gold-light); padding:4px 8px; border-radius:6px; font-size:0.8rem;">' + paste + '; ' + event + '; Notes: ' + notes + '</span></td>';
             tableBody.prepend(newRow);
+
+            // Add to customer bookings tracker
+            var bookingsList = document.getElementById('customerMyBookingsList');
+            var bookingCard = document.createElement('div');
+            bookingCard.style.cssText = "background: var(--gold-light); border: 1px solid var(--gold-accent); padding: 16px; border-radius: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;";
+            bookingCard.innerHTML = '<div><strong style="color: var(--primary-dark); font-size: 1.05rem;">' + currentSelectedArtist + ' &bull; ' + design + '</strong><div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">Scheduled: ' + date + ', ' + time + ' (Deposit Confirmed)</div><div style="font-size: 0.82rem; color: var(--primary-maroon); font-weight: bold; margin-top: 4px;">⏳ Session Countdown: Upcoming!</div></div><button onclick="if(confirm(\'Cancel or reschedule this appointment?\')) { alert(\'Request submitted.\'); this.parentElement.remove(); }" style="background: #c0392b; color: white; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 0.8rem;">Cancel / Reschedule</button>';
+            bookingsList.prepend(bookingCard);
             
-            alert('📱 [Simulated SMS Sent to ' + phone + ']:\n\n"Hi ' + name + '! Your appointment with ' + currentSelectedArtist + ' for ' + design + ' is confirmed for ' + date + ' at ' + time + '. We have sent studio directions to your phone. See you soon!"');
+            alert('📱 [Simulated SMS & Email Reminder Scheduled]:\n\n"Hi ' + name + '! Your appointment with ' + currentSelectedArtist + ' for ' + design + ' is confirmed for ' + date + ' at ' + time + '. We have scheduled your 2-hour pre-appointment text reminder. See you soon!"');
             closeBookingModal();
             document.getElementById('directBookingForm').reset();
+        });
+
+        // Client Healed Stain Review Submission
+        function submitClientReview() {
+            var cName = document.getElementById('clientReviewName').value;
+            var cText = document.getElementById('clientReviewText').value;
+            if (!cName || !cText) { alert('Please enter your name and review description.'); return; }
+
+            var feed = document.getElementById('reviewsFeedContainer');
+            var newRev = document.createElement('div');
+            newRev.className = 'review-card';
+            newRev.innerHTML = '<strong>' + cName + '</strong> ⭐⭐⭐⭐⭐<br>"' + cText + '" <br><span style="font-size: 0.75rem; color: #27ae60; font-weight: bold;">✓ Verified Healed Stain Upload</span>';
+            feed.prepend(newRev);
+
+            alert('Thank you! Your review and healed stain details have been successfully posted to the artist gallery.');
+            document.getElementById('clientReviewName').value = '';
+            document.getElementById('clientReviewText').value = '';
+        }
+
+        // Artist Studio Profile Customizer
+        document.getElementById('artistProfileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var newName = document.getElementById('editArtistName').value;
+            var newLoc = document.getElementById('editArtistLocation').value;
+            var newPaste = document.getElementById('editArtistPaste').value;
+
+            document.getElementById('displayArtistName').innerText = newName;
+            document.getElementById('displayArtistLocation').innerText = '📍 ' + newLoc;
+            document.getElementById('displayArtistPaste').innerText = newPaste;
+
+            alert('Success! Your artist profile branding has been updated across HennaLink.');
         });
 
         // Artist Upload Artwork
@@ -796,7 +923,6 @@
             var catalogGrid = document.getElementById('customerBibiCatalog');
             var newItem = document.createElement('div');
             newItem.className = 'catalog-item';
-            var safeId = dName.replace(/[^a-zA-Z0-9]/g, '');
             newItem.innerHTML = '<button class="favorite-btn" onclick="toggleFavorite(this, \'' + dName + ' (' + dPrice + ')\')">❤️</button>' + dName + '<br><span style="font-size:0.7rem; color:var(--primary-maroon)">' + dPrice + '</span>';
             catalogGrid.appendChild(newItem);
 
