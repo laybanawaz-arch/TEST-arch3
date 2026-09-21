@@ -175,10 +175,6 @@
             border-radius: 12px;
             padding: 22px;
             border: 1px solid var(--border-color);
-            transition: transform 0.2s;
-        }
-        .artist-card:hover {
-            transform: translateY(-2px);
         }
         .artist-header {
             display: flex;
@@ -216,24 +212,22 @@
             font-weight: 600;
             color: var(--primary-dark);
         }
-        .portfolio-preview {
-            display: flex;
+        /* Portfolio Design Catalog Grid */
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 8px;
             margin: 14px 0;
         }
-        .thumb {
-            width: 65px;
-            height: 65px;
+        .catalog-item {
             background: #eddccb;
             border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            color: var(--text-muted);
+            padding: 10px;
             text-align: center;
-            font-weight: 500;
+            font-size: 0.75rem;
+            color: var(--text-main);
             border: 1px solid var(--border-color);
+            font-weight: 600;
         }
         .action-row {
             display: flex;
@@ -257,54 +251,26 @@
         .book-btn:hover {
             background-color: var(--primary-dark);
         }
-        .claim-btn {
-            background-color: var(--gold-accent);
-            color: white;
-            border: none;
-            padding: 10px 14px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-        .claim-btn:hover {
-            opacity: 0.9;
-        }
-        /* Healed Stain Gallery Feed */
-        .stain-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 15px;
+        /* Artist Dashboard Table */
+        .dashboard-table {
+            width: 100%;
+            border-collapse: collapse;
             margin-top: 15px;
-        }
-        .stain-card {
-            background: var(--accent-light);
-            border-radius: 10px;
-            padding: 12px;
-            text-align: center;
+            font-size: 0.9rem;
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
             border: 1px solid var(--border-color);
         }
-        .stain-img-placeholder {
-            height: 100px;
-            background: #eddccb;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-            border: 1px dashed var(--gold-accent);
+        .dashboard-table th, .dashboard-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
         }
-        /* QR Generator Box */
-        .qr-box {
+        .dashboard-table th {
             background: var(--accent-light);
-            border: 2px dashed var(--gold-accent);
-            border-radius: 12px;
-            padding: 25px;
-            text-align: center;
-            margin-top: 15px;
+            color: var(--primary-dark);
+            font-family: serif;
         }
         /* Form Styling */
         form {
@@ -394,15 +360,15 @@
             
             <ul class="sidebar-menu">
                 <li><a href="#mapSection">📍 Live Radar Map</a></li>
-                <li><a href="#artistsSection">✨ Featured Artists</a></li>
-                <li><a href="#stainSection">🌿 Healed Stain Feed</a></li>
-                <li><a href="#qrSection">📱 Table QR Generator</a></li>
-                <li><a href="#broadcastSection">🎨 Broadcast Pop-Up</a></li>
+                <li><a href="#artistsSection">✨ Featured Artists & Catalogs</a></li>
+                <li><a href="#dashboardSection">📊 Artist Bookings Dashboard</a></li>
+                <li><a href="#uploadSection">🖼️ Upload New Design Art</a></li>
+                <li><a href="#broadcastSection">🎨 Broadcast Pop-Up Pin</a></li>
             </ul>
 
             <div style="background: var(--accent-light); padding: 18px; border-radius: 12px; margin-top: 35px; border: 1px solid var(--border-color);">
-                <p style="font-size: 0.85rem; margin: 0 0 6px 0; font-weight: bold; color: var(--primary-dark); font-family: serif;">Are you an artist?</p>
-                <p style="font-size: 0.78rem; margin: 0; color: var(--text-muted); line-height: 1.5;">Broadcast your booth location in seconds and get local clients walking right up.</p>
+                <p style="font-size: 0.85rem; margin: 0 0 6px 0; font-weight: bold; color: var(--primary-dark); font-family: serif;">Artist Control Panel</p>
+                <p style="font-size: 0.78rem; margin: 0; color: var(--text-muted); line-height: 1.5;">Manage your flash menu and review incoming client bookings instantly.</p>
             </div>
         </sidebar>
 
@@ -410,7 +376,7 @@
         <main class="main-content">
             <header>
                 <h1>Find Live Henna Pop-Ups Near You</h1>
-                <p>Discover real-time local body art, check active paste types, and book directly on the site.</p>
+                <p>Pick your favorite artist design from their catalog and book directly on the site.</p>
             </header>
 
             <!-- Section 1: Live Area Radar Map -->
@@ -425,28 +391,28 @@
                 <div id="map"></div>
             </div>
 
-            <!-- Section 2: Featured Local Artists -->
+            <!-- Section 2: Featured Local Artists & Design Catalogs -->
             <div class="section-card" id="artistsSection">
-                <h3>✨ Featured Local Artists & Flash Menus</h3>
+                <h3>✨ Featured Artists & Design Catalogs</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: -5px;">Browse each artist's custom flash menu and click book to select a design.</p>
                 <div class="artist-grid">
                     <div class="artist-card">
                         <div class="artist-header">
                             <div>
                                 <p class="artist-name">Henna By BiBi</p>
-                                <span class="artist-location">📍 Ronkonkoma, NY (Active)</span>
+                                <span class="artist-location">📍 Ronkonkoma, NY</span>
                                 <div><span class="paste-badge">🌿 100% Organic Henna</span></div>
                             </div>
                             <div class="rating">⭐ 5.0</div>
                         </div>
-                        <p style="font-size: 0.85rem; margin: 8px 0; color: var(--text-muted);">Specializes in bridal botanicals and geometric cuffs.</p>
-                        <div class="portfolio-preview">
-                            <div class="thumb">Floral</div>
-                            <div class="thumb">Mandala</div>
-                            <div class="thumb">Bridal</div>
+                        <p style="font-size: 0.85rem; margin: 6px 0; color: var(--text-muted);">Select a design from my portfolio flash sheet:</p>
+                        <div class="catalog-grid" id="bibiCatalog">
+                            <div class="catalog-item">Floral Strip</div>
+                            <div class="catalog-item">Mandala Palm</div>
+                            <div class="catalog-item">Geometric Cuff</div>
                         </div>
                         <div class="action-row">
-                            <button class="book-btn" onclick="openBookingModal('Henna By BiBi')">Book Appointment</button>
-                            <button class="claim-btn" onclick="alert('Flash Design #1 Reserved! Show this code to BiBi at the booth.')">Claim Flash</button>
+                            <button class="book-btn" onclick="openBookingModal('Henna By BiBi')">Book & Pick Design</button>
                         </div>
                     </div>
 
@@ -454,60 +420,74 @@
                         <div class="artist-header">
                             <div>
                                 <p class="artist-name">Island Henna Studio</p>
-                                <span class="artist-location">📍 Islip, NY (Walk-Ins)</span>
+                                <span class="artist-location">📍 Islip, NY</span>
                                 <div><span class="paste-badge">🫐 Jagua Dark Stain</span></div>
                             </div>
                             <div class="rating">⭐ 4.9</div>
                         </div>
-                        <p style="font-size: 0.85rem; margin: 8px 0; color: var(--text-muted);">Organic paste, custom finger bands, and weekend market stalls.</p>
-                        <div class="portfolio-preview">
-                            <div class="thumb">Stain</div>
-                            <div class="thumb">Cuffs</div>
-                            <div class="thumb">Stripes</div>
+                        <p style="font-size: 0.85rem; margin: 6px 0; color: var(--text-muted);">Select a design from my portfolio flash sheet:</p>
+                        <div class="catalog-grid">
+                            <div class="catalog-item">Vine Wrap</div>
+                            <div class="catalog-item">Finger Band</div>
+                            <div class="catalog-item">Lotus Motif</div>
                         </div>
                         <div class="action-row">
-                            <button class="book-btn" onclick="openBookingModal('Island Henna Studio')">Book Appointment</button>
-                            <button class="claim-btn" onclick="alert('Flash Design #2 Reserved!')">Claim Flash</button>
+                            <button class="book-btn" onclick="openBookingModal('Island Henna Studio')">Book & Pick Design</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Section 3: Healed Stain Gallery Feed -->
-            <div class="section-card" id="stainSection">
-                <h3>🌿 Community Healed Stain Feed</h3>
-                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: -5px;">Real 48-hour dark stain results uploaded by local clients!</p>
-                <div class="stain-grid">
-                    <div class="stain-card">
-                        <div class="stain-img-placeholder">Stain Photo</div>
-                        <span style="font-size: 0.8rem; font-weight: bold; color: var(--primary-dark);">@ Henna By BiBi</span>
-                    </div>
-                    <div class="stain-card">
-                        <div class="stain-img-placeholder">Stain Photo</div>
-                        <span style="font-size: 0.8rem; font-weight: bold; color: var(--primary-dark);">@ Island Henna</span>
-                    </div>
-                    <div class="stain-card">
-                        <div class="stain-img-placeholder">Stain Photo</div>
-                        <span style="font-size: 0.8rem; font-weight: bold; color: var(--primary-dark);">@ Henna By BiBi</span>
-                    </div>
-                </div>
+            <!-- Section 3: Artist Bookings Dashboard -->
+            <div class="section-card" id="dashboardSection">
+                <h3>📊 Live Artist Bookings Dashboard</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: -5px;">Artists can see all scheduled client appointments and their chosen design here in real-time.</p>
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>Client Name</th>
+                            <th>Artist Booked</th>
+                            <th>Selected Design</th>
+                            <th>Date & Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dashboardTableBody">
+                        <tr>
+                            <td>Sarah Jenkins</td>
+                            <td>Henna By BiBi</td>
+                            <td>Mandala Palm ($40)</td>
+                            <td>Sept 22, 2:00 PM</td>
+                        </tr>
+                        <tr>
+                            <td>Jessica Miller</td>
+                            <td>Island Henna Studio</td>
+                            <td>Vine Wrap ($30)</td>
+                            <td>Sept 23, 11:00 AM</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <!-- Section 4: Table QR Code Generator -->
-            <div class="section-card" id="qrSection">
-                <h3>📱 Artist Tool: Print Your Table QR Code</h3>
-                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: -5px;">Generate a unique QR code for your market or booth table so clients can scan and view live flash menus instantly.</p>
-                <div class="qr-box">
-                    <div style="font-size: 2.2rem; margin-bottom: 5px; color: var(--primary);">📷 [ QR CODE ]</div>
-                    <p style="font-size: 0.85rem; margin: 0 0 12px 0; font-weight: bold; color: var(--primary-dark);">Scan to View Live Radar & Flash Sheet</p>
-                    <button class="claim-btn" onclick="alert('Generating printable QR code sheet...')">Download Printable QR Sign</button>
-                </div>
+            <!-- Section 4: Upload Unlimited Artwork to Catalog -->
+            <div class="section-card" id="uploadSection">
+                <h3>🖼️ Upload New Design to Your Portfolio Catalog</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: -5px;">Add an unlimited amount of your own artwork or flash pieces to show your customers.</p>
+                <form id="uploadDesignForm">
+                    <input type="text" id="designName" placeholder="Design Name (e.g., Rose Hand Trail, Full Bridal Back)" required>
+                    <select id="catalogTargetArtist" required>
+                        <option value="">Select Your Artist Profile</option>
+                        <option value="Henna By BiBi">Henna By BiBi</option>
+                        <option value="Island Henna Studio">Island Henna Studio</option>
+                    </select>
+                    <input type="text" id="designPrice" placeholder="Price (e.g., $35)" required>
+                    <button type="submit" class="submit-btn">Publish Design to Live Catalog</button>
+                </form>
             </div>
 
             <!-- Section 5: Artist Pop-Up Submission Form -->
             <div class="section-card" id="broadcastSection">
-                <h3>🎨 Broadcast Your Pop-Up & Upload Stain Photos</h3>
-                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: -5px;">Fill out your details to drop your live pin and showcase your healed stain portfolio.</p>
+                <h3>🎨 Broadcast Your Pop-Up Location</h3>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: -5px;">Drop your live map pin for street fairs, markets, or studio walk-ins.</p>
                 <form id="popupForm">
                     <input type="text" id="artistName" placeholder="Artist / Business Name" required>
                     <input type="text" id="locationName" placeholder="Location Name (e.g., Ronkonkoma Street Fair)" required>
@@ -517,14 +497,7 @@
                         <option value="jagua">Jagua Gel (Blue-Black Stain)</option>
                         <option value="both">Both Organic & Jagua</option>
                     </select>
-                    <select id="popupType" required>
-                        <option value="">Select Status</option>
-                        <option value="active">Active Pop-Up Right Now (🔴)</option>
-                        <option value="weekend">Weekend Market / Fair (🔵)</option>
-                        <option value="walkin">Salon / Studio Walk-Ins Open (🟣)</option>
-                    </select>
-                    <textarea id="customNote" rows="2" placeholder="Notes or special offers for clients..." required></textarea>
-                    <button type="submit" class="submit-btn">Publish My Live Radar Pin & QR Code</button>
+                    <button type="submit" class="submit-btn">Publish My Live Radar Pin</button>
                 </form>
             </div>
 
@@ -539,15 +512,17 @@
         <div class="modal-content">
             <span class="close-modal" onclick="closeBookingModal()">&times;</span>
             <h3 id="modalArtistTitle" style="margin-top: 0; font-family: serif; color: var(--primary);">Book Appointment</h3>
-            <p style="font-size: 0.85rem; color: var(--text-muted);">Fill out your details below to schedule your session with this artist directly.</p>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Fill out your details and pick your design to lock in your slot.</p>
             <form id="directBookingForm">
                 <input type="text" id="clientName" placeholder="Your Full Name" required>
-                <input type="tel" id="clientPhone" placeholder="Phone Number (for appointment reminder)" required>
+                <input type="tel" id="clientPhone" placeholder="Phone Number (for reminders)" required>
                 <select id="designChoice" required>
-                    <option value="">Select Design / Service</option>
-                    <option value="floral">Floral Strip / Hand Band ($25)</option>
-                    <option value="mandala">Detailed Mandala Palm ($40)</option>
-                    <option value="bridal">Full Bridal Suite ($120)</option>
+                    <option value="">Select Design from Flash Catalog</option>
+                    <option value="Floral Strip">Floral Strip</option>
+                    <option value="Mandala Palm">Mandala Palm</option>
+                    <option value="Geometric Cuff">Geometric Cuff</option>
+                    <option value="Vine Wrap">Vine Wrap</option>
+                    <option value="Finger Band">Finger Band</option>
                 </select>
                 <input type="date" id="appointmentDate" required>
                 <select id="appointmentTime" required>
@@ -557,7 +532,7 @@
                     <option value="3:00 PM">3:00 PM</option>
                     <option value="5:00 PM">5:00 PM</option>
                 </select>
-                <button type="submit" class="submit-btn">Confirm Booking</button>
+                <button type="submit" class="submit-btn">Confirm Booking & Notify Artist</button>
             </form>
         </div>
     </div>
@@ -573,13 +548,15 @@
         }).addTo(map);
 
         var marker1 = L.marker([40.8173, -73.1251]).addTo(map);
-        marker1.bindPopup("<b>Henna By BiBi</b><br>📍 Ronkonkoma, NY<br>🌿 Organic Henna<br><button onclick='openBookingModal(\"Henna By BiBi\")' style='background:#7b1113; color:#fff; border:none; padding:5px 10px; border-radius:5px; margin-top:5px; cursor:pointer;'>Book Here</button>");
+        marker1.bindPopup("<b>Henna By BiBi</b><br>📍 Ronkonkoma, NY<br><button onclick='openBookingModal(\"Henna By BiBi\")' style='background:#7b1113; color:#fff; border:none; padding:5px 10px; border-radius:5px; margin-top:5px; cursor:pointer;'>Book Here</button>");
 
         var marker2 = L.marker([40.7289, -73.2161]).addTo(map);
-        marker2.bindPopup("<b>Island Henna Studio</b><br>📍 Islip, NY<br>🫐 Jagua Stain<br><button onclick='openBookingModal(\"Island Henna Studio\")' style='background:#7b1113; color:#fff; border:none; padding:5px 10px; border-radius:5px; margin-top:5px; cursor:pointer;'>Book Here</button>");
+        marker2.bindPopup("<b>Island Henna Studio</b><br>📍 Islip, NY<br><button onclick='openBookingModal(\"Island Henna Studio\")' style='background:#7b1113; color:#fff; border:none; padding:5px 10px; border-radius:5px; margin-top:5px; cursor:pointer;'>Book Here</button>");
 
-        // Modal Control Functions
+        var currentSelectedArtist = "Henna By BiBi";
+
         function openBookingModal(artistName) {
+            currentSelectedArtist = artistName;
             document.getElementById('modalArtistTitle').innerText = 'Book with ' + artistName;
             document.getElementById('bookingModal').style.display = 'flex';
         }
@@ -588,20 +565,52 @@
             document.getElementById('bookingModal').style.display = 'none';
         }
 
+        // Handle Direct Booking & Update Artist Dashboard Table Live
         document.getElementById('directBookingForm').addEventListener('submit', function(e) {
             e.preventDefault();
             var name = document.getElementById('clientName').value;
+            var design = document.getElementById('designChoice').value;
             var date = document.getElementById('appointmentDate').value;
             var time = document.getElementById('appointmentTime').value;
+
+            // Add new row to the Artist Dashboard Table
+            var tableBody = document.getElementById('dashboardTableBody');
+            var newRow = document.createElement('tr');
+            newRow.innerHTML = '<td>' + name + '</td><td>' + currentSelectedArtist + '</td><td>' + design + '</td><td>' + date + ', ' + time + '</td>';
+            tableBody.prepend(newRow);
             
-            alert('Success! Your appointment is confirmed for ' + date + ' at ' + time + '. We sent a confirmation notice to the artist!');
+            alert('Success! Booking confirmed for ' + date + ' at ' + time + '. The artist has received notification in their dashboard with your selected design (' + design + ')!');
             closeBookingModal();
             document.getElementById('directBookingForm').reset();
         });
 
+        // Handle Uploading Unlimited Artwork to Catalog
+        document.getElementById('uploadDesignForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var dName = document.getElementById('designName').value;
+            var artist = document.getElementById('catalogTargetArtist').value;
+            var dPrice = document.getElementById('designPrice').value;
+
+            // Add to the visual catalog grid
+            var catalogGrid = document.getElementById('bibiCatalog');
+            var newItem = document.createElement('div');
+            newItem.className = 'catalog-item';
+            newItem.innerText = dName + ' (' + dPrice + ')';
+            catalogGrid.appendChild(newItem);
+
+            // Also add to booking modal dropdown options
+            var designDropdown = document.getElementById('designChoice');
+            var opt = document.createElement('option');
+            opt.value = dName;
+            opt.text = dName + ' (' + dPrice + ')';
+            designDropdown.appendChild(opt);
+
+            alert('Success! "' + dName + '" has been uploaded and added to ' + artist + '\'s live customer selection menu.');
+            document.getElementById('uploadDesignForm').reset();
+        });
+
         document.getElementById('popupForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
             var name = document.getElementById('artistName').value;
             var loc = document.getElementById('locationName').value;
 
@@ -609,11 +618,11 @@
             var randomLng = -73.1251 + (Math.random() - 0.5) * 0.05;
 
             var newMarker = L.marker([randomLat, randomLng]).addTo(map);
-            newMarker.bindPopup("<b>" + name + "</b><br>📍 " + loc + "<br>Status: Live Pop-Up!<br><button onclick='openBookingModal(\"" + name + "\")' style='background:#7b1113; color:#fff; border:none; padding:5px 10px; border-radius:5px; margin-top:5px; cursor:pointer;'>Book Here</button>").openPopup();
+            newMarker.bindPopup("<b>" + name + "</b><br>📍 " + loc + "<br><button onclick='openBookingModal(\"" + name + "\")' style='background:#7b1113; color:#fff; border:none; padding:5px 10px; border-radius:5px; margin-top:5px; cursor:pointer;'>Book Here</button>").openPopup();
 
             map.setView([randomLat, randomLng], 13);
 
-            alert('Success! Your pop-up is live on the radar map and your table QR code profile has been created.');
+            alert('Success! Your pop-up pin is live on the radar map.');
             document.getElementById('popupForm').reset();
         });
     </script>
