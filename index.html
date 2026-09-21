@@ -3,61 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HennaLink | Luxury Henna Artists & Pop-Up Radar</title>
+    <title>HENNALINK | Professional Henna Artistry & Client Hub</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     
     <style>
         :root {
-            --primary-maroon: #6b1418;
-            --primary-dark: #3e0a0d;
-            --gold-accent: #d4af37;
-            --gold-light: #f9f3e6;
-            --bg-cream: #faf6f0;
+            --bordeaux: #5c1015;
+            --bordeaux-dark: #3a080c;
+            --champagne: #d4af37;
+            --champagne-light: #f7f3e8;
+            --champagne-border: #e6dfcb;
+            --bg-ivory: #fcfbfa;
             --card-bg: #ffffff;
-            --text-main: #2b2220;
-            --text-muted: #756560;
-            --border-warm: #ebdcd0;
-            --shadow-subtle: 0 10px 30px rgba(107, 20, 24, 0.06);
-            --shadow-hover: 0 15px 35px rgba(107, 20, 24, 0.12);
+            --text-main: #25201e;
+            --text-muted: #736763;
+            --border-refined: #e8e1da;
+            --shadow-lux: 0 12px 40px rgba(92, 16, 21, 0.08);
+            --shadow-hover: 0 20px 45px rgba(92, 16, 21, 0.14);
+            --radius-lux: 18px;
         }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-cream);
+            background-color: var(--bg-ivory);
             color: var(--text-main);
             margin: 0;
             padding: 0;
-            line-height: 1.6;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
         }
 
-        h1, h2, h3, h4, .serif-font {
+        h1, h2, h3, h4, .serif {
             font-family: 'Playfair Display', serif;
         }
 
+        /* Luxury Navbar */
         .top-navbar {
-            background: var(--card-bg);
-            border-bottom: 1px solid var(--border-warm);
-            padding: 16px 5%;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-refined);
+            padding: 18px 6%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
         }
 
         .nav-brand h2 {
-            color: var(--primary-maroon);
+            color: var(--bordeaux);
             font-size: 1.5rem;
             margin: 0;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .brand-handle {
+            font-size: 0.78rem;
+            color: var(--bordeaux);
+            background: var(--champagne-light);
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--champagne);
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
         .nav-links {
@@ -70,116 +94,148 @@
         }
 
         .user-status-badge {
-            background: var(--gold-light);
-            color: var(--primary-maroon);
-            padding: 6px 14px;
+            background: var(--champagne-light);
+            color: var(--bordeaux);
+            padding: 6px 16px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             font-weight: 600;
-            border: 1px solid var(--gold-accent);
+            border: 1px solid var(--champagne);
         }
 
         .logout-link {
             color: var(--text-muted);
             font-size: 0.82rem;
-            text-decoration: underline;
+            text-decoration: none;
             cursor: pointer;
             background: none;
             border: none;
             font-family: inherit;
+            transition: color 0.2s;
         }
+        .logout-link:hover { color: var(--bordeaux); text-decoration: underline; }
 
+        /* Main Layout */
         .main-container {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 20px;
+            max-width: 1160px;
+            margin: 45px auto;
+            padding: 0 24px;
         }
 
+        /* Editorial Hero Banner */
         .hero-banner {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-maroon) 100%);
+            background: linear-gradient(135deg, var(--bordeaux-dark) 0%, var(--bordeaux) 100%);
             color: white;
-            padding: 50px 30px;
+            padding: 65px 40px;
             text-align: center;
             border-radius: 24px;
-            margin-bottom: 40px;
-            box-shadow: var(--shadow-subtle);
+            margin-bottom: 45px;
+            box-shadow: var(--shadow-lux);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .hero-banner::after {
+            content: "";
+            position: absolute;
+            top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%);
+            pointer-events: none;
         }
 
         .hero-banner h1 {
-            font-size: 2.6rem;
-            margin: 0 0 10px 0;
+            font-size: 3rem;
+            margin: 0 0 12px 0;
             color: #ffffff;
+            letter-spacing: 0.5px;
+            font-weight: 600;
         }
 
         .hero-banner p {
-            color: #f0e6e0;
-            font-size: 1.05rem;
-            max-width: 600px;
+            color: #f3ece4;
+            font-size: 1.1rem;
+            max-width: 640px;
             margin: 0 auto;
+            font-weight: 300;
         }
 
+        /* Luxurious Content Cards */
         .content-card {
             background: var(--card-bg);
-            border-radius: 20px;
-            padding: 35px;
+            border-radius: var(--radius-lux);
+            padding: 40px;
             margin-bottom: 35px;
-            border: 1px solid var(--border-warm);
-            box-shadow: var(--shadow-subtle);
+            border: 1px solid var(--border-refined);
+            box-shadow: var(--shadow-lux);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .content-card:hover {
+            box-shadow: var(--shadow-hover);
         }
 
         .section-title {
-            color: var(--primary-maroon);
-            font-size: 1.6rem;
+            color: var(--bordeaux);
+            font-size: 1.75rem;
             margin-top: 0;
             margin-bottom: 6px;
+            font-weight: 600;
         }
 
         .section-subtitle {
             color: var(--text-muted);
-            font-size: 0.92rem;
-            margin-bottom: 25px;
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+            font-weight: 400;
         }
 
         .portal-view { display: none; }
         .portal-view.active-view { display: block; }
 
+        /* Filter Chips */
         .filter-bar {
             display: flex;
             gap: 12px;
             overflow-x: auto;
             padding-bottom: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         .filter-chip {
-            background: var(--gold-light);
-            border: 1px solid var(--gold-accent);
-            color: var(--primary-dark);
-            padding: 8px 18px;
+            background: var(--champagne-light);
+            border: 1px solid var(--champagne);
+            color: var(--bordeaux-dark);
+            padding: 8px 20px;
             border-radius: 30px;
             font-size: 0.85rem;
             cursor: pointer;
             white-space: nowrap;
             font-weight: 600;
+            transition: all 0.2s;
         }
 
         .filter-chip:hover, .filter-chip.active {
-            background: var(--primary-maroon);
+            background: var(--bordeaux);
             color: white;
-            border-color: var(--primary-maroon);
+            border-color: var(--bordeaux);
         }
 
+        /* High Quality Map Container */
         #map {
-            height: 380px;
+            height: 440px;
             width: 100%;
             border-radius: 16px;
-            border: 1px solid var(--border-warm);
+            border: 1px solid var(--champagne-border);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            position: relative;
+            z-index: 1;
         }
 
+        /* Artist Grid & Cards */
         .artist-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 25px;
+            gap: 30px;
         }
 
         @media(min-width: 768px) {
@@ -187,127 +243,149 @@
         }
 
         .artist-card {
-            background: var(--gold-light);
+            background: var(--champagne-light);
             border-radius: 16px;
-            padding: 24px;
-            border: 1px solid var(--border-warm);
+            padding: 30px;
+            border: 1px solid var(--champagne-border);
+            position: relative;
         }
 
         .artist-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
 
         .artist-name {
-            font-size: 1.25rem;
-            color: var(--primary-dark);
+            font-size: 1.35rem;
+            color: var(--bordeaux-dark);
             margin: 0 0 4px 0;
+            font-weight: 600;
         }
 
         .artist-location {
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             color: var(--text-muted);
         }
 
         .rating-badge {
             background: #ffffff;
-            padding: 4px 10px;
-            border-radius: 10px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            color: var(--gold-accent);
-            border: 1px solid var(--border-warm);
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--champagne);
+            border: 1px solid var(--champagne-border);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
 
         .paste-tag {
             display: inline-block;
             background: #ffffff;
-            font-size: 0.75rem;
-            padding: 4px 10px;
-            border-radius: 8px;
-            margin-top: 8px;
+            font-size: 0.78rem;
+            padding: 5px 12px;
+            border-radius: 10px;
+            margin-top: 10px;
             font-weight: 600;
-            color: var(--primary-maroon);
-            border: 1px solid var(--border-warm);
+            color: var(--bordeaux);
+            border: 1px solid var(--champagne-border);
         }
 
         .catalog-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin: 16px 0;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        @media(min-width: 500px) {
+            .catalog-grid { grid-template-columns: repeat(4, 1fr); }
         }
 
         .catalog-item {
             background: #ffffff;
-            border-radius: 10px;
-            padding: 12px 8px;
+            border-radius: 12px;
+            padding: 16px 10px;
             text-align: center;
-            font-size: 0.78rem;
+            font-size: 0.82rem;
             color: var(--text-main);
-            border: 1px solid var(--border-warm);
+            border: 1px solid var(--border-refined);
             font-weight: 600;
             position: relative;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .catalog-item:hover {
+            transform: translateY(-2px);
+            border-color: var(--champagne);
         }
 
         .favorite-btn {
             position: absolute;
-            top: 4px;
-            right: 6px;
+            top: 6px;
+            right: 8px;
             background: none;
             border: none;
             cursor: pointer;
-            font-size: 0.9rem;
-            color: #ccc;
+            font-size: 0.95rem;
+            color: #d1c7be;
+            transition: color 0.2s;
         }
-        .favorite-btn.favorited { color: #e74c3c; }
+        .favorite-btn.favorited { color: #d9534f; }
 
         .btn-primary {
             width: 100%;
-            background-color: var(--primary-maroon);
+            background-color: var(--bordeaux);
             color: white;
             border: none;
-            padding: 14px;
-            border-radius: 12px;
+            padding: 16px;
+            border-radius: 14px;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 1rem;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(107, 20, 24, 0.2);
+            box-shadow: 0 6px 20px rgba(92, 16, 21, 0.25);
+            transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+            letter-spacing: 0.3px;
         }
-        .btn-primary:hover { background-color: var(--primary-dark); }
+        .btn-primary:hover { 
+            background-color: var(--bordeaux-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 25px rgba(92, 16, 21, 0.35);
+        }
 
+        /* Dashboard Tables */
         .dashboard-table-wrapper {
             overflow-x: auto;
-            border-radius: 12px;
-            border: 1px solid var(--border-warm);
+            border-radius: 14px;
+            border: 1px solid var(--border-refined);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
         }
 
         .dashboard-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             background: #ffffff;
             text-align: left;
         }
 
         .dashboard-table th, .dashboard-table td {
-            padding: 14px 18px;
-            border-bottom: 1px solid var(--border-warm);
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-refined);
         }
 
         .dashboard-table th {
-            background: var(--gold-light);
-            color: var(--primary-dark);
+            background: var(--champagne-light);
+            color: var(--bordeaux-dark);
             font-family: 'Playfair Display', serif;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
+            font-weight: 600;
         }
 
         .form-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 16px;
+            gap: 18px;
         }
         @media(min-width: 600px) {
             .form-grid.two-col { grid-template-columns: 1fr 1fr; }
@@ -315,232 +393,254 @@
 
         input, select, textarea {
             width: 100%;
-            padding: 14px 18px;
-            border: 1px solid var(--border-warm);
+            padding: 15px 18px;
+            border: 1px solid var(--border-refined);
             border-radius: 12px;
             font-size: 0.95rem;
             font-family: inherit;
             background: #ffffff;
             color: var(--text-main);
             box-sizing: border-box;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--champagne);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
         }
 
-        /* Walk-In Toggle Switch Bar */
+        /* Status Toggle Box */
         .status-toggle-box {
-            background: var(--gold-light);
-            border: 1px solid var(--gold-accent);
-            padding: 18px 24px;
+            background: var(--champagne-light);
+            border: 1px solid var(--champagne);
+            padding: 22px 28px;
             border-radius: 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
         .status-badge-live {
-            background: #27ae60;
+            background: #2e7d32;
             color: white;
-            padding: 6px 14px;
+            padding: 6px 16px;
             border-radius: 20px;
-            font-weight: bold;
+            font-weight: 600;
             font-size: 0.85rem;
+            letter-spacing: 0.3px;
         }
         .status-badge-busy {
-            background: #c0392b;
+            background: #c62828;
             color: white;
-            padding: 6px 14px;
+            padding: 6px 16px;
             border-radius: 20px;
-            font-weight: bold;
+            font-weight: 600;
             font-size: 0.85rem;
+            letter-spacing: 0.3px;
         }
 
-        /* Reviews & Gallery */
         .review-card {
             background: #ffffff;
-            border: 1px solid var(--border-warm);
-            padding: 15px;
+            border: 1px solid var(--border-refined);
+            padding: 18px;
             border-radius: 12px;
-            margin-bottom: 12px;
-            font-size: 0.88rem;
+            margin-bottom: 14px;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
         }
 
         /* Floating Chat Widget */
         .chat-widget-btn {
             position: fixed;
-            bottom: 25px; right: 25px;
-            background: var(--primary-maroon);
+            bottom: 30px; right: 30px;
+            background: var(--bordeaux);
             color: white;
-            width: 60px; height: 60px;
+            width: 64px; height: 64px;
             border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             cursor: pointer;
-            box-shadow: 0 6px 20px rgba(107, 20, 24, 0.4);
+            box-shadow: 0 8px 25px rgba(92, 16, 21, 0.4);
             z-index: 1800;
-            border: 2px solid var(--gold-accent);
+            border: 2px solid var(--champagne);
+            transition: transform 0.2s;
         }
+        .chat-widget-btn:hover { transform: scale(1.05); }
+
         .chat-drawer {
             display: none;
             position: fixed;
-            bottom: 95px; right: 25px;
-            width: 360px; height: 480px;
+            bottom: 105px; right: 30px;
+            width: 380px; height: 500px;
             background: var(--card-bg);
             border-radius: 20px;
-            border: 1px solid var(--border-warm);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border: 1px solid var(--border-refined);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.18);
             z-index: 1800;
             flex-direction: column;
             overflow: hidden;
         }
         .chat-header {
-            background: var(--primary-maroon);
+            background: var(--bordeaux);
             color: white;
-            padding: 16px;
-            font-weight: bold;
+            padding: 18px;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         .chat-body {
             flex: 1;
-            padding: 15px;
+            padding: 18px;
             overflow-y: auto;
-            background: var(--bg-cream);
+            background: var(--bg-ivory);
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            font-size: 0.85rem;
+            gap: 12px;
+            font-size: 0.88rem;
         }
         .chat-msg {
-            padding: 10px 14px;
-            border-radius: 12px;
-            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 14px;
+            max-width: 82%;
+            line-height: 1.5;
         }
         .chat-msg.incoming {
             background: #ffffff;
-            border: 1px solid var(--border-warm);
+            border: 1px solid var(--border-refined);
             align-self: flex-start;
         }
         .chat-msg.outgoing {
-            background: var(--gold-light);
-            color: var(--primary-dark);
-            border: 1px solid var(--gold-accent);
+            background: var(--champagne-light);
+            color: var(--bordeaux-dark);
+            border: 1px solid var(--champagne);
             align-self: flex-end;
         }
         .chat-footer {
-            padding: 12px;
+            padding: 14px;
             background: #ffffff;
-            border-top: 1px solid var(--border-warm);
+            border-top: 1px solid var(--border-refined);
             display: flex;
-            gap: 8px;
+            gap: 10px;
         }
         .chat-footer input {
-            padding: 10px 14px;
-            font-size: 0.85rem;
+            padding: 12px 16px;
+            font-size: 0.88rem;
         }
 
         /* Onboarding Modal */
         .onboarding-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(43, 34, 32, 0.8);
-            backdrop-filter: blur(5px);
+            background: rgba(37, 32, 30, 0.75);
+            backdrop-filter: blur(8px);
             z-index: 2000;
             display: flex; justify-content: center; align-items: center;
             padding: 20px; box-sizing: border-box;
         }
         .onboarding-card {
             background: var(--card-bg);
-            padding: 40px 30px;
+            padding: 45px 35px;
             border-radius: 24px;
-            max-width: 520px; width: 100%;
-            border: 1px solid var(--border-warm);
+            max-width: 540px; width: 100%;
+            border: 1px solid var(--border-refined);
             text-align: center;
             max-height: 90vh;
             overflow-y: auto;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.25);
         }
         .role-choice-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0;
         }
         .role-option-card {
-            background: var(--gold-light);
-            border: 2px solid var(--border-warm);
-            padding: 20px 16px;
+            background: var(--champagne-light);
+            border: 2px solid var(--border-refined);
+            padding: 22px 18px;
             border-radius: 16px;
             cursor: pointer;
             text-align: left;
+            transition: all 0.2s;
         }
         .role-option-card.selected {
-            border-color: var(--primary-maroon);
+            border-color: var(--bordeaux);
             background: #ffffff;
+            box-shadow: 0 6px 20px rgba(92, 16, 21, 0.08);
         }
 
         /* Booking Wizard Modal */
         .modal-overlay {
             display: none;
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(43, 34, 32, 0.6);
-            backdrop-filter: blur(3px);
+            background: rgba(37, 32, 30, 0.65);
+            backdrop-filter: blur(5px);
             z-index: 1500; justify-content: center; align-items: center;
             padding: 20px; box-sizing: border-box;
         }
         .modal-content {
             background: var(--card-bg);
-            padding: 35px; border-radius: 24px;
-            max-width: 480px; width: 100%;
-            border: 1px solid var(--border-warm);
+            padding: 40px; border-radius: 24px;
+            max-width: 500px; width: 100%;
+            border: 1px solid var(--border-refined);
             position: relative;
             max-height: 90vh;
             overflow-y: auto;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
         }
         .close-modal {
-            position: absolute; top: 18px; right: 22px; font-size: 1.6rem; cursor: pointer; color: var(--text-muted);
+            position: absolute; top: 20px; right: 24px; font-size: 1.8rem; cursor: pointer; color: var(--text-muted);
+            transition: color 0.2s;
         }
+        .close-modal:hover { color: var(--bordeaux); }
 
         footer {
-            text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border-warm); margin-top: 60px; background: var(--card-bg);
+            text-align: center; padding: 45px 20px; color: var(--text-muted); font-size: 0.88rem; border-top: 1px solid var(--border-refined); margin-top: 70px; background: var(--card-bg);
         }
     </style>
 </head>
 <body>
 
-    <!-- Onboarding Modal with Instant Promo & Notification Opt-In -->
+    <!-- Onboarding Modal -->
     <div class="onboarding-overlay" id="onboardingModal">
         <div class="onboarding-card">
-            <h2>Welcome to HennaLink</h2>
-            <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 15px;">Connect with local artists or manage your studio.</p>
+            <h2 class="serif" style="color: var(--bordeaux); font-size: 2rem; margin-top: 0;">✨ HENNALINK</h2>
+            <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px;">Welcome to @hennabybibi0's professional studio workspace. Please select your portal view below.</p>
             <form id="signupForm" style="text-align: left;">
-                <input type="email" id="signupEmail" placeholder="Enter your email address" required style="margin-bottom: 15px;">
+                <input type="email" id="signupEmail" placeholder="Enter your email address" required style="margin-bottom: 18px;">
                 
                 <div class="role-choice-grid">
                     <div class="role-option-card" id="customerCard" onclick="selectRoleChoice('customer')">
-                        <h4 style="margin:0 0 5px 0; color:var(--primary-maroon);">👤 Customer</h4>
-                        <p style="margin:0; font-size:0.78rem; color:var(--text-muted);">Book appointments & group parties.</p>
+                        <h4 class="serif" style="margin:0 0 6px 0; color:var(--bordeaux); font-size: 1.1rem;">👤 Client / Host</h4>
+                        <p style="margin:0; font-size:0.8rem; color:var(--text-muted);">Book sessions & group parties.</p>
                     </div>
                     <div class="role-option-card" id="artistCard" onclick="selectRoleChoice('artist')">
-                        <h4 style="margin:0 0 5px 0; color:var(--primary-maroon);">🎨 Henna Artist</h4>
-                        <p style="margin:0; font-size:0.78rem; color:var(--text-muted);">Manage flash inventory & team dispatch.</p>
+                        <h4 class="serif" style="margin:0 0 6px 0; color:var(--bordeaux); font-size: 1.1rem;">🎨 Artist Studio</h4>
+                        <p style="margin:0; font-size:0.8rem; color:var(--text-muted);">Manage flash inventory & radar.</p>
                     </div>
                 </div>
                 <input type="hidden" id="selectedRole" value="">
 
-                <!-- Instant Notification & Promo Consent Checkbox -->
-                <div style="background: var(--gold-light); padding: 12px 15px; border-radius: 12px; border: 1px solid var(--gold-accent); margin-bottom: 20px; font-size: 0.82rem;">
-                    <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; color: var(--primary-dark); font-weight: 600;">
-                        <input type="checkbox" id="promoConsent" checked style="width: auto; margin-top: 2px;">
-                        <span>🔔 Yes! Send me exclusive artist promotions, local event alerts, and automated appointment reminders to my email.</span>
+                <div style="background: var(--champagne-light); padding: 14px 18px; border-radius: 12px; border: 1px solid var(--champagne); margin-bottom: 24px; font-size: 0.85rem;">
+                    <label style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer; color: var(--bordeaux-dark); font-weight: 600;">
+                        <input type="checkbox" id="promoConsent" checked style="width: auto; margin-top: 3px;">
+                        <span>🔔 Yes! Send me exclusive @hennabybibi0 promotions, event updates, and automated appointment reminders.</span>
                     </label>
                 </div>
 
-                <button type="submit" class="btn-primary">Enter HennaLink</button>
+                <button type="submit" class="btn-primary">Enter Portal</button>
             </form>
         </div>
     </div>
 
     <!-- Navigation Bar -->
     <nav class="top-navbar">
-        <div class="nav-brand"><h2>✨ HennaLink</h2></div>
+        <div class="nav-brand">
+            <h2 class="serif">✨ HENNALINK</h2>
+            <span class="brand-handle">@hennabybibi0</span>
+        </div>
         <ul class="nav-links">
-            <li><span class="user-status-badge" id="navRoleBadge">Customer Portal</span></li>
+            <li><span class="user-status-badge" id="navRoleBadge">Client Portal</span></li>
             <li><button class="logout-link" onclick="localStorage.clear(); location.reload();">Switch Account</button></li>
         </ul>
     </nav>
@@ -549,57 +649,57 @@
     <div class="main-container">
         
         <div class="hero-banner">
-            <h1 id="mainHeaderTitle">Discover Local Henna Artistry</h1>
-            <p id="mainHeaderSubtitle">Explore custom flash catalogs, inspiration boards, and live radar pop-ups.</p>
+            <h1 class="serif" id="mainHeaderTitle">HENNALINK Studio Hub</h1>
+            <p id="mainHeaderSubtitle">Professional organic body art, custom flash catalogs, and live pop-up radar in Ronkonkoma, New York.</p>
         </div>
 
         <!-- ================= CUSTOMER PORTAL ================= -->
         <div id="customerPortalView" class="portal-view active-view">
             
-            <!-- Notifications & Promotions Live Banner -->
-            <div class="content-card" style="background: linear-gradient(135deg, var(--gold-light) 0%, #fff 100%); border-color: var(--gold-accent);">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
+            <!-- Promotions Banner -->
+            <div class="content-card" style="background: linear-gradient(135deg, var(--champagne-light) 0%, #fff 100%); border-color: var(--champagne);">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
                     <div>
-                        <h3 class="section-title" style="margin-bottom: 4px;">🎉 Active Promotions & Event Updates</h3>
-                        <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted);">Subscribed to alerts for: <strong id="subscribedEmailDisplay" style="color:var(--primary-maroon);">user@email.com</strong></p>
+                        <h3 class="section-title" style="margin-bottom: 4px; font-size: 1.4rem;">🎉 Active Promotions & Event Updates</h3>
+                        <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted);">Alert notifications enabled for: <strong id="subscribedEmailDisplay" style="color:var(--bordeaux);">user@email.com</strong></p>
                     </div>
-                    <span style="background: var(--primary-maroon); color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: bold;">Notifications ON</span>
+                    <span style="background: var(--bordeaux); color: white; padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.3px;">Notifications Active</span>
                 </div>
-                <div style="margin-top: 15px; font-size: 0.88rem; border-top: 1px solid var(--border-warm); padding-top: 12px;">
-                    ✨ <strong>Special Offer:</strong> Use code <code>HENNALINK15</code> for 15% off your first booking with any featured artist this month!<br>
+                <div style="margin-top: 18px; font-size: 0.9rem; border-top: 1px solid var(--border-refined); padding-top: 15px; color: var(--text-main);">
+                    ✨ <strong>Special Offer:</strong> Use code <code>BIBI15</code> for 15% off your first booking with @hennabybibi0 this season!<br>
                     📍 <strong>Upcoming Pop-Up:</strong> Suffolk County Street Fair Pop-Up this Saturday from 10:00 AM – 4:00 PM.
                 </div>
             </div>
 
-            <!-- Customer "My Bookings & Session Countdown" Card -->
+            <!-- Client Bookings & Countdown -->
             <div class="content-card">
                 <h3 class="section-title">📅 My Bookings & Session Countdown</h3>
-                <p class="section-subtitle">Track your upcoming appointments, countdowns, and deposit receipts.</p>
-                <div id="customerMyBookingsList" style="display: flex; flex-direction: column; gap: 12px;">
-                    <div style="background: var(--gold-light); border: 1px solid var(--gold-accent); padding: 16px; border-radius: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                <p class="section-subtitle">Track your upcoming appointments, countdowns, and deposit receipts with BiBi.</p>
+                <div id="customerMyBookingsList" style="display: flex; flex-direction: column; gap: 14px;">
+                    <div style="background: var(--champagne-light); border: 1px solid var(--champagne); padding: 18px; border-radius: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
                         <div>
-                            <strong style="color: var(--primary-dark); font-size: 1.05rem;">Henna By BiBi &bull; Mandala Palm ($40)</strong>
-                            <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">Scheduled: Sept 22, 2:00 PM (Deposit: $15 Confirmed)</div>
-                            <div style="font-size: 0.82rem; color: var(--primary-maroon); font-weight: bold; margin-top: 4px;">⏳ Session Countdown: 2 Days to Go!</div>
+                            <strong class="serif" style="color: var(--bordeaux-dark); font-size: 1.15rem;">Henna By BiBi &bull; Design #2 (Mandala Palm - $40)</strong>
+                            <div style="font-size: 0.88rem; color: var(--text-muted); margin-top: 3px;">Scheduled: Sept 22, 2:00 PM (Deposit: $15 Confirmed)</div>
+                            <div style="font-size: 0.85rem; color: var(--bordeaux); font-weight: bold; margin-top: 6px;">⏳ Session Countdown: 2 Days to Go!</div>
                         </div>
-                        <button onclick="if(confirm('Cancel or reschedule this appointment?')) { alert('Request submitted to artist.'); this.parentElement.remove(); }" style="background: #c0392b; color: white; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 0.8rem;">Cancel / Reschedule</button>
+                        <button onclick="if(confirm('Cancel or reschedule this appointment?')) { alert('Request submitted to artist.'); this.parentElement.remove(); }" style="background: #c62828; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 0.82rem; font-weight: 600;">Cancel / Reschedule</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Multi-Artist Group Event Booking Card -->
-            <div class="content-card" style="background: linear-gradient(135deg, #fff 0%, var(--gold-light) 100%); border-color: var(--gold-accent);">
+            <!-- Multi-Artist Group Booking -->
+            <div class="content-card" style="background: linear-gradient(135deg, #fff 0%, var(--champagne-light) 100%); border-color: var(--champagne);">
                 <h3 class="section-title">👥 Multi-Artist Group Event Booking</h3>
                 <p class="section-subtitle">Planning a bridal shower, Henna Night, or large celebration? Book multiple artists simultaneously to handle your party efficiently.</p>
                 
                 <form id="groupEventForm">
-                    <div class="form-grid two-col" style="margin-bottom: 15px;">
+                    <div class="form-grid two-col" style="margin-bottom: 18px;">
                         <input type="text" id="groupHostName" placeholder="Host / Bride Full Name" required>
                         <input type="tel" id="groupHostPhone" placeholder="Contact Phone Number" required>
                     </div>
-                    <div class="form-grid two-col" style="margin-bottom: 15px;">
+                    <div class="form-grid two-col" style="margin-bottom: 18px;">
                         <div>
-                            <label style="font-size: 0.82rem; font-weight: bold; display: block; margin-bottom: 4px;">Number of Artists Needed:</label>
+                            <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 6px; color: var(--bordeaux-dark);">Number of Artists Needed:</label>
                             <select id="groupArtistCount" required>
                                 <option value="2 Artists (Up to 15 Guests)">2 Artists (Up to 15 Guests)</option>
                                 <option value="3 Artists (15–30 Guests)">3 Artists (15–30 Guests)</option>
@@ -607,74 +707,88 @@
                             </select>
                         </div>
                         <div>
-                            <label style="font-size: 0.82rem; font-weight: bold; display: block; margin-bottom: 4px;">Event Date & Time:</label>
+                            <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 6px; color: var(--bordeaux-dark);">Event Date & Time:</label>
                             <input type="datetime-local" id="groupEventDateTime" required>
                         </div>
                     </div>
-                    <div style="margin-bottom: 15px;">
-                        <textarea id="groupEventNotes" placeholder="Event location address, guest count details, and paste style preference (Organic Henna / Jagua)..." style="height: 70px;"></textarea>
+                    <div style="margin-bottom: 18px;">
+                        <textarea id="groupEventNotes" placeholder="Event location address, guest count details, and paste style preference (Organic Henna / Jagua)..." style="height: 80px;"></textarea>
                     </div>
                     <button type="submit" class="btn-primary">Dispatch Group Event Booking to Studio Team</button>
                 </form>
             </div>
 
+            <!-- High Quality Map Card with Satellite View Toggle -->
             <div class="content-card">
-                <h3 class="section-title">📍 Live Area Radar Map</h3>
-                <p class="section-subtitle">Artists currently broadcasting live walk-in availability or scheduled pop-ups.</p>
-                <div class="filter-bar">
-                    <div class="filter-chip active">🌐 All Artists</div>
-                    <div class="filter-chip">🌿 Organic Henna</div>
-                    <div class="filter-chip">🫐 Jagua Stain</div>
-                    <div class="filter-chip">⚡ Walk-Ins Open</div>
+                <h3 class="section-title">📍 Live Area Radar & Satellite Map</h3>
+                <p class="section-subtitle">Switch between Editorial Street View and HD Satellite View to locate BiBi's studio and pop-ups.</p>
+                
+                <div class="filter-bar" style="justify-content: space-between; align-items: center;">
+                    <div style="display: flex; gap: 10px; overflow-x: auto;">
+                        <div class="filter-chip active">🌐 All Locations</div>
+                        <div class="filter-chip">🌿 Organic Henna</div>
+                        <div class="filter-chip">🫐 Jagua Stain</div>
+                        <div class="filter-chip">⚡ Walk-Ins Open</div>
+                    </div>
+                    <div style="display: flex; gap: 8px; flex-shrink: 0;">
+                        <button type="button" id="btnStreetView" onclick="setMapLayer('street')" class="filter-chip active" style="margin: 0;">Street Map</button>
+                        <button type="button" id="btnSatelliteView" onclick="setMapLayer('satellite')" class="filter-chip" style="margin: 0;">Satellite View</button>
+                    </div>
                 </div>
+                
                 <div id="map"></div>
             </div>
 
-            <!-- Inspiration Board (Favorites) -->
-            <div class="content-card" style="background: var(--gold-light);">
+            <!-- Inspiration Board -->
+            <div class="content-card" style="background: var(--champagne-light);">
                 <h3 class="section-title">❤️ My Saved Inspiration Board</h3>
-                <p class="section-subtitle">Designs you've favorited to easily show your artist during your session.</p>
-                <div id="inspirationBoardGrid" style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <span style="font-size: 0.85rem; color: var(--text-muted); font-style: italic;">No favorite designs saved yet. Tap the heart icon on any catalog item below!</span>
+                <p class="section-subtitle">Designs you've favorited to easily show BiBi during your session.</p>
+                <div id="inspirationBoardGrid" style="display: flex; gap: 12px; flex-wrap: wrap;">
+                    <span style="font-size: 0.88rem; color: var(--text-muted); font-style: italic;">No favorite designs saved yet. Tap the heart icon on any catalog item below!</span>
                 </div>
             </div>
 
+            <!-- Flash Design Catalog -->
             <div class="content-card">
-                <h3 class="section-title">✨ Featured Artists & Flash Catalogs</h3>
-                <p class="section-subtitle">Browse professional artwork and launch the booking consultation wizard.</p>
+                <h3 class="section-title">✨ Flash Design Catalog (Designs 1–4)</h3>
+                <p class="section-subtitle">Browse professional numbered flash artwork by @hennabybibi0 and launch the booking consultation wizard.</p>
                 
                 <div class="artist-grid">
-                    <div class="artist-card">
+                    <div class="artist-card" style="grid-column: 1 / -1;">
                         <div class="artist-header">
                             <div>
-                                <h4 class="artist-name" id="displayArtistName">Henna By BiBi</h4>
+                                <h4 class="serif artist-name" id="displayArtistName">Henna By BiBi</h4>
                                 <span class="artist-location" id="displayArtistLocation">📍 Ronkonkoma, NY</span>
                                 <div><span class="paste-tag" id="displayArtistPaste">🌿 100% Organic Natural Henna</span></div>
                             </div>
                             <div class="rating-badge">⭐ 5.0</div>
                         </div>
-                        <p style="font-size: 0.85rem; color: var(--text-muted); margin: 10px 0 5px 0;">Flash Design Menu (Tap ❤️ to Save):</p>
+                        <p style="font-size: 0.88rem; color: var(--text-muted); margin: 15px 0 8px 0;">Official Flash Menu (Designs 1, 2, 3, 4 — Tap ❤️ to Save):</p>
                         
                         <div class="catalog-grid" id="customerBibiCatalog">
-                            <div class="catalog-item" data-name="Floral Strip ($30)">
-                                <button class="favorite-btn" onclick="toggleFavorite(this, 'Floral Strip ($30)')">❤️</button>
-                                Floral Strip<br><span style="font-size:0.7rem; color:var(--primary-maroon)">$30</span>
+                            <div class="catalog-item" data-name="Design #1 (Floral Strip - $30)">
+                                <button class="favorite-btn" onclick="toggleFavorite(this, 'Design #1 (Floral Strip - $30)')">❤️</button>
+                                <strong>Design #1</strong><br>Floral Strip<br><span style="font-size:0.75rem; color:var(--bordeaux); font-weight:700;">$30 ($10 Dep.)</span>
                             </div>
-                            <div class="catalog-item" data-name="Mandala Palm ($40)">
-                                <button class="favorite-btn" onclick="toggleFavorite(this, 'Mandala Palm ($40)')">❤️</button>
-                                Mandala Palm<br><span style="font-size:0.7rem; color:var(--primary-maroon)">$40</span>
+                            <div class="catalog-item" data-name="Design #2 (Mandala Palm - $40)">
+                                <button class="favorite-btn" onclick="toggleFavorite(this, 'Design #2 (Mandala Palm - $40)')">❤️</button>
+                                <strong>Design #2</strong><br>Mandala Palm<br><span style="font-size:0.75rem; color:var(--bordeaux); font-weight:700;">$40 ($15 Dep.)</span>
                             </div>
-                            <div class="catalog-item" data-name="Geometric Cuff ($35)">
-                                <button class="favorite-btn" onclick="toggleFavorite(this, 'Geometric Cuff ($35)')">❤️</button>
-                                Geometric Cuff<br><span style="font-size:0.7rem; color:var(--primary-maroon)">$35</span>
+                            <div class="catalog-item" data-name="Design #3 (Geometric Cuff - $35)">
+                                <button class="favorite-btn" onclick="toggleFavorite(this, 'Design #3 (Geometric Cuff - $35)')">❤️</button>
+                                <strong>Design #3</strong><br>Geometric Cuff<br><span style="font-size:0.75rem; color:var(--bordeaux); font-weight:700;">$35 ($10 Dep.)</span>
+                            </div>
+                            <div class="catalog-item" data-name="Design #4 (Bridal Trail - $65)">
+                                <button class="favorite-btn" onclick="toggleFavorite(this, 'Design #4 (Bridal Trail - $65)')">❤️</button>
+                                <strong>Design #4</strong><br>Bridal Trail<br><span style="font-size:0.75rem; color:var(--bordeaux); font-weight:700;">$65 ($25 Dep.)</span>
                             </div>
                         </div>
                         
-                        <button class="btn-primary" style="margin-top: 10px;" onclick="openBookingModal('Henna By BiBi')">Book & Consultation Wizard</button>
+                        <button class="btn-primary" style="margin-top: 15px;" onclick="openBookingModal('Henna By BiBi')">Book Design & Consultation Wizard</button>
                         
-                        <!-- Verified Reviews & Healed Stain Upload -->
-                        <div style="margin-top: 20px; border-top: 1px solid var(--border-warm); padding-top: 15px;">
-                            <p style="font-size: 0.85rem; font-weight: bold; margin: 0 0 8px 0;">Verified Client Reviews & Healed Stains:</p>
+                        <!-- Verified Reviews -->
+                        <div style="margin-top: 25px; border-top: 1px solid var(--champagne-border); padding-top: 20px;">
+                            <p style="font-size: 0.88rem; font-weight: bold; margin: 0 0 10px 0; color: var(--bordeaux-dark);">Verified Client Reviews & Healed Stains:</p>
                             <div id="reviewsFeedContainer">
                                 <div class="review-card">
                                     <strong>Aisha M.</strong> ⭐⭐⭐⭐⭐<br>
@@ -682,12 +796,11 @@
                                 </div>
                             </div>
 
-                            <!-- Client Healed Stain Upload Form -->
-                            <div style="margin-top: 15px; background: #fff; padding: 12px; border-radius: 10px; border: 1px solid var(--border-warm);">
-                                <p style="font-size: 0.8rem; font-weight: bold; margin: 0 0 6px 0; color: var(--primary-maroon);">📸 Upload Your 48-Hour Healed Stain Photo:</p>
-                                <input type="text" id="clientReviewName" placeholder="Your Name" style="margin-bottom: 8px; font-size: 0.82rem; padding: 8px 12px;">
-                                <textarea id="clientReviewText" placeholder="Write review & describe your stain result..." style="margin-bottom: 8px; font-size: 0.82rem; padding: 8px 12px; height: 60px;"></textarea>
-                                <button onclick="submitClientReview()" class="btn-primary" style="padding: 8px; font-size: 0.82rem;">Submit Review & Healed Stain</button>
+                            <div style="margin-top: 18px; background: #fff; padding: 16px; border-radius: 12px; border: 1px solid var(--border-refined);">
+                                <p style="font-size: 0.82rem; font-weight: bold; margin: 0 0 8px 0; color: var(--bordeaux);">📸 Upload Your 48-Hour Healed Stain Photo:</p>
+                                <input type="text" id="clientReviewName" placeholder="Your Name" style="margin-bottom: 10px; font-size: 0.85rem; padding: 10px 14px;">
+                                <textarea id="clientReviewText" placeholder="Write review & describe your stain result..." style="margin-bottom: 10px; font-size: 0.85rem; padding: 10px 14px; height: 70px;"></textarea>
+                                <button onclick="submitClientReview()" class="btn-primary" style="padding: 10px; font-size: 0.85rem;">Submit Review & Healed Stain</button>
                             </div>
                         </div>
                     </div>
@@ -696,38 +809,38 @@
 
         </div>
 
-        <!-- ================= ARTIST PORTAL ================= -->
+        <!-- ================= ARTIST STUDIO MANAGEMENT PORTAL ================= -->
         <div id="artistPortalView" class="portal-view">
             
-            <!-- Walk-In Status Toggle Bar -->
+            <!-- Status Toggle -->
             <div class="status-toggle-box">
                 <div>
-                    <h4 style="margin: 0 0 4px 0; color: var(--primary-dark);">Live Walk-In Radar Status</h4>
-                    <p style="margin: 0; font-size: 0.82rem; color: var(--text-muted);">Toggle your status so clients know if you accept spontaneous walk-ins.</p>
+                    <h4 class="serif" style="margin: 0 0 4px 0; color: var(--bordeaux-dark); font-size: 1.2rem;">Live Walk-In Radar Status</h4>
+                    <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted);">Toggle your status so clients know if you accept spontaneous walk-ins.</p>
                 </div>
                 <div>
                     <span id="statusIndicatorBadge" class="status-badge-live">🟢 Accepting Walk-Ins Today</span>
-                    <button class="btn-primary" style="padding: 8px 14px; font-size: 0.8rem; margin-top: 8px;" onclick="toggleArtistWalkInStatus()">Toggle Status</button>
+                    <button class="btn-primary" style="padding: 10px 16px; font-size: 0.82rem; margin-top: 10px;" onclick="toggleArtistWalkInStatus()">Toggle Status</button>
                 </div>
             </div>
 
-            <!-- Artist Studio Profile & Bio Customization Editor -->
+            <!-- Profile Customization -->
             <div class="content-card">
                 <h3 class="section-title">⚙️ Studio Profile & Bio Customization</h3>
                 <p class="section-subtitle">Update your public business branding, location, and paste specialties displayed to customers.</p>
                 <form id="artistProfileForm">
-                    <div class="form-grid two-col" style="margin-bottom: 15px;">
+                    <div class="form-grid two-col" style="margin-bottom: 18px;">
                         <div>
-                            <label style="font-size: 0.82rem; font-weight: bold; display: block; margin-bottom: 4px;">Business Name:</label>
+                            <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 6px; color: var(--bordeaux-dark);">Business Name:</label>
                             <input type="text" id="editArtistName" value="Henna By BiBi" required>
                         </div>
                         <div>
-                            <label style="font-size: 0.82rem; font-weight: bold; display: block; margin-bottom: 4px;">Studio Location:</label>
+                            <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 6px; color: var(--bordeaux-dark);">Studio Location:</label>
                             <input type="text" id="editArtistLocation" value="Ronkonkoma, NY" required>
                         </div>
                     </div>
-                    <div style="margin-bottom: 15px;">
-                        <label style="font-size: 0.82rem; font-weight: bold; display: block; margin-bottom: 4px;">Paste Specialty Tag:</label>
+                    <div style="margin-bottom: 18px;">
+                        <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 6px; color: var(--bordeaux-dark);">Paste Specialty Tag:</label>
                         <input type="text" id="editArtistPaste" value="🌿 100% Organic Natural Henna" required>
                     </div>
                     <button type="submit" class="btn-primary">Save Profile Changes</button>
@@ -750,42 +863,46 @@
                         </thead>
                         <tbody id="artistDashboardTableBody">
                             <tr>
-                                <td>Sarah Jenkins<br><span style="font-size:0.75rem; color:var(--text-muted)">(631) 555-0192</span></td>
-                                <td>Mandala Palm ($40)<br><span style="font-size:0.75rem; color:#27ae60">Deposit Paid: $15</span></td>
+                                <td>Sarah Jenkins<br><span style="font-size:0.78rem; color:var(--text-muted)">(631) 555-0192</span></td>
+                                <td>Design #2 (Mandala Palm - $40)<br><span style="font-size:0.78rem; color:#2e7d32; font-weight:600;">Deposit Paid: $15</span></td>
                                 <td>Sept 22, 2:00 PM</td>
-                                <td><span style="background:var(--gold-light); padding:4px 8px; border-radius:6px; font-size:0.8rem;">Sensitive skin; Organic Henna; Bridal styling</span></td>
+                                <td><span style="background:var(--champagne-light); padding:5px 10px; border-radius:8px; font-size:0.82rem; border:1px solid var(--champagne);">Sensitive skin; Organic Henna; Bridal styling</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Flash Catalog Inventory Manager -->
+            <!-- Flash Inventory Manager -->
             <div class="content-card">
                 <h3 class="section-title">🖼️ Flash Catalog Inventory Manager</h3>
                 <p class="section-subtitle">Upload new designs with tiered pricing/deposits, or delete retired flash artwork.</p>
                 
                 <form id="artistUploadForm" style="margin-bottom: 25px;">
                     <div class="form-grid two-col">
-                        <input type="text" id="uploadDesignName" placeholder="Design Name (e.g., Rose Trail)" required>
-                        <input type="text" id="uploadDesignPrice" placeholder="Price & Deposit (e.g., $35 ($10 Deposit))" required>
+                        <input type="text" id="uploadDesignName" placeholder="Design Name (e.g., Design #5 - Rose Trail)" required>
+                        <input type="text" id="uploadDesignPrice" placeholder="Price & Deposit (e.g., $45 ($15 Deposit))" required>
                     </div>
-                    <button type="submit" class="btn-primary" style="margin-top: 10px;">Publish New Flash Design</button>
+                    <button type="submit" class="btn-primary" style="margin-top: 12px;">Publish New Flash Design</button>
                 </form>
 
-                <p style="font-size: 0.85rem; font-weight: bold; margin-bottom: 8px;">Active Inventory Manager:</p>
-                <div id="artistInventoryList" style="display: flex; flex-direction: column; gap: 8px;">
-                    <div style="background:#fff; border:1px solid var(--border-warm); padding:10px 15px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; font-size:0.88rem;">
-                        <span>Floral Strip — <strong>$30</strong></span>
-                        <button onclick="this.parentElement.remove()" style="background:#c0392b; color:white; border:none; padding:4px 10px; border-radius:6px; cursor:pointer; font-size:0.75rem;">Delete / Retire</button>
+                <p style="font-size: 0.88rem; font-weight: bold; margin-bottom: 10px; color: var(--bordeaux-dark);">Active Inventory Manager:</p>
+                <div id="artistInventoryList" style="display: flex; flex-direction: column; gap: 10px;">
+                    <div style="background:#fff; border:1px solid var(--border-refined); padding:12px 18px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; font-size:0.9rem;">
+                        <span>Design #1 (Floral Strip) — <strong>$30 ($10 Dep.)</strong></span>
+                        <button onclick="this.parentElement.remove()" style="background:#c62828; color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-size:0.78rem; font-weight:600;">Delete / Retire</button>
                     </div>
-                    <div style="background:#fff; border:1px solid var(--border-warm); padding:10px 15px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; font-size:0.88rem;">
-                        <span>Mandala Palm — <strong>$40</strong></span>
-                        <button onclick="this.parentElement.remove()" style="background:#c0392b; color:white; border:none; padding:4px 10px; border-radius:6px; cursor:pointer; font-size:0.75rem;">Delete / Retire</button>
+                    <div style="background:#fff; border:1px solid var(--border-refined); padding:12px 18px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; font-size:0.9rem;">
+                        <span>Design #2 (Mandala Palm) — <strong>$40 ($15 Dep.)</strong></span>
+                        <button onclick="this.parentElement.remove()" style="background:#c62828; color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-size:0.78rem; font-weight:600;">Delete / Retire</button>
                     </div>
-                    <div style="background:#fff; border:1px solid var(--border-warm); padding:10px 15px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; font-size:0.88rem;">
-                        <span>Geometric Cuff — <strong>$35</strong></span>
-                        <button onclick="this.parentElement.remove()" style="background:#c0392b; color:white; border:none; padding:4px 10px; border-radius:6px; cursor:pointer; font-size:0.75rem;">Delete / Retire</button>
+                    <div style="background:#fff; border:1px solid var(--border-refined); padding:12px 18px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; font-size:0.9rem;">
+                        <span>Design #3 (Geometric Cuff) — <strong>$35 ($10 Dep.)</strong></span>
+                        <button onclick="this.parentElement.remove()" style="background:#c62828; color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-size:0.78rem; font-weight:600;">Delete / Retire</button>
+                    </div>
+                    <div style="background:#fff; border:1px solid var(--border-refined); padding:12px 18px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; font-size:0.9rem;">
+                        <span>Design #4 (Bridal Trail) — <strong>$65 ($25 Dep.)</strong></span>
+                        <button onclick="this.parentElement.remove()" style="background:#c62828; color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-size:0.78rem; font-weight:600;">Delete / Retire</button>
                     </div>
                 </div>
             </div>
@@ -799,7 +916,7 @@
                         <input type="text" id="popupArtistName" placeholder="Business Name" required>
                         <input type="text" id="popupLocation" placeholder="Location Name (e.g., Ronkonkoma Craft Fair)" required>
                     </div>
-                    <button type="submit" class="btn-primary" style="margin-top: 10px;">Publish Live Radar Pin</button>
+                    <button type="submit" class="btn-primary" style="margin-top: 12px;">Publish Live Radar Pin</button>
                 </form>
             </div>
 
@@ -808,18 +925,18 @@
     </div>
 
     <!-- Floating In-App Chat Widget -->
-    <div class="chat-widget-btn" onclick="toggleChatDrawer()" title="Chat with Artist">💬</div>
+    <div class="chat-widget-btn" onclick="toggleChatDrawer()" title="Chat with BiBi">💬</div>
     <div class="chat-drawer" id="chatDrawer">
         <div class="chat-header">
-            <span>💬 Direct Studio Chat</span>
-            <span style="cursor: pointer; font-size: 1.2rem;" onclick="toggleChatDrawer()">&times;</span>
+            <span>💬 Chat with @hennabybibi0</span>
+            <span style="cursor: pointer; font-size: 1.3rem;" onclick="toggleChatDrawer()">&times;</span>
         </div>
         <div class="chat-body" id="chatMessageContainer">
-            <div class="chat-msg incoming">Hello! Welcome to Henna By BiBi. Feel free to ask about sizing, paste ingredients, or custom reference photos! ✨</div>
+            <div class="chat-msg incoming">Hello! Welcome to HENNALINK (@hennabybibi0). Feel free to ask about sizing, organic paste ingredients, or custom reference photos! ✨</div>
         </div>
         <div class="chat-footer">
-            <input type="text" id="chatInputText" placeholder="Type a message to artist..." onkeypress="if(event.key === 'Enter') sendChatMessage()">
-            <button onclick="sendChatMessage()" class="btn-primary" style="width: auto; padding: 10px 16px; font-size: 0.85rem;">Send</button>
+            <input type="text" id="chatInputText" placeholder="Type a message to BiBi..." onkeypress="if(event.key === 'Enter') sendChatMessage()">
+            <button onclick="sendChatMessage()" class="btn-primary" style="width: auto; padding: 10px 18px; font-size: 0.88rem;">Send</button>
         </div>
     </div>
 
@@ -827,8 +944,8 @@
     <div class="modal-overlay" id="bookingModal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeBookingModal()">&times;</span>
-            <h3 id="modalArtistTitle" style="color: var(--primary-maroon); margin-top: 0;">Consultation & Booking Wizard</h3>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Complete your consultation questions to secure your appointment.</p>
+            <h3 class="serif" id="modalArtistTitle" style="color: var(--bordeaux); margin-top: 0; font-size: 1.6rem;">Consultation & Booking Wizard</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 22px;">Complete your consultation questions to secure your appointment with BiBi.</p>
             
             <form id="directBookingForm">
                 <div class="form-grid">
@@ -837,26 +954,27 @@
                     
                     <select id="designChoice" required>
                         <option value="">Select Design from Flash Catalog</option>
-                        <option value="Floral Strip ($30)">Floral Strip ($30)</option>
-                        <option value="Mandala Palm ($40)">Mandala Palm ($40)</option>
-                        <option value="Geometric Cuff ($35)">Geometric Cuff ($35)</option>
+                        <option value="Design #1 (Floral Strip - $30)">Design #1 (Floral Strip - $30)</option>
+                        <option value="Design #2 (Mandala Palm - $40)">Design #2 (Mandala Palm - $40)</option>
+                        <option value="Design #3 (Geometric Cuff - $35)">Design #3 (Geometric Cuff - $35)</option>
+                        <option value="Design #4 (Bridal Trail - $65)">Design #4 (Bridal Trail - $65)</option>
                     </select>
 
-                    <div style="background: var(--gold-light); padding: 14px; border-radius: 12px; border: 1px solid var(--gold-accent);">
-                        <label style="font-size: 0.82rem; font-weight: bold; display: block; margin-bottom: 6px;">🌿 Paste Preference:</label>
-                        <select id="pastePreference" style="margin-bottom: 10px;" required>
+                    <div style="background: var(--champagne-light); padding: 16px; border-radius: 12px; border: 1px solid var(--champagne);">
+                        <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 6px; color: var(--bordeaux-dark);">🌿 Paste Preference:</label>
+                        <select id="pastePreference" style="margin-bottom: 12px;" required>
                             <option value="Traditional Organic Henna">Traditional 100% Organic Henna</option>
                             <option value="Dark-Staining Jagua">Dark-Staining Jagua Gel</option>
                         </select>
 
-                        <label style="font-size: 0.82rem; font-weight: bold; display: block; margin-bottom: 6px;">✨ Event Styling Type:</label>
-                        <select id="eventStyling" style="margin-bottom: 10px;" required>
+                        <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 6px; color: var(--bordeaux-dark);">✨ Event Styling Type:</label>
+                        <select id="eventStyling" style="margin-bottom: 12px;" required>
                             <option value="General / Festival">General / Festival</option>
                             <option value="Bridal">Bridal</option>
                             <option value="Eid / Celebration">Eid / Celebration</option>
                         </select>
 
-                        <label style="font-size: 0.82rem; font-weight: bold; display: block; margin-bottom: 6px;">⚠️ Skin Sensitivity Notes:</label>
+                        <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 6px; color: var(--bordeaux-dark);">⚠️ Skin Sensitivity Notes:</label>
                         <input type="text" id="skinNotes" placeholder="e.g., Sensitive skin, eucalyptus allergy notes">
                     </div>
 
@@ -876,17 +994,57 @@
     </div>
 
     <footer>
-        &copy; 2026 HennaLink &bull; Elevating Body Art Communities Worldwide
+        &copy; 2026 HENNALINK &bull; Powered by @hennabybibi0 &bull; Ronkonkoma, New York
     </footer>
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
-        var map = L.map('map').setView([40.8173, -73.1251], 11);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
+        // Initialize Map
+        var map = L.map('map', { zoomControl: false }).setView([40.8173, -73.1251], 12);
+        L.control.zoom({ position: 'topright' }).addTo(map);
 
-        var marker1 = L.marker([40.8173, -73.1251]).addTo(map);
-        marker1.bindPopup("<b>Henna By BiBi</b><br>📍 Ronkonkoma, NY<br>⚡ <span style='color:green;font-weight:bold;'>Walk-Ins Open</span>");
+        // Define Street & Satellite Tile Layers
+        var streetLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://carto.com/">CARTO</a>'
+        });
+
+        var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            maxZoom: 19,
+            attribution: '&copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        });
+
+        // Default to Street View
+        streetLayer.addTo(map);
+
+        function setMapLayer(type) {
+            var btnStreet = document.getElementById('btnStreetView');
+            var btnSat = document.getElementById('btnSatelliteView');
+            
+            if (type === 'street') {
+                if (map.hasLayer(satelliteLayer)) map.removeLayer(satelliteLayer);
+                streetLayer.addTo(map);
+                btnStreet.classList.add('active');
+                btnSat.classList.remove('active');
+            } else {
+                if (map.hasLayer(streetLayer)) map.removeLayer(streetLayer);
+                satelliteLayer.addTo(map);
+                btnSat.classList.add('active');
+                btnStreet.classList.remove('active');
+            }
+        }
+
+        // Custom High-End Styled Marker Icon
+        var customIcon = L.divIcon({
+            className: 'custom-map-pin',
+            html: '<div style="background: #5c1015; width: 24px; height: 24px; border-radius: 50%; border: 3px solid #d4af37; box-shadow: 0 4px 12px rgba(0,0,0,0.3);"></div>',
+            iconSize: [24, 24],
+            iconAnchor: [12, 12]
+        });
+
+        var marker1 = L.marker([40.8173, -73.1251], { icon: customIcon }).addTo(map);
+        marker1.bindPopup("<b>Henna By BiBi</b><br>📍 Ronkonkoma, NY<br>⚡ <span style='color:#2e7d32;font-weight:bold;'>Walk-Ins Open</span>");
 
         var currentSelectedArtist = "Henna By BiBi";
 
@@ -930,7 +1088,7 @@
             if (role === 'customer') {
                 document.getElementById('customerPortalView').classList.add('active-view');
                 document.getElementById('artistPortalView').classList.remove('active-view');
-                document.getElementById('navRoleBadge').innerText = "Customer Portal";
+                document.getElementById('navRoleBadge').innerText = "Client Portal";
             } else {
                 document.getElementById('customerPortalView').classList.remove('active-view');
                 document.getElementById('artistPortalView').classList.add('active-view');
@@ -939,7 +1097,6 @@
             }
         }
 
-        // Favorites Board Function
         function toggleFavorite(btn, designName) {
             btn.classList.toggle('favorited');
             var board = document.getElementById('inspirationBoardGrid');
@@ -956,7 +1113,7 @@
                 var item = document.getElementById(chipId);
                 if (item) item.remove();
                 if (board.children.length === 0) {
-                    board.innerHTML = '<span style="font-size: 0.85rem; color: var(--text-muted); font-style: italic;">No favorite designs saved yet. Tap the heart icon on any catalog item below!</span>';
+                    board.innerHTML = '<span style="font-size: 0.88rem; color: var(--text-muted); font-style: italic;">No favorite designs saved yet. Tap the heart icon on any catalog item below!</span>';
                 }
             }
         }
@@ -971,7 +1128,6 @@
             document.getElementById('bookingModal').style.display = 'none';
         }
 
-        // Chat Drawer Toggle & Message Send
         function toggleChatDrawer() {
             var drawer = document.getElementById('chatDrawer');
             drawer.style.display = (drawer.style.display === 'flex') ? 'none' : 'flex';
@@ -990,7 +1146,6 @@
             input.value = '';
             container.scrollTop = container.scrollHeight;
 
-            // Simulated auto-reply from artist
             setTimeout(() => {
                 var replyMsg = document.createElement('div');
                 replyMsg.className = 'chat-msg incoming';
@@ -1000,7 +1155,6 @@
             }, 1000);
         }
 
-        // Multi-Artist Group Event Form Submission
         document.getElementById('groupEventForm').addEventListener('submit', function(e) {
             e.preventDefault();
             var hName = document.getElementById('groupHostName').value;
@@ -1009,20 +1163,18 @@
             var eDateTime = document.getElementById('groupEventDateTime').value;
             var eNotes = document.getElementById('groupEventNotes').value || 'None';
 
-            // Add to artist dashboard table
             var tableBody = document.getElementById('artistDashboardTableBody');
             var newRow = document.createElement('tr');
-            newRow.innerHTML = '<td>' + hName + ' (Group Host)<br><span style="font-size:0.75rem; color:var(--text-muted)">(' + hPhone + ')</span></td>' +
-                               '<td>Group Event Booking<br><span style="font-size:0.75rem; color:#27ae60">' + aCount + '</span></td>' +
+            newRow.innerHTML = '<td>' + hName + ' (Group Host)<br><span style="font-size:0.78rem; color:var(--text-muted)">(' + hPhone + ')</span></td>' +
+                               '<td>Group Event Booking<br><span style="font-size:0.78rem; color:#2e7d32; font-weight:600;">' + aCount + '</span></td>' +
                                '<td>' + eDateTime.replace('T', ' ') + '</td>' +
-                               '<td><span style="background:var(--gold-light); padding:4px 8px; border-radius:6px; font-size:0.8rem;">Notes: ' + eNotes + '</span></td>';
+                               '<td><span style="background:var(--champagne-light); padding:5px 10px; border-radius:8px; font-size:0.82rem; border:1px solid var(--champagne);">Notes: ' + eNotes + '</span></td>';
             tableBody.prepend(newRow);
 
-            alert('🎉 Multi-Artist Group Booking Dispatched!\n\nHost: ' + hName + '\nTeam Size: ' + aCount + '\nDate & Time: ' + eDateTime + '\n\nAll confirmation details have been successfully synced to your artist management dashboard.');
+            alert('🎉 Multi-Artist Group Booking Dispatched to @hennabybibi0!\n\nHost: ' + hName + '\nTeam Size: ' + aCount + '\nDate & Time: ' + eDateTime + '\n\nAll confirmation details have been successfully synced to your studio dashboard.');
             document.getElementById('groupEventForm').reset();
         });
 
-        // Booking & Simulated SMS Reminder Trigger
         document.getElementById('directBookingForm').addEventListener('submit', function(e) {
             e.preventDefault();
             var name = document.getElementById('clientName').value;
@@ -1034,28 +1186,25 @@
             var date = document.getElementById('appointmentDate').value;
             var time = document.getElementById('appointmentTime').value;
 
-            // Add to artist dashboard table
             var tableBody = document.getElementById('artistDashboardTableBody');
             var newRow = document.createElement('tr');
-            newRow.innerHTML = '<td>' + name + '<br><span style="font-size:0.75rem; color:var(--text-muted)">( ' + phone + ')</span></td>' +
-                               '<td>' + design + '<br><span style="font-size:0.75rem; color:#27ae60">Deposit Confirmed</span></td>' +
+            newRow.innerHTML = '<td>' + name + '<br><span style="font-size:0.78rem; color:var(--text-muted)">( ' + phone + ')</span></td>' +
+                               '<td>' + design + '<br><span style="font-size:0.78rem; color:#2e7d32; font-weight:600;">Deposit Confirmed</span></td>' +
                                '<td>' + date + ', ' + time + '</td>' +
-                               '<td><span style="background:var(--gold-light); padding:4px 8px; border-radius:6px; font-size:0.8rem;">' + paste + '; ' + event + '; Notes: ' + notes + '</span></td>';
+                               '<td><span style="background:var(--champagne-light); padding:5px 10px; border-radius:8px; font-size:0.82rem; border:1px solid var(--champagne);">' + paste + '; ' + event + '; Notes: ' + notes + '</span></td>';
             tableBody.prepend(newRow);
 
-            // Add to customer bookings tracker
             var bookingsList = document.getElementById('customerMyBookingsList');
             var bookingCard = document.createElement('div');
-            bookingCard.style.cssText = "background: var(--gold-light); border: 1px solid var(--gold-accent); padding: 16px; border-radius: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;";
-            bookingCard.innerHTML = '<div><strong style="color: var(--primary-dark); font-size: 1.05rem;">' + currentSelectedArtist + ' &bull; ' + design + '</strong><div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">Scheduled: ' + date + ', ' + time + ' (Deposit Confirmed)</div><div style="font-size: 0.82rem; color: var(--primary-maroon); font-weight: bold; margin-top: 4px;">⏳ Session Countdown: Upcoming!</div></div><button onclick="if(confirm(\'Cancel or reschedule this appointment?\')) { alert(\'Request submitted.\'); this.parentElement.remove(); }" style="background: #c0392b; color: white; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 0.8rem;">Cancel / Reschedule</button>';
+            bookingCard.style.cssText = "background: var(--champagne-light); border: 1px solid var(--champagne); padding: 18px; border-radius: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;";
+            bookingCard.innerHTML = '<div><strong class="serif" style="color: var(--bordeaux-dark); font-size: 1.15rem;">' + currentSelectedArtist + ' &bull; ' + design + '</strong><div style="font-size: 0.88rem; color: var(--text-muted); margin-top: 3px;">Scheduled: ' + date + ', ' + time + ' (Deposit Confirmed)</div><div style="font-size: 0.85rem; color: var(--bordeaux); font-weight: bold; margin-top: 6px;">⏳ Session Countdown: Upcoming!</div></div><button onclick="if(confirm(\'Cancel or reschedule this appointment?\')) { alert(\'Request submitted.\'); this.parentElement.remove(); }" style="background: #c62828; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 0.82rem; font-weight: 600;">Cancel / Reschedule</button>';
             bookingsList.prepend(bookingCard);
             
-            alert('📱 [Simulated SMS & Email Reminder Scheduled]:\n\n"Hi ' + name + '! Your appointment with ' + currentSelectedArtist + ' for ' + design + ' is confirmed for ' + date + ' at ' + time + '. We have scheduled your 2-hour pre-appointment text reminder. See you soon!"');
+            alert('📱 [Simulated SMS & Email Reminder Scheduled]:\n\n"Hi ' + name + '! Your appointment with Henna By BiBi for ' + design + ' is confirmed for ' + date + ' at ' + time + '. We have scheduled your 2-hour pre-appointment text reminder. See you soon!"');
             closeBookingModal();
             document.getElementById('directBookingForm').reset();
         });
 
-        // Client Healed Stain Review Submission
         function submitClientReview() {
             var cName = document.getElementById('clientReviewName').value;
             var cText = document.getElementById('clientReviewText').value;
@@ -1064,15 +1213,14 @@
             var feed = document.getElementById('reviewsFeedContainer');
             var newRev = document.createElement('div');
             newRev.className = 'review-card';
-            newRev.innerHTML = '<strong>' + cName + '</strong> ⭐⭐⭐⭐⭐<br>"' + cText + '" <br><span style="font-size: 0.75rem; color: #27ae60; font-weight: bold;">✓ Verified Healed Stain Upload</span>';
+            newRev.innerHTML = '<strong>' + cName + '</strong> ⭐⭐⭐⭐⭐<br>"' + cText + '" <br><span style="font-size: 0.78rem; color: #2e7d32; font-weight: bold;">✓ Verified Healed Stain Upload</span>';
             feed.prepend(newRev);
 
-            alert('Thank you! Your review and healed stain details have been successfully posted to the artist gallery.');
+            alert('Thank you! Your review and healed stain details have been successfully posted to BiBi\'s gallery.');
             document.getElementById('clientReviewName').value = '';
             document.getElementById('clientReviewText').value = '';
         }
 
-        // Artist Studio Profile Customizer
         document.getElementById('artistProfileForm').addEventListener('submit', function(e) {
             e.preventDefault();
             var newName = document.getElementById('editArtistName').value;
@@ -1083,34 +1231,30 @@
             document.getElementById('displayArtistLocation').innerText = '📍 ' + newLoc;
             document.getElementById('displayArtistPaste').innerText = newPaste;
 
-            alert('Success! Your artist profile branding has been updated across HennaLink.');
+            alert('Success! Your studio profile branding has been updated.');
         });
 
-        // Artist Upload Artwork
         document.getElementById('artistUploadForm').addEventListener('submit', function(e) {
             e.preventDefault();
             var dName = document.getElementById('uploadDesignName').value;
             var dPrice = document.getElementById('uploadDesignPrice').value;
 
-            // Add to customer catalog
             var catalogGrid = document.getElementById('customerBibiCatalog');
             var newItem = document.createElement('div');
             newItem.className = 'catalog-item';
-            newItem.innerHTML = '<button class="favorite-btn" onclick="toggleFavorite(this, \'' + dName + ' (' + dPrice + ')\')">❤️</button>' + dName + '<br><span style="font-size:0.7rem; color:var(--primary-maroon)">' + dPrice + '</span>';
+            newItem.innerHTML = '<button class="favorite-btn" onclick="toggleFavorite(this, \'' + dName + ' (' + dPrice + ')\')">❤️</button>' + dName + '<br><span style="font-size:0.75rem; color:var(--bordeaux); font-weight:700;">' + dPrice + '</span>';
             catalogGrid.appendChild(newItem);
 
-            // Add to inventory manager list
             var invList = document.getElementById('artistInventoryList');
             var invItem = document.createElement('div');
-            invItem.style.cssText = "background:#fff; border:1px solid var(--border-warm); padding:10px 15px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; font-size:0.88rem;";
-            invItem.innerHTML = '<span>' + dName + ' — <strong>' + dPrice + '</strong></span><button onclick="this.parentElement.remove()" style="background:#c0392b; color:white; border:none; padding:4px 10px; border-radius:6px; cursor:pointer; font-size:0.75rem;">Delete / Retire</button>';
+            invItem.style.cssText = "background:#fff; border:1px solid var(--border-refined); padding:12px 18px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; font-size:0.9rem;";
+            invItem.innerHTML = '<span>' + dName + ' — <strong>' + dPrice + '</strong></span><button onclick="this.parentElement.remove()" style="background:#c62828; color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-size:0.78rem; font-weight:600;">Delete / Retire</button>';
             invList.appendChild(invItem);
 
-            alert('Success! "' + dName + '" published to your live catalog.');
+            alert('Success! "' + dName + '" published to your live @hennabybibi0 catalog.');
             document.getElementById('artistUploadForm').reset();
         });
 
-        // Walk-In Status Toggle
         let isWalkInOpen = true;
         function toggleArtistWalkInStatus() {
             isWalkInOpen = !isWalkInOpen;
@@ -1118,11 +1262,11 @@
             if (isWalkInOpen) {
                 badge.className = "status-badge-live";
                 badge.innerText = "🟢 Accepting Walk-Ins Today";
-                marker1.setPopupContent("<b>Henna By BiBi</b><br>📍 Ronkonkoma, NY<br>⚡ <span style='color:green;font-weight:bold;'>Walk-Ins Open</span>");
+                marker1.setPopupContent("<b>Henna By BiBi</b><br>📍 Ronkonkoma, NY<br>⚡ <span style='color:#2e7d32;font-weight:bold;'>Walk-Ins Open</span>");
             } else {
                 badge.className = "status-badge-busy";
                 badge.innerText = "🔴 Fully Booked (Appointments Only)";
-                marker1.setPopupContent("<b>Henna By BiBi</b><br>📍 Ronkonkoma, NY<br>🔒 <span style='color:red;font-weight:bold;'>Fully Booked</span>");
+                marker1.setPopupContent("<b>Henna By BiBi</b><br>📍 Ronkonkoma, NY<br>🔒 <span style='color:#c62828;font-weight:bold;'>Fully Booked</span>");
             }
         }
 
@@ -1130,7 +1274,7 @@
             e.preventDefault();
             var name = document.getElementById('popupArtistName').value;
             var loc = document.getElementById('popupLocation').value;
-            var newMarker = L.marker([40.8300, -73.1000]).addTo(map);
+            var newMarker = L.marker([40.8300, -73.1000], { icon: customIcon }).addTo(map);
             newMarker.bindPopup("<b>" + name + "</b><br>📍 " + loc).openPopup();
             alert('Success! Your pop-up pin is now broadcasting live on the radar map.');
             document.getElementById('artistPopupForm').reset();
