@@ -363,6 +363,81 @@
             font-size: 0.88rem;
         }
 
+        /* Floating Chat Widget */
+        .chat-widget-btn {
+            position: fixed;
+            bottom: 25px; right: 25px;
+            background: var(--primary-maroon);
+            color: white;
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(107, 20, 24, 0.4);
+            z-index: 1800;
+            border: 2px solid var(--gold-accent);
+        }
+        .chat-drawer {
+            display: none;
+            position: fixed;
+            bottom: 95px; right: 25px;
+            width: 360px; height: 480px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid var(--border-warm);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            z-index: 1800;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .chat-header {
+            background: var(--primary-maroon);
+            color: white;
+            padding: 16px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background: var(--bg-cream);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.85rem;
+        }
+        .chat-msg {
+            padding: 10px 14px;
+            border-radius: 12px;
+            max-width: 80%;
+        }
+        .chat-msg.incoming {
+            background: #ffffff;
+            border: 1px solid var(--border-warm);
+            align-self: flex-start;
+        }
+        .chat-msg.outgoing {
+            background: var(--gold-light);
+            color: var(--primary-dark);
+            border: 1px solid var(--gold-accent);
+            align-self: flex-end;
+        }
+        .chat-footer {
+            padding: 12px;
+            background: #ffffff;
+            border-top: 1px solid var(--border-warm);
+            display: flex;
+            gap: 8px;
+        }
+        .chat-footer input {
+            padding: 10px 14px;
+            font-size: 0.85rem;
+        }
+
         /* Onboarding Modal */
         .onboarding-overlay {
             position: fixed;
@@ -439,11 +514,11 @@
                 <div class="role-choice-grid">
                     <div class="role-option-card" id="customerCard" onclick="selectRoleChoice('customer')">
                         <h4 style="margin:0 0 5px 0; color:var(--primary-maroon);">👤 Customer</h4>
-                        <p style="margin:0; font-size:0.78rem; color:var(--text-muted);">Book appointments & save favorites.</p>
+                        <p style="margin:0; font-size:0.78rem; color:var(--text-muted);">Book appointments & group parties.</p>
                     </div>
                     <div class="role-option-card" id="artistCard" onclick="selectRoleChoice('artist')">
                         <h4 style="margin:0 0 5px 0; color:var(--primary-maroon);">🎨 Henna Artist</h4>
-                        <p style="margin:0; font-size:0.78rem; color:var(--text-muted);">Manage flash inventory & walk-ins.</p>
+                        <p style="margin:0; font-size:0.78rem; color:var(--text-muted);">Manage flash inventory & team dispatch.</p>
                     </div>
                 </div>
                 <input type="hidden" id="selectedRole" value="">
@@ -510,6 +585,37 @@
                         <button onclick="if(confirm('Cancel or reschedule this appointment?')) { alert('Request submitted to artist.'); this.parentElement.remove(); }" style="background: #c0392b; color: white; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 0.8rem;">Cancel / Reschedule</button>
                     </div>
                 </div>
+            </div>
+
+            <!-- Multi-Artist Group Event Booking Card -->
+            <div class="content-card" style="background: linear-gradient(135deg, #fff 0%, var(--gold-light) 100%); border-color: var(--gold-accent);">
+                <h3 class="section-title">👥 Multi-Artist Group Event Booking</h3>
+                <p class="section-subtitle">Planning a bridal shower, Henna Night, or large celebration? Book multiple artists simultaneously to handle your party efficiently.</p>
+                
+                <form id="groupEventForm">
+                    <div class="form-grid two-col" style="margin-bottom: 15px;">
+                        <input type="text" id="groupHostName" placeholder="Host / Bride Full Name" required>
+                        <input type="tel" id="groupHostPhone" placeholder="Contact Phone Number" required>
+                    </div>
+                    <div class="form-grid two-col" style="margin-bottom: 15px;">
+                        <div>
+                            <label style="font-size: 0.82rem; font-weight: bold; display: block; margin-bottom: 4px;">Number of Artists Needed:</label>
+                            <select id="groupArtistCount" required>
+                                <option value="2 Artists (Up to 15 Guests)">2 Artists (Up to 15 Guests)</option>
+                                <option value="3 Artists (15–30 Guests)">3 Artists (15–30 Guests)</option>
+                                <option value="4+ Master Team (30+ Guests)">4+ Master Team (30+ Guests)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size: 0.82rem; font-weight: bold; display: block; margin-bottom: 4px;">Event Date & Time:</label>
+                            <input type="datetime-local" id="groupEventDateTime" required>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <textarea id="groupEventNotes" placeholder="Event location address, guest count details, and paste style preference (Organic Henna / Jagua)..." style="height: 70px;"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Dispatch Group Event Booking to Studio Team</button>
+                </form>
             </div>
 
             <div class="content-card">
@@ -701,6 +807,22 @@
 
     </div>
 
+    <!-- Floating In-App Chat Widget -->
+    <div class="chat-widget-btn" onclick="toggleChatDrawer()" title="Chat with Artist">💬</div>
+    <div class="chat-drawer" id="chatDrawer">
+        <div class="chat-header">
+            <span>💬 Direct Studio Chat</span>
+            <span style="cursor: pointer; font-size: 1.2rem;" onclick="toggleChatDrawer()">&times;</span>
+        </div>
+        <div class="chat-body" id="chatMessageContainer">
+            <div class="chat-msg incoming">Hello! Welcome to Henna By BiBi. Feel free to ask about sizing, paste ingredients, or custom reference photos! ✨</div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chatInputText" placeholder="Type a message to artist..." onkeypress="if(event.key === 'Enter') sendChatMessage()">
+            <button onclick="sendChatMessage()" class="btn-primary" style="width: auto; padding: 10px 16px; font-size: 0.85rem;">Send</button>
+        </div>
+    </div>
+
     <!-- Booking & Consultation Wizard Modal -->
     <div class="modal-overlay" id="bookingModal">
         <div class="modal-content">
@@ -849,6 +971,57 @@
             document.getElementById('bookingModal').style.display = 'none';
         }
 
+        // Chat Drawer Toggle & Message Send
+        function toggleChatDrawer() {
+            var drawer = document.getElementById('chatDrawer');
+            drawer.style.display = (drawer.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        function sendChatMessage() {
+            var input = document.getElementById('chatInputText');
+            var text = input.value.trim();
+            if (!text) return;
+
+            var container = document.getElementById('chatMessageContainer');
+            var userMsg = document.createElement('div');
+            userMsg.className = 'chat-msg outgoing';
+            userMsg.innerText = text;
+            container.appendChild(userMsg);
+            input.value = '';
+            container.scrollTop = container.scrollHeight;
+
+            // Simulated auto-reply from artist
+            setTimeout(() => {
+                var replyMsg = document.createElement('div');
+                replyMsg.className = 'chat-msg incoming';
+                replyMsg.innerText = "Thanks for your message! BiBi has received your inquiry and will review your request shortly. ✨";
+                container.appendChild(replyMsg);
+                container.scrollTop = container.scrollHeight;
+            }, 1000);
+        }
+
+        // Multi-Artist Group Event Form Submission
+        document.getElementById('groupEventForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var hName = document.getElementById('groupHostName').value;
+            var hPhone = document.getElementById('groupHostPhone').value;
+            var aCount = document.getElementById('groupArtistCount').value;
+            var eDateTime = document.getElementById('groupEventDateTime').value;
+            var eNotes = document.getElementById('groupEventNotes').value || 'None';
+
+            // Add to artist dashboard table
+            var tableBody = document.getElementById('artistDashboardTableBody');
+            var newRow = document.createElement('tr');
+            newRow.innerHTML = '<td>' + hName + ' (Group Host)<br><span style="font-size:0.75rem; color:var(--text-muted)">(' + hPhone + ')</span></td>' +
+                               '<td>Group Event Booking<br><span style="font-size:0.75rem; color:#27ae60">' + aCount + '</span></td>' +
+                               '<td>' + eDateTime.replace('T', ' ') + '</td>' +
+                               '<td><span style="background:var(--gold-light); padding:4px 8px; border-radius:6px; font-size:0.8rem;">Notes: ' + eNotes + '</span></td>';
+            tableBody.prepend(newRow);
+
+            alert('🎉 Multi-Artist Group Booking Dispatched!\n\nHost: ' + hName + '\nTeam Size: ' + aCount + '\nDate & Time: ' + eDateTime + '\n\nAll confirmation details have been successfully synced to your artist management dashboard.');
+            document.getElementById('groupEventForm').reset();
+        });
+
         // Booking & Simulated SMS Reminder Trigger
         document.getElementById('directBookingForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -864,7 +1037,7 @@
             // Add to artist dashboard table
             var tableBody = document.getElementById('artistDashboardTableBody');
             var newRow = document.createElement('tr');
-            newRow.innerHTML = '<td>' + name + '<br><span style="font-size:0.75rem; color:var(--text-muted)>( ' + phone + ')</span></td>' +
+            newRow.innerHTML = '<td>' + name + '<br><span style="font-size:0.75rem; color:var(--text-muted)">( ' + phone + ')</span></td>' +
                                '<td>' + design + '<br><span style="font-size:0.75rem; color:#27ae60">Deposit Confirmed</span></td>' +
                                '<td>' + date + ', ' + time + '</td>' +
                                '<td><span style="background:var(--gold-light); padding:4px 8px; border-radius:6px; font-size:0.8rem;">' + paste + '; ' + event + '; Notes: ' + notes + '</span></td>';
