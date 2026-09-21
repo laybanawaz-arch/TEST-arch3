@@ -5,25 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HennaLink | Luxury Henna Artists & Pop-Up Radar</title>
     
-    <!-- Google Fonts: Playfair Display for Luxury Serif & Plus Jakarta Sans for Modern UI -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Leaflet CSS for the Interactive Map -->
+    <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     
     <style>
         :root {
-            --primary-maroon: #6b1418;  /* Deep Royal Henna Maroon */
-            --primary-dark: #3e0a0d;    /* Rich Espresso Maroon */
-            --gold-accent: #d4af37;     /* Vibrant Luxury Gold */
-            --gold-light: #f9f3e6;      /* Soft Warm Champagne */
-            --bg-cream: #faf6f0;        /* Premium Warm Parchment */
-            --card-bg: #ffffff;         /* Pure Crisp White Card */
-            --text-main: #2b2220;       /* Rich Dark Brown Text */
-            --text-muted: #756560;      /* Warm Muted Gray-Brown */
-            --border-warm: #ebdcd0;     /* Delicate Soft Border */
+            --primary-maroon: #6b1418;
+            --primary-dark: #3e0a0d;
+            --gold-accent: #d4af37;
+            --gold-light: #f9f3e6;
+            --bg-cream: #faf6f0;
+            --card-bg: #ffffff;
+            --text-main: #2b2220;
+            --text-muted: #756560;
+            --border-warm: #ebdcd0;
             --shadow-subtle: 0 10px 30px rgba(107, 20, 24, 0.06);
             --shadow-hover: 0 15px 35px rgba(107, 20, 24, 0.12);
         }
@@ -41,7 +41,6 @@
             font-family: 'Playfair Display', serif;
         }
 
-        /* Luxury Top Navigation Bar */
         .top-navbar {
             background: var(--card-bg);
             border-bottom: 1px solid var(--border-warm);
@@ -55,38 +54,19 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.03);
         }
 
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
         .nav-brand h2 {
             color: var(--primary-maroon);
             font-size: 1.5rem;
             margin: 0;
-            letter-spacing: 0.5px;
         }
 
         .nav-links {
             display: flex;
-            gap: 25px;
+            gap: 20px;
             list-style: none;
             margin: 0;
             padding: 0;
             align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-main);
-            font-weight: 500;
-            font-size: 0.92rem;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-maroon);
         }
 
         .user-status-badge {
@@ -109,14 +89,12 @@
             font-family: inherit;
         }
 
-        /* Main Container Layout */
         .main-container {
             max-width: 1100px;
             margin: 40px auto;
             padding: 0 20px;
         }
 
-        /* Hero Header Banner */
         .hero-banner {
             background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-maroon) 100%);
             color: white;
@@ -125,27 +103,12 @@
             border-radius: 24px;
             margin-bottom: 40px;
             box-shadow: var(--shadow-subtle);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-banner::after {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 200px;
-            height: 200px;
-            background: rgba(212, 175, 55, 0.1);
-            border-radius: 50%;
-            pointer-events: none;
         }
 
         .hero-banner h1 {
             font-size: 2.6rem;
             margin: 0 0 10px 0;
             color: #ffffff;
-            letter-spacing: 0.5px;
         }
 
         .hero-banner p {
@@ -155,7 +118,6 @@
             margin: 0 auto;
         }
 
-        /* Section Cards */
         .content-card {
             background: var(--card-bg);
             border-radius: 20px;
@@ -170,9 +132,6 @@
             font-size: 1.6rem;
             margin-top: 0;
             margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
         .section-subtitle {
@@ -181,11 +140,9 @@
             margin-bottom: 25px;
         }
 
-        /* Portal View Control */
         .portal-view { display: none; }
         .portal-view.active-view { display: block; }
 
-        /* Filter Chips Bar */
         .filter-bar {
             display: flex;
             gap: 12px;
@@ -204,7 +161,6 @@
             cursor: pointer;
             white-space: nowrap;
             font-weight: 600;
-            transition: all 0.2s;
         }
 
         .filter-chip:hover, .filter-chip.active {
@@ -213,7 +169,6 @@
             border-color: var(--primary-maroon);
         }
 
-        /* Interactive Map */
         #map {
             height: 380px;
             width: 100%;
@@ -221,7 +176,6 @@
             border: 1px solid var(--border-warm);
         }
 
-        /* Artist Grid & Cards */
         .artist-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -237,12 +191,6 @@
             border-radius: 16px;
             padding: 24px;
             border: 1px solid var(--border-warm);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .artist-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-hover);
         }
 
         .artist-header {
@@ -271,7 +219,6 @@
             font-weight: bold;
             color: var(--gold-accent);
             border: 1px solid var(--border-warm);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
         }
 
         .paste-tag {
@@ -286,7 +233,6 @@
             border: 1px solid var(--border-warm);
         }
 
-        /* Flash Catalog Grid */
         .catalog-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -303,9 +249,21 @@
             color: var(--text-main);
             border: 1px solid var(--border-warm);
             font-weight: 600;
+            position: relative;
         }
 
-        /* Buttons */
+        .favorite-btn {
+            position: absolute;
+            top: 4px;
+            right: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        .favorite-btn.favorited { color: #e74c3c; }
+
         .btn-primary {
             width: 100%;
             background-color: var(--primary-maroon);
@@ -316,19 +274,10 @@
             font-weight: 600;
             font-size: 0.95rem;
             cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
             box-shadow: 0 4px 15px rgba(107, 20, 24, 0.2);
         }
+        .btn-primary:hover { background-color: var(--primary-dark); }
 
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-        }
-
-        .btn-primary:active {
-            transform: scale(0.98);
-        }
-
-        /* Dashboard Table */
         .dashboard-table-wrapper {
             overflow-x: auto;
             border-radius: 12px;
@@ -355,13 +304,11 @@
             font-size: 1.05rem;
         }
 
-        /* Forms */
         .form-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 16px;
         }
-
         @media(min-width: 600px) {
             .form-grid.two-col { grid-template-columns: 1fr 1fr; }
         }
@@ -376,173 +323,135 @@
             background: #ffffff;
             color: var(--text-main);
             box-sizing: border-box;
-            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary-maroon);
-            box-shadow: 0 0 0 4px rgba(107, 20, 24, 0.1);
+        /* Walk-In Toggle Switch Bar */
+        .status-toggle-box {
+            background: var(--gold-light);
+            border: 1px solid var(--gold-accent);
+            padding: 18px 24px;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        .status-badge-live {
+            background: #27ae60;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+        .status-badge-busy {
+            background: #c0392b;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.85rem;
         }
 
-        /* Onboarding / Signup Modal Overlay */
+        /* Reviews & Gallery */
+        .review-card {
+            background: #ffffff;
+            border: 1px solid var(--border-warm);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            font-size: 0.88rem;
+        }
+
+        /* Onboarding Modal */
         .onboarding-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(43, 34, 32, 0.8);
             backdrop-filter: blur(5px);
             z-index: 2000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
+            display: flex; justify-content: center; align-items: center;
+            padding: 20px; box-sizing: border-box;
         }
-
         .onboarding-card {
             background: var(--card-bg);
             padding: 40px 30px;
             border-radius: 24px;
-            max-width: 520px;
-            width: 100%;
+            max-width: 520px; width: 100%;
             border: 1px solid var(--border-warm);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
             text-align: center;
         }
-
-        .onboarding-card h2 {
-            color: var(--primary-maroon);
-            font-size: 2rem;
-            margin-top: 0;
-            margin-bottom: 10px;
-        }
-
         .role-choice-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 25px 0;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 25px 0;
         }
-
         .role-option-card {
             background: var(--gold-light);
             border: 2px solid var(--border-warm);
-            padding: 24px 16px;
+            padding: 20px 16px;
             border-radius: 16px;
             cursor: pointer;
-            transition: all 0.2s ease;
             text-align: left;
         }
-
-        .role-option-card:hover, .role-option-card.selected {
+        .role-option-card.selected {
             border-color: var(--primary-maroon);
             background: #ffffff;
-            box-shadow: 0 8px 20px rgba(107, 20, 24, 0.08);
-            transform: translateY(-3px);
         }
 
-        .role-option-card h4 {
-            margin: 0 0 8px 0;
-            color: var(--primary-maroon);
-            font-size: 1.15rem;
-        }
-
-        .role-option-card p {
-            margin: 0;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            line-height: 1.4;
-        }
-
-        /* Booking Modal */
+        /* Booking Wizard Modal */
         .modal-overlay {
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(43, 34, 32, 0.6);
             backdrop-filter: blur(3px);
-            z-index: 1500;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
+            z-index: 1500; justify-content: center; align-items: center;
+            padding: 20px; box-sizing: border-box;
         }
-
         .modal-content {
             background: var(--card-bg);
-            padding: 35px;
-            border-radius: 24px;
-            max-width: 450px;
-            width: 100%;
+            padding: 35px; border-radius: 24px;
+            max-width: 480px; width: 100%;
             border: 1px solid var(--border-warm);
             position: relative;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            max-height: 90vh;
+            overflow-y: auto;
         }
-
         .close-modal {
-            position: absolute;
-            top: 18px;
-            right: 22px;
-            font-size: 1.6rem;
-            cursor: pointer;
-            color: var(--text-muted);
-            transition: color 0.2s;
+            position: absolute; top: 18px; right: 22px; font-size: 1.6rem; cursor: pointer; color: var(--text-muted);
         }
-
-        .close-modal:hover { color: var(--primary-maroon); }
 
         footer {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--border-warm);
-            margin-top: 60px;
-            background: var(--card-bg);
+            text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border-warm); margin-top: 60px; background: var(--card-bg);
         }
     </style>
 </head>
 <body>
 
-    <!-- Onboarding Signup Modal (First-Time Visit) -->
+    <!-- Onboarding Modal -->
     <div class="onboarding-overlay" id="onboardingModal">
         <div class="onboarding-card">
             <h2>Welcome to HennaLink</h2>
-            <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 20px;">Connect with local artists or grow your professional henna business.</p>
-            
+            <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 20px;">Connect with local artists or manage your studio.</p>
             <form id="signupForm" style="text-align: left;">
-                <div style="margin-bottom: 15px;">
-                    <input type="email" id="signupEmail" placeholder="Enter your email address" required>
-                </div>
-                
+                <input type="email" id="signupEmail" placeholder="Enter your email address" required style="margin-bottom: 15px;">
                 <div class="role-choice-grid">
                     <div class="role-option-card" id="customerCard" onclick="selectRoleChoice('customer')">
-                        <h4>👤 Customer</h4>
-                        <p>Find artists, browse flash catalogs, and book appointments.</p>
+                        <h4 style="margin:0 0 5px 0; color:var(--primary-maroon);">👤 Customer</h4>
+                        <p style="margin:0; font-size:0.78rem; color:var(--text-muted);">Book appointments & save favorites.</p>
                     </div>
                     <div class="role-option-card" id="artistCard" onclick="selectRoleChoice('artist')">
-                        <h4>🎨 Henna Artist</h4>
-                        <p>Upload portfolio designs, list pop-ups, and manage bookings.</p>
+                        <h4 style="margin:0 0 5px 0; color:var(--primary-maroon);">🎨 Henna Artist</h4>
+                        <p style="margin:0; font-size:0.78rem; color:var(--text-muted);">Manage flash inventory & walk-ins.</p>
                     </div>
                 </div>
-
                 <input type="hidden" id="selectedRole" value="">
                 <button type="submit" class="btn-primary">Enter HennaLink</button>
             </form>
         </div>
     </div>
 
-    <!-- Luxury Top Navigation Bar -->
+    <!-- Navigation Bar -->
     <nav class="top-navbar">
-        <div class="nav-brand">
-            <h2>✨ HennaLink</h2>
-        </div>
+        <div class="nav-brand"><h2>✨ HennaLink</h2></div>
         <ul class="nav-links">
             <li><span class="user-status-badge" id="navRoleBadge">Customer Portal</span></li>
             <li><button class="logout-link" onclick="localStorage.clear(); location.reload();">Switch Account</button></li>
@@ -552,19 +461,17 @@
     <!-- Main Container -->
     <div class="main-container">
         
-        <!-- Hero Header -->
         <div class="hero-banner">
             <h1 id="mainHeaderTitle">Discover Local Henna Artistry</h1>
-            <p id="mainHeaderSubtitle">Explore stunning custom flash catalogs, locate live pop-up events, and reserve your session instantly.</p>
+            <p id="mainHeaderSubtitle">Explore custom flash catalogs, inspiration boards, and live radar pop-ups.</p>
         </div>
 
-        <!-- ================= CUSTOMER PORTAL VIEW ================= -->
+        <!-- ================= CUSTOMER PORTAL ================= -->
         <div id="customerPortalView" class="portal-view active-view">
             
-            <!-- Live Radar Map Section -->
             <div class="content-card">
                 <h3 class="section-title">📍 Live Area Radar Map</h3>
-                <p class="section-subtitle">Discover artists and active pop-up booths currently operating in your area.</p>
+                <p class="section-subtitle">Artists currently broadcasting live walk-in availability or scheduled pop-ups.</p>
                 <div class="filter-bar">
                     <div class="filter-chip active">🌐 All Artists</div>
                     <div class="filter-chip">🌿 Organic Henna</div>
@@ -574,10 +481,18 @@
                 <div id="map"></div>
             </div>
 
-            <!-- Featured Artists & Catalogs Section -->
+            <!-- Inspiration Board (Favorites) -->
+            <div class="content-card" style="background: var(--gold-light);">
+                <h3 class="section-title">❤️ My Saved Inspiration Board</h3>
+                <p class="section-subtitle">Designs you've favorited to easily show your artist during your session.</p>
+                <div id="inspirationBoardGrid" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <span style="font-size: 0.85rem; color: var(--text-muted); font-style: italic;">No favorite designs saved yet. Tap the heart icon on any catalog item below!</span>
+                </div>
+            </div>
+
             <div class="content-card">
                 <h3 class="section-title">✨ Featured Artists & Flash Catalogs</h3>
-                <p class="section-subtitle">Browse professional artwork and select your favorite design to book directly.</p>
+                <p class="section-subtitle">Browse professional artwork and launch the booking consultation wizard.</p>
                 
                 <div class="artist-grid">
                     <div class="artist-card">
@@ -589,74 +504,120 @@
                             </div>
                             <div class="rating-badge">⭐ 5.0</div>
                         </div>
-                        <p style="font-size: 0.85rem; color: var(--text-muted); margin: 10px 0 5px 0;">Available Flash Designs:</p>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin: 10px 0 5px 0;">Flash Design Menu (Tap ❤️ to Save):</p>
+                        
                         <div class="catalog-grid" id="customerBibiCatalog">
-                            <div class="catalog-item">Floral Strip</div>
-                            <div class="catalog-item">Mandala Palm</div>
-                            <div class="catalog-item">Geometric Cuff</div>
+                            <div class="catalog-item" data-name="Floral Strip ($30)">
+                                <button class="favorite-btn" onclick="toggleFavorite(this, 'Floral Strip ($30)')">❤️</button>
+                                Floral Strip<br><span style="font-size:0.7rem; color:var(--primary-maroon)">$30</span>
+                            </div>
+                            <div class="catalog-item" data-name="Mandala Palm ($40)">
+                                <button class="favorite-btn" onclick="toggleFavorite(this, 'Mandala Palm ($40)')">❤️</button>
+                                Mandala Palm<br><span style="font-size:0.7rem; color:var(--primary-maroon)">$40</span>
+                            </div>
+                            <div class="catalog-item" data-name="Geometric Cuff ($35)">
+                                <button class="favorite-btn" onclick="toggleFavorite(this, 'Geometric Cuff ($35)')">❤️</button>
+                                Geometric Cuff<br><span style="font-size:0.7rem; color:var(--primary-maroon)">$35</span>
+                            </div>
                         </div>
-                        <button class="btn-primary" style="margin-top: 10px;" onclick="openBookingModal('Henna By BiBi')">Book & Select Design</button>
+                        
+                        <button class="btn-primary" style="margin-top: 10px;" onclick="openBookingModal('Henna By BiBi')">Book & Consultation Wizard</button>
+                        
+                        <!-- Verified Reviews -->
+                        <div style="margin-top: 20px; border-top: 1px solid var(--border-warm); padding-top: 15px;">
+                            <p style="font-size: 0.85rem; font-weight: bold; margin: 0 0 8px 0;">Verified Client Reviews & Healed Stains:</p>
+                            <div class="review-card">
+                                <strong>Aisha M.</strong> ⭐⭐⭐⭐⭐<br>
+                                "The organic stain developed into such a rich mahogany color by day two! BiBi was so gentle."
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
         </div>
 
-        <!-- ================= ARTIST PORTAL VIEW ================= -->
+        <!-- ================= ARTIST PORTAL ================= -->
         <div id="artistPortalView" class="portal-view">
             
-            <!-- Artist Bookings Dashboard -->
+            <!-- Walk-In Status Toggle Bar -->
+            <div class="status-toggle-box">
+                <div>
+                    <h4 style="margin: 0 0 4px 0; color: var(--primary-dark);">Live Walk-In Radar Status</h4>
+                    <p style="margin: 0; font-size: 0.82rem; color: var(--text-muted);">Toggle your status so clients know if you accept spontaneous walk-ins.</p>
+                </div>
+                <div>
+                    <span id="statusIndicatorBadge" class="status-badge-live">🟢 Accepting Walk-Ins Today</span>
+                    <button class="btn-primary" style="padding: 8px 14px; font-size: 0.8rem; margin-top: 8px;" onclick="toggleArtistWalkInStatus()">Toggle Status</button>
+                </div>
+            </div>
+
             <div class="content-card">
-                <h3 class="section-title">📊 Live Appointments & Client Bookings</h3>
-                <p class="section-subtitle">Review incoming client reservations, chosen flash designs, and contact information.</p>
+                <h3 class="section-title">📊 Client Bookings & Consultation Notes</h3>
+                <p class="section-subtitle">Review client reservations, skin sensitivities, paste preferences, and custom requests.</p>
                 
                 <div class="dashboard-table-wrapper">
                     <table class="dashboard-table">
                         <thead>
                             <tr>
-                                <th>Client Name</th>
-                                <th>Selected Design</th>
+                                <th>Client & Contact</th>
+                                <th>Design & Pricing</th>
                                 <th>Date & Time</th>
-                                <th>Phone Number</th>
+                                <th>Consultation Notes</th>
                             </tr>
                         </thead>
                         <tbody id="artistDashboardTableBody">
                             <tr>
-                                <td>Sarah Jenkins</td>
-                                <td>Mandala Palm ($40)</td>
+                                <td>Sarah Jenkins<br><span style="font-size:0.75rem; color:var(--text-muted)">(631) 555-0192</span></td>
+                                <td>Mandala Palm ($40)<br><span style="font-size:0.75rem; color:#27ae60">Deposit Paid: $15</span></td>
                                 <td>Sept 22, 2:00 PM</td>
-                                <td>(631) 555-0192</td>
+                                <td><span style="background:var(--gold-light); padding:4px 8px; border-radius:6px; font-size:0.8rem;">Sensitive skin; Organic Henna; Bridal styling</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
-            <!-- Upload Artwork Section -->
+            <!-- Flash Catalog Inventory Manager -->
             <div class="content-card">
-                <h3 class="section-title">🖼️ Upload New Design to Your Flash Menu</h3>
-                <p class="section-subtitle">Add unlimited portfolio pieces or Procreate artwork so customers can view and pick them.</p>
+                <h3 class="section-title">🖼️ Flash Catalog Inventory Manager</h3>
+                <p class="section-subtitle">Upload new designs with tiered pricing/deposits, or delete retired flash artwork.</p>
                 
-                <form id="artistUploadForm">
+                <form id="artistUploadForm" style="margin-bottom: 25px;">
                     <div class="form-grid two-col">
-                        <input type="text" id="uploadDesignName" placeholder="Design Name (e.g., Rose Hand Trail)" required>
-                        <input type="text" id="uploadDesignPrice" placeholder="Price (e.g., $35)" required>
+                        <input type="text" id="uploadDesignName" placeholder="Design Name (e.g., Rose Trail)" required>
+                        <input type="text" id="uploadDesignPrice" placeholder="Price & Deposit (e.g., $35 ($10 Deposit))" required>
                     </div>
-                    <button type="submit" class="btn-primary" style="margin-top: 5px;">Publish Design to Live Catalog</button>
+                    <button type="submit" class="btn-primary" style="margin-top: 10px;">Publish New Flash Design</button>
                 </form>
+
+                <p style="font-size: 0.85rem; font-weight: bold; margin-bottom: 8px;">Active Inventory Manager:</p>
+                <div id="artistInventoryList" style="display: flex; flex-direction: column; gap: 8px;">
+                    <div style="background:#fff; border:1px solid var(--border-warm); padding:10px 15px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; font-size:0.88rem;">
+                        <span>Floral Strip — <strong>$30</strong></span>
+                        <button onclick="this.parentElement.remove()" style="background:#c0392b; color:white; border:none; padding:4px 10px; border-radius:6px; cursor:pointer; font-size:0.75rem;">Delete / Retire</button>
+                    </div>
+                    <div style="background:#fff; border:1px solid var(--border-warm); padding:10px 15px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; font-size:0.88rem;">
+                        <span>Mandala Palm — <strong>$40</strong></span>
+                        <button onclick="this.parentElement.remove()" style="background:#c0392b; color:white; border:none; padding:4px 10px; border-radius:6px; cursor:pointer; font-size:0.75rem;">Delete / Retire</button>
+                    </div>
+                    <div style="background:#fff; border:1px solid var(--border-warm); padding:10px 15px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; font-size:0.88rem;">
+                        <span>Geometric Cuff — <strong>$35</strong></span>
+                        <button onclick="this.parentElement.remove()" style="background:#c0392b; color:white; border:none; padding:4px 10px; border-radius:6px; cursor:pointer; font-size:0.75rem;">Delete / Retire</button>
+                    </div>
+                </div>
             </div>
 
-            <!-- Broadcast Pop-Up Pin Section -->
+            <!-- Broadcast Pop-Up Pin -->
             <div class="content-card">
-                <h3 class="section-title">🎨 Broadcast Your Live Pop-Up Pin</h3>
-                <p class="section-subtitle">Pin your location for street fairs, markets, or studio walk-in sessions.</p>
-                
+                <h3 class="section-title">🎨 Broadcast Pop-Up Pin</h3>
+                <p class="section-subtitle">Publish your location for street fairs or special market stalls.</p>
                 <form id="artistPopupForm">
                     <div class="form-grid two-col">
-                        <input type="text" id="popupArtistName" placeholder="Your Business Name (e.g., Henna By BiBi)" required>
-                        <input type="text" id="popupLocation" placeholder="Location Name (e.g., Ronkonkoma Fair)" required>
+                        <input type="text" id="popupArtistName" placeholder="Business Name" required>
+                        <input type="text" id="popupLocation" placeholder="Location Name (e.g., Ronkonkoma Craft Fair)" required>
                     </div>
-                    <button type="submit" class="btn-primary" style="margin-top: 5px;">Publish My Live Radar Pin</button>
+                    <button type="submit" class="btn-primary" style="margin-top: 10px;">Publish Live Radar Pin</button>
                 </form>
             </div>
 
@@ -664,23 +625,43 @@
 
     </div>
 
-    <!-- Direct Booking Modal -->
+    <!-- Booking & Consultation Wizard Modal -->
     <div class="modal-overlay" id="bookingModal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeBookingModal()">&times;</span>
-            <h3 id="modalArtistTitle" style="color: var(--primary-maroon); margin-top: 0;">Book Appointment</h3>
-            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">Provide your details to secure your spot and notify the artist.</p>
+            <h3 id="modalArtistTitle" style="color: var(--primary-maroon); margin-top: 0;">Consultation & Booking Wizard</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Complete your consultation questions to secure your appointment.</p>
             
             <form id="directBookingForm">
                 <div class="form-grid">
                     <input type="text" id="clientName" placeholder="Your Full Name" required>
-                    <input type="tel" id="clientPhone" placeholder="Phone Number (for SMS updates)" required>
+                    <input type="tel" id="clientPhone" placeholder="Phone Number (for SMS reminders)" required>
+                    
                     <select id="designChoice" required>
                         <option value="">Select Design from Flash Catalog</option>
-                        <option value="Floral Strip">Floral Strip</option>
-                        <option value="Mandala Palm">Mandala Palm</option>
-                        <option value="Geometric Cuff">Geometric Cuff</option>
+                        <option value="Floral Strip ($30)">Floral Strip ($30)</option>
+                        <option value="Mandala Palm ($40)">Mandala Palm ($40)</option>
+                        <option value="Geometric Cuff ($35)">Geometric Cuff ($35)</option>
                     </select>
+
+                    <div style="background: var(--gold-light); padding: 14px; border-radius: 12px; border: 1px solid var(--gold-accent);">
+                        <label style="font-size: 0.82rem; font-weight: bold; display: block; margin-bottom: 6px;">🌿 Paste Preference:</label>
+                        <select id="pastePreference" style="margin-bottom: 10px;" required>
+                            <option value="Traditional Organic Henna">Traditional 100% Organic Henna</option>
+                            <option value="Dark-Staining Jagua">Dark-Staining Jagua Gel</option>
+                        </select>
+
+                        <label style="font-size: 0.82rem; font-weight: bold; display: block; margin-bottom: 6px;">✨ Event Styling Type:</label>
+                        <select id="eventStyling" style="margin-bottom: 10px;" required>
+                            <option value="General / Festival">General / Festival</option>
+                            <option value="Bridal">Bridal</option>
+                            <option value="Eid / Celebration">Eid / Celebration</option>
+                        </select>
+
+                        <label style="font-size: 0.82rem; font-weight: bold; display: block; margin-bottom: 6px;">⚠️ Skin Sensitivity Notes:</label>
+                        <input type="text" id="skinNotes" placeholder="e.g., Sensitive skin, eucalyptus allergy notes">
+                    </div>
+
                     <input type="date" id="appointmentDate" required>
                     <select id="appointmentTime" required>
                         <option value="">Select Time Slot</option>
@@ -689,7 +670,8 @@
                         <option value="3:00 PM">3:00 PM</option>
                         <option value="5:00 PM">5:00 PM</option>
                     </select>
-                    <button type="submit" class="btn-primary">Confirm Booking & Notify Artist</button>
+
+                    <button type="submit" class="btn-primary">Confirm Booking & Send SMS Reminder</button>
                 </div>
             </form>
         </div>
@@ -699,18 +681,17 @@
         &copy; 2026 HennaLink &bull; Elevating Body Art Communities Worldwide
     </footer>
 
-    <!-- Leaflet JS Script -->
+    <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
         var map = L.map('map').setView([40.8173, -73.1251], 11);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
 
         var marker1 = L.marker([40.8173, -73.1251]).addTo(map);
-        marker1.bindPopup("<b>Henna By BiBi</b><br>📍 Ronkonkoma, NY");
+        marker1.bindPopup("<b>Henna By BiBi</b><br>📍 Ronkonkoma, NY<br>⚡ <span style='color:green;font-weight:bold;'>Walk-Ins Open</span>");
 
         var currentSelectedArtist = "Henna By BiBi";
 
-        // Check if user session role exists on load
         window.onload = function() {
             var savedRole = localStorage.getItem('hennaLinkRole');
             if (savedRole) {
@@ -729,35 +710,44 @@
         document.getElementById('signupForm').addEventListener('submit', function(e) {
             e.preventDefault();
             var role = document.getElementById('selectedRole').value;
-            if (!role) {
-                alert('Please select whether you are a Customer or a Henna Artist.');
-                return;
-            }
+            if (!role) { alert('Please select a role.'); return; }
             localStorage.setItem('hennaLinkRole', role);
             document.getElementById('onboardingModal').style.display = 'none';
             applyUserRole(role);
         });
 
         function applyUserRole(role) {
-            const customerView = document.getElementById('customerPortalView');
-            const artistView = document.getElementById('artistPortalView');
-            const roleBadge = document.getElementById('navRoleBadge');
-            const headerTitle = document.getElementById('mainHeaderTitle');
-            const headerSubtitle = document.getElementById('mainHeaderSubtitle');
-
             if (role === 'customer') {
-                customerView.classList.add('active-view');
-                artistView.classList.remove('active-view');
-                roleBadge.innerText = "Customer Portal";
-                headerTitle.innerText = "Discover Local Henna Artistry";
-                headerSubtitle.innerText = "Explore stunning custom flash catalogs, locate live pop-up events, and reserve your session instantly.";
+                document.getElementById('customerPortalView').classList.add('active-view');
+                document.getElementById('artistPortalView').classList.remove('active-view');
+                document.getElementById('navRoleBadge').innerText = "Customer Portal";
             } else {
-                customerView.classList.remove('active-view');
-                artistView.classList.add('active-view');
-                roleBadge.innerText = "Artist Studio Management";
-                headerTitle.innerText = "Artist Control Portal";
-                headerSubtitle.innerText = "Manage your client bookings table, publish new portfolio designs, and broadcast your live pop-up pins.";
+                document.getElementById('customerPortalView').classList.remove('active-view');
+                document.getElementById('artistPortalView').classList.add('active-view');
+                document.getElementById('navRoleBadge').innerText = "Artist Studio Management";
                 setTimeout(() => { map.invalidateSize(); }, 300);
+            }
+        }
+
+        // Favorites Board Function
+        function toggleFavorite(btn, designName) {
+            btn.classList.toggle('favorited');
+            var board = document.getElementById('inspirationBoardGrid');
+            if (btn.classList.contains('favorited')) {
+                if (board.innerText.includes('No favorite designs')) { board.innerHTML = ''; }
+                var chip = document.createElement('div');
+                chip.className = 'catalog-item';
+                chip.id = 'fav-' + designName.replace(/[^a-zA-Z0-9]/g, '');
+                chip.style.background = '#fff';
+                chip.innerHTML = designName;
+                board.appendChild(chip);
+            } else {
+                var chipId = 'fav-' + designName.replace(/[^a-zA-Z0-9]/g, '');
+                var item = document.getElementById(chipId);
+                if (item) item.remove();
+                if (board.children.length === 0) {
+                    board.innerHTML = '<span style="font-size: 0.85rem; color: var(--text-muted); font-style: italic;">No favorite designs saved yet. Tap the heart icon on any catalog item below!</span>';
+                }
             }
         }
 
@@ -771,49 +761,78 @@
             document.getElementById('bookingModal').style.display = 'none';
         }
 
-        // Handle Customer Booking Submission
+        // Booking & Simulated SMS Reminder Trigger
         document.getElementById('directBookingForm').addEventListener('submit', function(e) {
             e.preventDefault();
             var name = document.getElementById('clientName').value;
             var phone = document.getElementById('clientPhone').value;
             var design = document.getElementById('designChoice').value;
+            var paste = document.getElementById('pastePreference').value;
+            var event = document.getElementById('eventStyling').value;
+            var notes = document.getElementById('skinNotes').value || 'None';
             var date = document.getElementById('appointmentDate').value;
             var time = document.getElementById('appointmentTime').value;
 
             var tableBody = document.getElementById('artistDashboardTableBody');
             var newRow = document.createElement('tr');
-            newRow.innerHTML = '<td>' + name + '</td><td>' + design + '</td><td>' + date + ', ' + time + '</td><td>' + phone + '</td>';
+            newRow.innerHTML = '<td>' + name + '<br><span style="font-size:0.75rem; color:var(--text-muted)">(' + phone + ')</span></td>' +
+                               '<td>' + design + '<br><span style="font-size:0.75rem; color:#27ae60">Deposit Confirmed</span></td>' +
+                               '<td>' + date + ', ' + time + '</td>' +
+                               '<td><span style="background:var(--gold-light); padding:4px 8px; border-radius:6px; font-size:0.8rem;">' + paste + '; ' + event + '; Notes: ' + notes + '</span></td>';
             tableBody.prepend(newRow);
             
-            alert('Success! Your booking has been securely sent to ' + currentSelectedArtist + '\'s dashboard.');
+            alert('📱 [Simulated SMS Sent to ' + phone + ']:\n\n"Hi ' + name + '! Your appointment with ' + currentSelectedArtist + ' for ' + design + ' is confirmed for ' + date + ' at ' + time + '. We have sent studio directions to your phone. See you soon!"');
             closeBookingModal();
             document.getElementById('directBookingForm').reset();
         });
 
-        // Handle Artist Uploading Artwork to Catalog
+        // Artist Upload Artwork
         document.getElementById('artistUploadForm').addEventListener('submit', function(e) {
             e.preventDefault();
             var dName = document.getElementById('uploadDesignName').value;
             var dPrice = document.getElementById('uploadDesignPrice').value;
 
+            // Add to customer catalog
             var catalogGrid = document.getElementById('customerBibiCatalog');
             var newItem = document.createElement('div');
             newItem.className = 'catalog-item';
-            newItem.innerText = dName + ' (' + dPrice + ')';
+            var safeId = dName.replace(/[^a-zA-Z0-9]/g, '');
+            newItem.innerHTML = '<button class="favorite-btn" onclick="toggleFavorite(this, \'' + dName + ' (' + dPrice + ')\')">❤️</button>' + dName + '<br><span style="font-size:0.7rem; color:var(--primary-maroon)">' + dPrice + '</span>';
             catalogGrid.appendChild(newItem);
 
-            alert('Success! "' + dName + '" has been published to your public flash catalog.');
+            // Add to inventory manager list
+            var invList = document.getElementById('artistInventoryList');
+            var invItem = document.createElement('div');
+            invItem.style.cssText = "background:#fff; border:1px solid var(--border-warm); padding:10px 15px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; font-size:0.88rem;";
+            invItem.innerHTML = '<span>' + dName + ' — <strong>' + dPrice + '</strong></span><button onclick="this.parentElement.remove()" style="background:#c0392b; color:white; border:none; padding:4px 10px; border-radius:6px; cursor:pointer; font-size:0.75rem;">Delete / Retire</button>';
+            invList.appendChild(invItem);
+
+            alert('Success! "' + dName + '" published to your live catalog.');
             document.getElementById('artistUploadForm').reset();
         });
+
+        // Walk-In Status Toggle
+        let isWalkInOpen = true;
+        function toggleArtistWalkInStatus() {
+            isWalkInOpen = !isWalkInOpen;
+            var badge = document.getElementById('statusIndicatorBadge');
+            if (isWalkInOpen) {
+                badge.className = "status-badge-live";
+                badge.innerText = "🟢 Accepting Walk-Ins Today";
+                marker1.setPopupContent("<b>Henna By BiBi</b><br>📍 Ronkonkoma, NY<br>⚡ <span style='color:green;font-weight:bold;'>Walk-Ins Open</span>");
+            } else {
+                badge.className = "status-badge-busy";
+                badge.innerText = "🔴 Fully Booked (Appointments Only)";
+                marker1.setPopupContent("<b>Henna By BiBi</b><br>📍 Ronkonkoma, NY<br>🔒 <span style='color:red;font-weight:bold;'>Fully Booked</span>");
+            }
+        }
 
         document.getElementById('artistPopupForm').addEventListener('submit', function(e) {
             e.preventDefault();
             var name = document.getElementById('popupArtistName').value;
             var loc = document.getElementById('popupLocation').value;
-
             var newMarker = L.marker([40.8300, -73.1000]).addTo(map);
             newMarker.bindPopup("<b>" + name + "</b><br>📍 " + loc).openPopup();
-
             alert('Success! Your pop-up pin is now broadcasting live on the radar map.');
             document.getElementById('artistPopupForm').reset();
         });
