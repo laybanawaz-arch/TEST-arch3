@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HennaLink | Luxury Henna Artists & Pop-Up Radar</title>
+    <title>Henna By BiBi (@hennabybibi0) | Professional Henna Artistry & Studio</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,10 +54,26 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.03);
         }
 
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
         .nav-brand h2 {
             color: var(--primary-maroon);
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin: 0;
+        }
+
+        .brand-handle {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            background: var(--gold-light);
+            padding: 2px 8px;
+            border-radius: 6px;
+            border: 1px solid var(--gold-accent);
+            font-weight: 600;
         }
 
         .nav-links {
@@ -506,18 +522,18 @@
     <!-- Onboarding Modal with Instant Promo & Notification Opt-In -->
     <div class="onboarding-overlay" id="onboardingModal">
         <div class="onboarding-card">
-            <h2>Welcome to HennaLink</h2>
-            <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 15px;">Connect with local artists or manage your studio.</p>
+            <h2>✨ Henna By BiBi</h2>
+            <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 15px;">Welcome to @hennabybibi0! Enter your portal below.</p>
             <form id="signupForm" style="text-align: left;">
                 <input type="email" id="signupEmail" placeholder="Enter your email address" required style="margin-bottom: 15px;">
                 
                 <div class="role-choice-grid">
                     <div class="role-option-card" id="customerCard" onclick="selectRoleChoice('customer')">
-                        <h4 style="margin:0 0 5px 0; color:var(--primary-maroon);">👤 Customer</h4>
+                        <h4 style="margin:0 0 5px 0; color:var(--primary-maroon);">👤 Client / Host</h4>
                         <p style="margin:0; font-size:0.78rem; color:var(--text-muted);">Book appointments & group parties.</p>
                     </div>
                     <div class="role-option-card" id="artistCard" onclick="selectRoleChoice('artist')">
-                        <h4 style="margin:0 0 5px 0; color:var(--primary-maroon);">🎨 Henna Artist</h4>
+                        <h4 style="margin:0 0 5px 0; color:var(--primary-maroon);">🎨 Artist Studio</h4>
                         <p style="margin:0; font-size:0.78rem; color:var(--text-muted);">Manage flash inventory & team dispatch.</p>
                     </div>
                 </div>
@@ -527,20 +543,23 @@
                 <div style="background: var(--gold-light); padding: 12px 15px; border-radius: 12px; border: 1px solid var(--gold-accent); margin-bottom: 20px; font-size: 0.82rem;">
                     <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; color: var(--primary-dark); font-weight: 600;">
                         <input type="checkbox" id="promoConsent" checked style="width: auto; margin-top: 2px;">
-                        <span>🔔 Yes! Send me exclusive artist promotions, local event alerts, and automated appointment reminders to my email.</span>
+                        <span>🔔 Yes! Send me exclusive @hennabybibi0 promotions, local event alerts, and automated appointment reminders to my email.</span>
                     </label>
                 </div>
 
-                <button type="submit" class="btn-primary">Enter HennaLink</button>
+                <button type="submit" class="btn-primary">Enter Portal</button>
             </form>
         </div>
     </div>
 
     <!-- Navigation Bar -->
     <nav class="top-navbar">
-        <div class="nav-brand"><h2>✨ HennaLink</h2></div>
+        <div class="nav-brand">
+            <h2>✨ Henna By BiBi</h2>
+            <span class="brand-handle">@hennabybibi0</span>
+        </div>
         <ul class="nav-links">
-            <li><span class="user-status-badge" id="navRoleBadge">Customer Portal</span></li>
+            <li><span class="user-status-badge" id="navRoleBadge">Client Portal</span></li>
             <li><button class="logout-link" onclick="localStorage.clear(); location.reload();">Switch Account</button></li>
         </ul>
     </nav>
@@ -549,11 +568,11 @@
     <div class="main-container">
         
         <div class="hero-banner">
-            <h1 id="mainHeaderTitle">Discover Local Henna Artistry</h1>
-            <p id="mainHeaderSubtitle">Explore custom flash catalogs, inspiration boards, and live radar pop-ups.</p>
+            <h1 id="mainHeaderTitle">Henna By BiBi Studio</h1>
+            <p id="mainHeaderSubtitle">Professional organic body art, custom flash catalogs, and live pop-up radar in Ronkonkoma, NY.</p>
         </div>
 
-        <!-- ================= CUSTOMER PORTAL ================= -->
+        <!-- ================= CUSTOMER / CLIENT PORTAL ================= -->
         <div id="customerPortalView" class="portal-view active-view">
             
             <!-- Notifications & Promotions Live Banner -->
@@ -561,12 +580,12 @@
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div>
                         <h3 class="section-title" style="margin-bottom: 4px;">🎉 Active Promotions & Event Updates</h3>
-                        <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted);">Subscribed to alerts for: <strong id="subscribedEmailDisplay" style="color:var(--primary-maroon);">user@email.com</strong></p>
+                        <p style="margin: 0; font-size: 0.88rem; color: var(--text-muted);">Subscribed alerts for: <strong id="subscribedEmailDisplay" style="color:var(--primary-maroon);">user@email.com</strong></p>
                     </div>
                     <span style="background: var(--primary-maroon); color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: bold;">Notifications ON</span>
                 </div>
                 <div style="margin-top: 15px; font-size: 0.88rem; border-top: 1px solid var(--border-warm); padding-top: 12px;">
-                    ✨ <strong>Special Offer:</strong> Use code <code>HENNALINK15</code> for 15% off your first booking with any featured artist this month!<br>
+                    ✨ <strong>Special Offer:</strong> Use code <code>BIBI15</code> for 15% off your first booking with @hennabybibi0 this month!<br>
                     📍 <strong>Upcoming Pop-Up:</strong> Suffolk County Street Fair Pop-Up this Saturday from 10:00 AM – 4:00 PM.
                 </div>
             </div>
@@ -574,7 +593,7 @@
             <!-- Customer "My Bookings & Session Countdown" Card -->
             <div class="content-card">
                 <h3 class="section-title">📅 My Bookings & Session Countdown</h3>
-                <p class="section-subtitle">Track your upcoming appointments, countdowns, and deposit receipts.</p>
+                <p class="section-subtitle">Track your upcoming appointments, countdowns, and deposit receipts with BiBi.</p>
                 <div id="customerMyBookingsList" style="display: flex; flex-direction: column; gap: 12px;">
                     <div style="background: var(--gold-light); border: 1px solid var(--gold-accent); padding: 16px; border-radius: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
                         <div>
@@ -620,9 +639,9 @@
 
             <div class="content-card">
                 <h3 class="section-title">📍 Live Area Radar Map</h3>
-                <p class="section-subtitle">Artists currently broadcasting live walk-in availability or scheduled pop-ups.</p>
+                <p class="section-subtitle">BiBi's current live walk-in availability and scheduled pop-up locations.</p>
                 <div class="filter-bar">
-                    <div class="filter-chip active">🌐 All Artists</div>
+                    <div class="filter-chip active">🌐 All Locations</div>
                     <div class="filter-chip">🌿 Organic Henna</div>
                     <div class="filter-chip">🫐 Jagua Stain</div>
                     <div class="filter-chip">⚡ Walk-Ins Open</div>
@@ -633,15 +652,15 @@
             <!-- Inspiration Board (Favorites) -->
             <div class="content-card" style="background: var(--gold-light);">
                 <h3 class="section-title">❤️ My Saved Inspiration Board</h3>
-                <p class="section-subtitle">Designs you've favorited to easily show your artist during your session.</p>
+                <p class="section-subtitle">Designs you've favorited to easily show BiBi during your session.</p>
                 <div id="inspirationBoardGrid" style="display: flex; gap: 10px; flex-wrap: wrap;">
                     <span style="font-size: 0.85rem; color: var(--text-muted); font-style: italic;">No favorite designs saved yet. Tap the heart icon on any catalog item below!</span>
                 </div>
             </div>
 
             <div class="content-card">
-                <h3 class="section-title">✨ Featured Artists & Flash Catalogs</h3>
-                <p class="section-subtitle">Browse professional artwork and launch the booking consultation wizard.</p>
+                <h3 class="section-title">✨ Flash Design Catalog</h3>
+                <p class="section-subtitle">Browse professional artwork by @hennabybibi0 and launch the booking consultation wizard.</p>
                 
                 <div class="artist-grid">
                     <div class="artist-card">
@@ -696,7 +715,7 @@
 
         </div>
 
-        <!-- ================= ARTIST PORTAL ================= -->
+        <!-- ================= ARTIST STUDIO MANAGEMENT PORTAL ================= -->
         <div id="artistPortalView" class="portal-view">
             
             <!-- Walk-In Status Toggle Bar -->
@@ -808,17 +827,17 @@
     </div>
 
     <!-- Floating In-App Chat Widget -->
-    <div class="chat-widget-btn" onclick="toggleChatDrawer()" title="Chat with Artist">💬</div>
+    <div class="chat-widget-btn" onclick="toggleChatDrawer()" title="Chat with BiBi">💬</div>
     <div class="chat-drawer" id="chatDrawer">
         <div class="chat-header">
-            <span>💬 Direct Studio Chat</span>
+            <span>💬 Chat with @hennabybibi0</span>
             <span style="cursor: pointer; font-size: 1.2rem;" onclick="toggleChatDrawer()">&times;</span>
         </div>
         <div class="chat-body" id="chatMessageContainer">
-            <div class="chat-msg incoming">Hello! Welcome to Henna By BiBi. Feel free to ask about sizing, paste ingredients, or custom reference photos! ✨</div>
+            <div class="chat-msg incoming">Hello! Welcome to Henna By BiBi. Feel free to ask about sizing, organic paste ingredients, or custom reference photos! ✨</div>
         </div>
         <div class="chat-footer">
-            <input type="text" id="chatInputText" placeholder="Type a message to artist..." onkeypress="if(event.key === 'Enter') sendChatMessage()">
+            <input type="text" id="chatInputText" placeholder="Type a message to BiBi..." onkeypress="if(event.key === 'Enter') sendChatMessage()">
             <button onclick="sendChatMessage()" class="btn-primary" style="width: auto; padding: 10px 16px; font-size: 0.85rem;">Send</button>
         </div>
     </div>
@@ -828,7 +847,7 @@
         <div class="modal-content">
             <span class="close-modal" onclick="closeBookingModal()">&times;</span>
             <h3 id="modalArtistTitle" style="color: var(--primary-maroon); margin-top: 0;">Consultation & Booking Wizard</h3>
-            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Complete your consultation questions to secure your appointment.</p>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Complete your consultation questions to secure your appointment with BiBi.</p>
             
             <form id="directBookingForm">
                 <div class="form-grid">
@@ -876,7 +895,7 @@
     </div>
 
     <footer>
-        &copy; 2026 HennaLink &bull; Elevating Body Art Communities Worldwide
+        &copy; 2026 Henna By BiBi (@hennabybibi0) &bull; Ronkonkoma, NY
     </footer>
 
     <!-- Leaflet JS -->
@@ -930,7 +949,7 @@
             if (role === 'customer') {
                 document.getElementById('customerPortalView').classList.add('active-view');
                 document.getElementById('artistPortalView').classList.remove('active-view');
-                document.getElementById('navRoleBadge').innerText = "Customer Portal";
+                document.getElementById('navRoleBadge').innerText = "Client Portal";
             } else {
                 document.getElementById('customerPortalView').classList.remove('active-view');
                 document.getElementById('artistPortalView').classList.add('active-view');
@@ -990,7 +1009,7 @@
             input.value = '';
             container.scrollTop = container.scrollHeight;
 
-            // Simulated auto-reply from artist
+            // Simulated auto-reply from BiBi
             setTimeout(() => {
                 var replyMsg = document.createElement('div');
                 replyMsg.className = 'chat-msg incoming';
@@ -1018,7 +1037,7 @@
                                '<td><span style="background:var(--gold-light); padding:4px 8px; border-radius:6px; font-size:0.8rem;">Notes: ' + eNotes + '</span></td>';
             tableBody.prepend(newRow);
 
-            alert('🎉 Multi-Artist Group Booking Dispatched!\n\nHost: ' + hName + '\nTeam Size: ' + aCount + '\nDate & Time: ' + eDateTime + '\n\nAll confirmation details have been successfully synced to your artist management dashboard.');
+            alert('🎉 Multi-Artist Group Booking Dispatched to @hennabybibi0!\n\nHost: ' + hName + '\nTeam Size: ' + aCount + '\nDate & Time: ' + eDateTime + '\n\nAll confirmation details have been successfully synced to your studio dashboard.');
             document.getElementById('groupEventForm').reset();
         });
 
@@ -1050,7 +1069,7 @@
             bookingCard.innerHTML = '<div><strong style="color: var(--primary-dark); font-size: 1.05rem;">' + currentSelectedArtist + ' &bull; ' + design + '</strong><div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">Scheduled: ' + date + ', ' + time + ' (Deposit Confirmed)</div><div style="font-size: 0.82rem; color: var(--primary-maroon); font-weight: bold; margin-top: 4px;">⏳ Session Countdown: Upcoming!</div></div><button onclick="if(confirm(\'Cancel or reschedule this appointment?\')) { alert(\'Request submitted.\'); this.parentElement.remove(); }" style="background: #c0392b; color: white; border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 0.8rem;">Cancel / Reschedule</button>';
             bookingsList.prepend(bookingCard);
             
-            alert('📱 [Simulated SMS & Email Reminder Scheduled]:\n\n"Hi ' + name + '! Your appointment with ' + currentSelectedArtist + ' for ' + design + ' is confirmed for ' + date + ' at ' + time + '. We have scheduled your 2-hour pre-appointment text reminder. See you soon!"');
+            alert('📱 [Simulated SMS & Email Reminder Scheduled]:\n\n"Hi ' + name + '! Your appointment with Henna By BiBi for ' + design + ' is confirmed for ' + date + ' at ' + time + '. We have scheduled your 2-hour pre-appointment text reminder. See you soon!"');
             closeBookingModal();
             document.getElementById('directBookingForm').reset();
         });
@@ -1067,7 +1086,7 @@
             newRev.innerHTML = '<strong>' + cName + '</strong> ⭐⭐⭐⭐⭐<br>"' + cText + '" <br><span style="font-size: 0.75rem; color: #27ae60; font-weight: bold;">✓ Verified Healed Stain Upload</span>';
             feed.prepend(newRev);
 
-            alert('Thank you! Your review and healed stain details have been successfully posted to the artist gallery.');
+            alert('Thank you! Your review and healed stain details have been successfully posted to BiBi\'s gallery.');
             document.getElementById('clientReviewName').value = '';
             document.getElementById('clientReviewText').value = '';
         }
@@ -1083,7 +1102,7 @@
             document.getElementById('displayArtistLocation').innerText = '📍 ' + newLoc;
             document.getElementById('displayArtistPaste').innerText = newPaste;
 
-            alert('Success! Your artist profile branding has been updated across HennaLink.');
+            alert('Success! Your studio profile branding has been updated.');
         });
 
         // Artist Upload Artwork
@@ -1106,7 +1125,7 @@
             invItem.innerHTML = '<span>' + dName + ' — <strong>' + dPrice + '</strong></span><button onclick="this.parentElement.remove()" style="background:#c0392b; color:white; border:none; padding:4px 10px; border-radius:6px; cursor:pointer; font-size:0.75rem;">Delete / Retire</button>';
             invList.appendChild(invItem);
 
-            alert('Success! "' + dName + '" published to your live catalog.');
+            alert('Success! "' + dName + '" published to your live @hennabybibi0 catalog.');
             document.getElementById('artistUploadForm').reset();
         });
 
