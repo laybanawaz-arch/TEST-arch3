@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HENNALINK | Professional Henna Artistry & Client Hub</title>
+    <title>HENNALINK | Professional Artistry & Client Hub</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,7 +73,7 @@
             font-weight: 700;
         }
 
-        .brand-handle {
+        .brand-badge {
             font-size: 0.78rem;
             color: var(--bordeaux);
             background: var(--champagne-light);
@@ -220,7 +220,7 @@
             border-color: var(--bordeaux);
         }
 
-        /* High Quality Map Container */
+        /* Map Container */
         #map {
             height: 440px;
             width: 100%;
@@ -605,7 +605,7 @@
     <div class="onboarding-overlay" id="onboardingModal">
         <div class="onboarding-card">
             <h2 class="serif" style="color: var(--bordeaux); font-size: 2rem; margin-top: 0;">✨ HENNALINK</h2>
-            <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px;">Welcome to @hennabybibi0's professional studio workspace. Please select your portal view below.</p>
+            <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px;">Welcome to your professional studio workspace. Please select your portal view below.</p>
             <form id="signupForm" style="text-align: left;">
                 <input type="email" id="signupEmail" placeholder="Enter your email address" required style="margin-bottom: 18px;">
                 
@@ -624,7 +624,7 @@
                 <div style="background: var(--champagne-light); padding: 14px 18px; border-radius: 12px; border: 1px solid var(--champagne); margin-bottom: 24px; font-size: 0.85rem;">
                     <label style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer; color: var(--bordeaux-dark); font-weight: 600;">
                         <input type="checkbox" id="promoConsent" checked style="width: auto; margin-top: 3px;">
-                        <span>🔔 Yes! Send me exclusive @hennabybibi0 promotions, event updates, and automated appointment reminders.</span>
+                        <span>🔔 Yes! Send me exclusive studio promotions, event updates, and automated appointment reminders.</span>
                     </label>
                 </div>
 
@@ -637,7 +637,7 @@
     <nav class="top-navbar">
         <div class="nav-brand">
             <h2 class="serif">✨ HENNALINK</h2>
-            <span class="brand-handle">@hennabybibi0</span>
+            <span class="brand-badge">Studio Hub</span>
         </div>
         <ul class="nav-links">
             <li><span class="user-status-badge" id="navRoleBadge">Client Portal</span></li>
@@ -666,7 +666,7 @@
                     <span style="background: var(--bordeaux); color: white; padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; letter-spacing: 0.3px;">Notifications Active</span>
                 </div>
                 <div style="margin-top: 18px; font-size: 0.9rem; border-top: 1px solid var(--border-refined); padding-top: 15px; color: var(--text-main);">
-                    ✨ <strong>Special Offer:</strong> Use code <code>BIBI15</code> for 15% off your first booking with @hennabybibi0 this season!<br>
+                    ✨ <strong>Special Offer:</strong> Use code <code>BIBI15</code> for 15% off your first booking this season!<br>
                     📍 <strong>Upcoming Pop-Up:</strong> Suffolk County Street Fair Pop-Up this Saturday from 10:00 AM – 4:00 PM.
                 </div>
             </div>
@@ -674,11 +674,11 @@
             <!-- Client Bookings & Countdown -->
             <div class="content-card">
                 <h3 class="section-title">📅 My Bookings & Session Countdown</h3>
-                <p class="section-subtitle">Track your upcoming appointments, countdowns, and deposit receipts with BiBi.</p>
+                <p class="section-subtitle">Track your upcoming appointments, countdowns, and deposit receipts.</p>
                 <div id="customerMyBookingsList" style="display: flex; flex-direction: column; gap: 14px;">
                     <div style="background: var(--champagne-light); border: 1px solid var(--champagne); padding: 18px; border-radius: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
                         <div>
-                            <strong class="serif" style="color: var(--bordeaux-dark); font-size: 1.15rem;">Henna By BiBi &bull; Design #2 (Mandala Palm - $40)</strong>
+                            <strong class="serif" style="color: var(--bordeaux-dark); font-size: 1.15rem;">Studio Session &bull; Design #2 (Mandala Palm - $40)</strong>
                             <div style="font-size: 0.88rem; color: var(--text-muted); margin-top: 3px;">Scheduled: Sept 22, 2:00 PM (Deposit: $15 Confirmed)</div>
                             <div style="font-size: 0.85rem; color: var(--bordeaux); font-weight: bold; margin-top: 6px;">⏳ Session Countdown: 2 Days to Go!</div>
                         </div>
@@ -718,22 +718,16 @@
                 </form>
             </div>
 
-            <!-- High Quality Map Card with Satellite View Toggle -->
+            <!-- Map Card (Clean Street View Only) -->
             <div class="content-card">
-                <h3 class="section-title">📍 Live Area Radar & Satellite Map</h3>
-                <p class="section-subtitle">Switch between Editorial Street View and HD Satellite View to locate BiBi's studio and pop-ups.</p>
+                <h3 class="section-title">📍 Live Area Radar</h3>
+                <p class="section-subtitle">Locate the studio and active pop-up spots in the Ronkonkoma area.</p>
                 
-                <div class="filter-bar" style="justify-content: space-between; align-items: center;">
-                    <div style="display: flex; gap: 10px; overflow-x: auto;">
-                        <div class="filter-chip active">🌐 All Locations</div>
-                        <div class="filter-chip">🌿 Organic Henna</div>
-                        <div class="filter-chip">🫐 Jagua Stain</div>
-                        <div class="filter-chip">⚡ Walk-Ins Open</div>
-                    </div>
-                    <div style="display: flex; gap: 8px; flex-shrink: 0;">
-                        <button type="button" id="btnStreetView" onclick="setMapLayer('street')" class="filter-chip active" style="margin: 0;">Street Map</button>
-                        <button type="button" id="btnSatelliteView" onclick="setMapLayer('satellite')" class="filter-chip" style="margin: 0;">Satellite View</button>
-                    </div>
+                <div class="filter-bar">
+                    <div class="filter-chip active">🌐 All Locations</div>
+                    <div class="filter-chip">🌿 Organic Henna</div>
+                    <div class="filter-chip">🫐 Jagua Stain</div>
+                    <div class="filter-chip">⚡ Walk-Ins Open</div>
                 </div>
                 
                 <div id="map"></div>
@@ -742,22 +736,22 @@
             <!-- Inspiration Board -->
             <div class="content-card" style="background: var(--champagne-light);">
                 <h3 class="section-title">❤️ My Saved Inspiration Board</h3>
-                <p class="section-subtitle">Designs you've favorited to easily show BiBi during your session.</p>
+                <p class="section-subtitle">Designs you've favorited to easily show during your session.</p>
                 <div id="inspirationBoardGrid" style="display: flex; gap: 12px; flex-wrap: wrap;">
                     <span style="font-size: 0.88rem; color: var(--text-muted); font-style: italic;">No favorite designs saved yet. Tap the heart icon on any catalog item below!</span>
                 </div>
             </div>
 
-            <!-- Flash Design Catalog -->
+            <!-- Flash Design Catalog (1, 2, 3, 4) -->
             <div class="content-card">
                 <h3 class="section-title">✨ Flash Design Catalog (Designs 1–4)</h3>
-                <p class="section-subtitle">Browse professional numbered flash artwork by @hennabybibi0 and launch the booking consultation wizard.</p>
+                <p class="section-subtitle">Browse professional numbered flash artwork and launch the booking consultation wizard.</p>
                 
                 <div class="artist-grid">
                     <div class="artist-card" style="grid-column: 1 / -1;">
                         <div class="artist-header">
                             <div>
-                                <h4 class="serif artist-name" id="displayArtistName">Henna By BiBi</h4>
+                                <h4 class="serif artist-name" id="displayArtistName">Studio Flash Collection</h4>
                                 <span class="artist-location" id="displayArtistLocation">📍 Ronkonkoma, NY</span>
                                 <div><span class="paste-tag" id="displayArtistPaste">🌿 100% Organic Natural Henna</span></div>
                             </div>
@@ -784,7 +778,7 @@
                             </div>
                         </div>
                         
-                        <button class="btn-primary" style="margin-top: 15px;" onclick="openBookingModal('Henna By BiBi')">Book Design & Consultation Wizard</button>
+                        <button class="btn-primary" style="margin-top: 15px;" onclick="openBookingModal('Studio Flash Collection')">Book Design & Consultation Wizard</button>
                         
                         <!-- Verified Reviews -->
                         <div style="margin-top: 25px; border-top: 1px solid var(--champagne-border); padding-top: 20px;">
@@ -792,7 +786,7 @@
                             <div id="reviewsFeedContainer">
                                 <div class="review-card">
                                     <strong>Aisha M.</strong> ⭐⭐⭐⭐⭐<br>
-                                    "The organic stain developed into such a rich mahogany color by day two! BiBi was so gentle."
+                                    "The organic stain developed into such a rich mahogany color by day two! Highly professional."
                                 </div>
                             </div>
 
@@ -832,7 +826,7 @@
                     <div class="form-grid two-col" style="margin-bottom: 18px;">
                         <div>
                             <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 6px; color: var(--bordeaux-dark);">Business Name:</label>
-                            <input type="text" id="editArtistName" value="Henna By BiBi" required>
+                            <input type="text" id="editArtistName" value="Studio Flash Collection" required>
                         </div>
                         <div>
                             <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 6px; color: var(--bordeaux-dark);">Studio Location:</label>
@@ -925,17 +919,17 @@
     </div>
 
     <!-- Floating In-App Chat Widget -->
-    <div class="chat-widget-btn" onclick="toggleChatDrawer()" title="Chat with BiBi">💬</div>
+    <div class="chat-widget-btn" onclick="toggleChatDrawer()" title="Chat with Studio">💬</div>
     <div class="chat-drawer" id="chatDrawer">
         <div class="chat-header">
-            <span>💬 Chat with @hennabybibi0</span>
+            <span>💬 Chat with Studio</span>
             <span style="cursor: pointer; font-size: 1.3rem;" onclick="toggleChatDrawer()">&times;</span>
         </div>
         <div class="chat-body" id="chatMessageContainer">
-            <div class="chat-msg incoming">Hello! Welcome to HENNALINK (@hennabybibi0). Feel free to ask about sizing, organic paste ingredients, or custom reference photos! ✨</div>
+            <div class="chat-msg incoming">Hello! Welcome to HENNALINK. Feel free to ask about sizing, organic paste ingredients, or custom reference photos! ✨</div>
         </div>
         <div class="chat-footer">
-            <input type="text" id="chatInputText" placeholder="Type a message to BiBi..." onkeypress="if(event.key === 'Enter') sendChatMessage()">
+            <input type="text" id="chatInputText" placeholder="Type a message to the studio..." onkeypress="if(event.key === 'Enter') sendChatMessage()">
             <button onclick="sendChatMessage()" class="btn-primary" style="width: auto; padding: 10px 18px; font-size: 0.88rem;">Send</button>
         </div>
     </div>
@@ -945,7 +939,7 @@
         <div class="modal-content">
             <span class="close-modal" onclick="closeBookingModal()">&times;</span>
             <h3 class="serif" id="modalArtistTitle" style="color: var(--bordeaux); margin-top: 0; font-size: 1.6rem;">Consultation & Booking Wizard</h3>
-            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 22px;">Complete your consultation questions to secure your appointment with BiBi.</p>
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 22px;">Complete your consultation questions to secure your appointment.</p>
             
             <form id="directBookingForm">
                 <div class="form-grid">
@@ -994,48 +988,21 @@
     </div>
 
     <footer>
-        &copy; 2026 HENNALINK &bull; Powered by @hennabybibi0 &bull; Ronkonkoma, New York
+        &copy; 2026 HENNALINK &bull; Ronkonkoma, New York
     </footer>
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
-        // Initialize Map
+        // Initialize Map (Clean Carto Light Tiles Only — No Satellite View)
         var map = L.map('map', { zoomControl: false }).setView([40.8173, -73.1251], 12);
         L.control.zoom({ position: 'topright' }).addTo(map);
 
-        // Define Street & Satellite Tile Layers
-        var streetLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="https://carto.com/">CARTO</a>'
-        });
+        }).addTo(map);
 
-        var satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-            maxZoom: 19,
-            attribution: '&copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-        });
-
-        // Default to Street View
-        streetLayer.addTo(map);
-
-        function setMapLayer(type) {
-            var btnStreet = document.getElementById('btnStreetView');
-            var btnSat = document.getElementById('btnSatelliteView');
-            
-            if (type === 'street') {
-                if (map.hasLayer(satelliteLayer)) map.removeLayer(satelliteLayer);
-                streetLayer.addTo(map);
-                btnStreet.classList.add('active');
-                btnSat.classList.remove('active');
-            } else {
-                if (map.hasLayer(streetLayer)) map.removeLayer(streetLayer);
-                satelliteLayer.addTo(map);
-                btnSat.classList.add('active');
-                btnStreet.classList.remove('active');
-            }
-        }
-
-        // Custom High-End Styled Marker Icon
         var customIcon = L.divIcon({
             className: 'custom-map-pin',
             html: '<div style="background: #5c1015; width: 24px; height: 24px; border-radius: 50%; border: 3px solid #d4af37; box-shadow: 0 4px 12px rgba(0,0,0,0.3);"></div>',
@@ -1044,9 +1011,9 @@
         });
 
         var marker1 = L.marker([40.8173, -73.1251], { icon: customIcon }).addTo(map);
-        marker1.bindPopup("<b>Henna By BiBi</b><br>📍 Ronkonkoma, NY<br>⚡ <span style='color:#2e7d32;font-weight:bold;'>Walk-Ins Open</span>");
+        marker1.bindPopup("<b>Studio Location</b><br>📍 Ronkonkoma, NY<br>⚡ <span style='color:#2e7d32;font-weight:bold;'>Walk-Ins Open</span>");
 
-        var currentSelectedArtist = "Henna By BiBi";
+        var currentSelectedArtist = "Studio Flash Collection";
 
         window.onload = function() {
             var savedRole = localStorage.getItem('hennaLinkRole');
@@ -1120,7 +1087,7 @@
 
         function openBookingModal(artistName) {
             currentSelectedArtist = artistName;
-            document.getElementById('modalArtistTitle').innerText = 'Book with ' + artistName;
+            document.getElementById('modalArtistTitle').innerText = 'Book Session';
             document.getElementById('bookingModal').style.display = 'flex';
         }
 
@@ -1149,7 +1116,7 @@
             setTimeout(() => {
                 var replyMsg = document.createElement('div');
                 replyMsg.className = 'chat-msg incoming';
-                replyMsg.innerText = "Thanks for your message! BiBi has received your inquiry and will review your request shortly. ✨";
+                replyMsg.innerText = "Thanks for your message! Studio management has received your inquiry and will review your request shortly. ✨";
                 container.appendChild(replyMsg);
                 container.scrollTop = container.scrollHeight;
             }, 1000);
@@ -1171,7 +1138,7 @@
                                '<td><span style="background:var(--champagne-light); padding:5px 10px; border-radius:8px; font-size:0.82rem; border:1px solid var(--champagne);">Notes: ' + eNotes + '</span></td>';
             tableBody.prepend(newRow);
 
-            alert('🎉 Multi-Artist Group Booking Dispatched to @hennabybibi0!\n\nHost: ' + hName + '\nTeam Size: ' + aCount + '\nDate & Time: ' + eDateTime + '\n\nAll confirmation details have been successfully synced to your studio dashboard.');
+            alert('🎉 Multi-Artist Group Booking Dispatched to Studio Team!\n\nHost: ' + hName + '\nTeam Size: ' + aCount + '\nDate & Time: ' + eDateTime + '\n\nAll confirmation details have been successfully synced to your studio dashboard.');
             document.getElementById('groupEventForm').reset();
         });
 
@@ -1197,10 +1164,10 @@
             var bookingsList = document.getElementById('customerMyBookingsList');
             var bookingCard = document.createElement('div');
             bookingCard.style.cssText = "background: var(--champagne-light); border: 1px solid var(--champagne); padding: 18px; border-radius: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;";
-            bookingCard.innerHTML = '<div><strong class="serif" style="color: var(--bordeaux-dark); font-size: 1.15rem;">' + currentSelectedArtist + ' &bull; ' + design + '</strong><div style="font-size: 0.88rem; color: var(--text-muted); margin-top: 3px;">Scheduled: ' + date + ', ' + time + ' (Deposit Confirmed)</div><div style="font-size: 0.85rem; color: var(--bordeaux); font-weight: bold; margin-top: 6px;">⏳ Session Countdown: Upcoming!</div></div><button onclick="if(confirm(\'Cancel or reschedule this appointment?\')) { alert(\'Request submitted.\'); this.parentElement.remove(); }" style="background: #c62828; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 0.82rem; font-weight: 600;">Cancel / Reschedule</button>';
+            bookingCard.innerHTML = '<div><strong class="serif" style="color: var(--bordeaux-dark); font-size: 1.15rem;">Studio Session &bull; ' + design + '</strong><div style="font-size: 0.88rem; color: var(--text-muted); margin-top: 3px;">Scheduled: ' + date + ', ' + time + ' (Deposit Confirmed)</div><div style="font-size: 0.85rem; color: var(--bordeaux); font-weight: bold; margin-top: 6px;">⏳ Session Countdown: Upcoming!</div></div><button onclick="if(confirm(\'Cancel or reschedule this appointment?\')) { alert(\'Request submitted.\'); this.parentElement.remove(); }" style="background: #c62828; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 0.82rem; font-weight: 600;">Cancel / Reschedule</button>';
             bookingsList.prepend(bookingCard);
             
-            alert('📱 [Simulated SMS & Email Reminder Scheduled]:\n\n"Hi ' + name + '! Your appointment with Henna By BiBi for ' + design + ' is confirmed for ' + date + ' at ' + time + '. We have scheduled your 2-hour pre-appointment text reminder. See you soon!"');
+            alert('📱 [Simulated SMS & Email Reminder Scheduled]:\n\n"Hi ' + name + '! Your appointment for ' + design + ' is confirmed for ' + date + ' at ' + time + '. We have scheduled your 2-hour pre-appointment text reminder. See you soon!"');
             closeBookingModal();
             document.getElementById('directBookingForm').reset();
         });
@@ -1216,7 +1183,7 @@
             newRev.innerHTML = '<strong>' + cName + '</strong> ⭐⭐⭐⭐⭐<br>"' + cText + '" <br><span style="font-size: 0.78rem; color: #2e7d32; font-weight: bold;">✓ Verified Healed Stain Upload</span>';
             feed.prepend(newRev);
 
-            alert('Thank you! Your review and healed stain details have been successfully posted to BiBi\'s gallery.');
+            alert('Thank you! Your review and healed stain details have been successfully posted to the gallery.');
             document.getElementById('clientReviewName').value = '';
             document.getElementById('clientReviewText').value = '';
         }
@@ -1231,7 +1198,7 @@
             document.getElementById('displayArtistLocation').innerText = '📍 ' + newLoc;
             document.getElementById('displayArtistPaste').innerText = newPaste;
 
-            alert('Success! Your studio profile branding has been updated.');
+            alert('Success! Studio profile branding has been updated.');
         });
 
         document.getElementById('artistUploadForm').addEventListener('submit', function(e) {
@@ -1251,7 +1218,7 @@
             invItem.innerHTML = '<span>' + dName + ' — <strong>' + dPrice + '</strong></span><button onclick="this.parentElement.remove()" style="background:#c62828; color:white; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-size:0.78rem; font-weight:600;">Delete / Retire</button>';
             invList.appendChild(invItem);
 
-            alert('Success! "' + dName + '" published to your live @hennabybibi0 catalog.');
+            alert('Success! "' + dName + '" published to your live catalog.');
             document.getElementById('artistUploadForm').reset();
         });
 
@@ -1262,11 +1229,11 @@
             if (isWalkInOpen) {
                 badge.className = "status-badge-live";
                 badge.innerText = "🟢 Accepting Walk-Ins Today";
-                marker1.setPopupContent("<b>Henna By BiBi</b><br>📍 Ronkonkoma, NY<br>⚡ <span style='color:#2e7d32;font-weight:bold;'>Walk-Ins Open</span>");
+                marker1.setPopupContent("<b>Studio Location</b><br>📍 Ronkonkoma, NY<br>⚡ <span style='color:#2e7d32;font-weight:bold;'>Walk-Ins Open</span>");
             } else {
                 badge.className = "status-badge-busy";
                 badge.innerText = "🔴 Fully Booked (Appointments Only)";
-                marker1.setPopupContent("<b>Henna By BiBi</b><br>📍 Ronkonkoma, NY<br>🔒 <span style='color:#c62828;font-weight:bold;'>Fully Booked</span>");
+                marker1.setPopupContent("<b>Studio Location</b><br>📍 Ronkonkoma, NY<br>🔒 <span style='color:#c62828;font-weight:bold;'>Fully Booked</span>");
             }
         }
 
