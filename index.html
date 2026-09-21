@@ -12,6 +12,7 @@
             --card-bg: #ffffff;
             --text-main: #333333;
             --text-muted: #666666;
+            --accent: #faf6f0;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -23,109 +24,185 @@
         }
         header {
             background-color: var(--card-bg);
-            padding: 40px 20px;
+            padding: 30px 20px;
             text-align: center;
             border-bottom: 1px solid #eee;
         }
         header h1 {
             color: var(--primary);
-            margin: 0 0 10px 0;
-            font-size: 2.5rem;
+            margin: 0 0 5px 0;
+            font-size: 2.2rem;
         }
         header p {
             color: var(--text-muted);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin: 0;
         }
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 30px 20px;
+            padding: 20px;
         }
         .section-card {
             background: var(--card-bg);
             border-radius: 16px;
-            padding: 30px;
+            padding: 25px;
             margin-bottom: 25px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.04);
         }
         h2 {
             color: var(--primary);
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             margin-top: 0;
             border-bottom: 2px solid #f9f2f2;
             padding-bottom: 10px;
         }
-        .feature-grid {
+        /* Search & Map Mockup */
+        .search-bar-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .search-bar-box input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+        }
+        .search-bar-box button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .map-mockup {
+            background: #e9e5de;
+            height: 220px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            color: #555;
+            font-weight: 500;
+        }
+        .map-pin-badge {
+            position: absolute;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        /* Artist Cards Grid */
+        .artist-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 15px;
+            gap: 20px;
             margin-top: 15px;
         }
-        @media (min-width: 600px) {
-            .feature-grid {
+        @media(min-width: 650px) {
+            .artist-grid {
                 grid-template-columns: 1fr 1fr;
             }
         }
-        .feature-box {
-            background: #faf6f0;
-            padding: 20px;
-            border-radius: 12px;
-            border-left: 4px solid var(--primary);
-        }
-        .feature-box h3 {
-            margin: 0 0 8px 0;
-            font-size: 1.1rem;
-            color: var(--primary-dark);
-        }
-        .feature-box p {
-            margin: 0;
-            font-size: 0.95rem;
-            color: var(--text-muted);
-        }
-        .flash-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-        .flash-item {
-            background: #faf6f0;
+        .artist-card {
+            background: var(--accent);
             border-radius: 12px;
             padding: 20px;
-            text-align: center;
+            border: 1px solid #f0e6dc;
         }
-        .flash-item h4 {
-            margin: 0 0 5px 0;
-            color: var(--text-main);
-            font-size: 1.1rem;
+        .artist-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
         }
-        .flash-price {
-            color: var(--primary);
+        .artist-name {
             font-weight: bold;
             font-size: 1.1rem;
+            color: var(--primary-dark);
+            margin: 0;
         }
-        .btn {
+        .artist-location {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .rating {
+            background: #fff;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #d4a373;
+        }
+        .portfolio-preview {
+            display: flex;
+            gap: 8px;
+            margin: 12px 0;
+        }
+        .thumb {
+            width: 60px;
+            height: 60px;
+            background: #d8c9bc;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: #666;
+            text-align: center;
+        }
+        .book-btn {
             display: block;
             background-color: var(--primary);
             color: white;
             text-align: center;
-            padding: 16px 20px;
-            margin-top: 25px;
-            border-radius: 30px;
+            padding: 10px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 1.05rem;
-            transition: background 0.2s;
+            font-size: 0.9rem;
+            margin-top: 12px;
         }
-        .btn:hover {
-            background-color: var(--primary-dark);
+        /* Artist Submission Form */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        input, select, textarea {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: inherit;
+        }
+        .submit-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
         }
         footer {
             text-align: center;
             padding: 20px;
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
     </style>
 </head>
@@ -133,63 +210,93 @@
 
     <header>
         <h1>HennaLink</h1>
-        <p>The Local Artist & Pop-Up Radar</p>
+        <p>Find Live Henna Pop-Ups & Local Artists Near You</p>
     </header>
 
     <div class="container">
-        <!-- Target Audience & Core Value -->
+
+        <!-- Section 1: Interactive Radar Search & Map -->
         <div class="section-card">
-            <h2>Connecting Clients & Local Artists</h2>
-            <p>Welcome to HennaLink—solving the gap between clients looking for immediate local body art and artists promoting live pop-ups, markets, and walk-in slots without relying on messy social media algorithms.</p>
-            
-            <div class="feature-grid">
-                <div class="feature-box">
-                    <h3>For Clients</h3>
-                    <p>Fast map-based discovery to find local artists working nearby this weekend, check live availability, and grab quick walk-in slots.</p>
-                </div>
-                <div class="feature-box">
-                    <h3>For Artists</h3>
-                    <p>High-visibility local broadcasting tool to share temporary pop-up locations, flash sheets, and capture walk-in traffic directly.</p>
+            <h2>📍 Live Area Radar</h2>
+            <div class="search-bar-box">
+                <input type="text" placeholder="Enter your city or zip code (e.g., Ronkonkoma, NY)..." id="searchInput">
+                <button onclick="alert('Radar centered on your search area!')">Search</button>
+            </div>
+            <div class="map-mockup">
+                <span>🗺️ Interactive Map View (Suffolk County & Surrounding Areas)</span>
+                <div class="map-pin-badge" style="top: 20px; left: 20px;">
+                    🔴 <strong>Henna By BiBi</strong><br><span style="font-size:0.75rem;">Active Pop-Up: Local Market (Until 4 PM)</span>
                 </div>
             </div>
         </div>
 
-        <!-- Core Features -->
+        <!-- Section 2: Browse Local Artists & Portfolios -->
         <div class="section-card">
-            <h2>Core Features (MVP)</h2>
-            <div style="display: flex; flex-direction: column; gap: 14px;">
-                <div><strong>📍 The Live Radar Map:</strong> Geolocation map with color-coded pins (🔴 Active Pop-Up right now, 🔵 Weekend Market, 🟣 Salon Walk-Ins).</div>
-                <div><strong>⚡ "Open Now" Broadcasts:</strong> Quick toggles allowing artists to drop a temporary 4-hour pin showing exactly where they are set up.</div>
-                <div><strong>🌿 Artist Profiles & Flash Catalogs:</strong> Clean display of portfolios, natural ingredients vs. jagua, pricing, and direct booking links.</div>
+            <h2>✨ Featured Local Artists & Portfolios</h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Browse nearby artist profiles, view flash sheets, read client reviews, and book directly.</p>
+            
+            <div class="artist-grid">
+                <!-- Artist 1 -->
+                <div class="artist-card">
+                    <div class="artist-header">
+                        <div>
+                            <p class="artist-name">Henna By BiBi</p>
+                            <span class="artist-location">📍 Ronkonkoma, NY (Pop-Up Active)</span>
+                        </div>
+                        <div class="rating">⭐ 5.0 (48)</div>
+                    </div>
+                    <p style="font-size: 0.85rem; margin: 5px 0;">Specializes in bridal botanicals, geometric cuffs, and fine-line mandalas.</p>
+                    <div class="portfolio-preview">
+                        <div class="thumb">Floral</div>
+                        <div class="thumb">Mandala</div>
+                        <div class="thumb">Bridal</div>
+                    </div>
+                    <a href="https://linktr.ee" class="target-blank" class="book-btn">Book Appointment / View Flash</a>
+                </div>
+
+                <!-- Artist 2 -->
+                <div class="artist-card">
+                    <div class="artist-header">
+                        <div>
+                            <p class="artist-name">Island Henna Studio</p>
+                            <span class="artist-location">📍 Islip, NY (Walk-Ins Open)</span>
+                        </div>
+                        <div class="rating">⭐ 4.9 (32)</div>
+                    </div>
+                    <p style="font-size: 0.85rem; margin: 5px 0;">Organic natural henna paste, custom finger bands, and weekend market stalls.</p>
+                    <div class="portfolio-preview">
+                        <div class="thumb">Stain</div>
+                        <div class="thumb">Cuffs</div>
+                        <div class="thumb">Stripes</div>
+                    </div>
+                    <a href="https://linktr.ee" target="_blank" class="book-btn">Book Appointment / View Flash</a>
+                </div>
             </div>
         </div>
 
-        <!-- Flash Sheet Preview -->
+        <!-- Section 3: Artist Pop-Up & Portfolio Submission Form -->
         <div class="section-card">
-            <h2>Today's Pop-Up Flash Sheet</h2>
-            <p style="margin-bottom: 10px;">Sample flat-rate mini designs available for walk-ins:</p>
-            <div class="flash-grid">
-                <div class="flash-item">
-                    <h4>Mini Florals</h4>
-                    <p class="flash-price">$15 - $25</p>
-                </div>
-                <div class="flash-item">
-                    <h4>Finger Mandalas</h4>
-                    <p class="flash-price">$20 - $30</p>
-                </div>
-                <div class="flash-item">
-                    <h4>Geometric Cuffs</h4>
-                    <p class="flash-price">$25 - $35</p>
-                </div>
-            </div>
+            <h2>🎨 Are You a Henna Artist? Broadcast Your Pop-Up</h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Add your location, upload your flash designs, and let local clients find you instantly.</p>
             
-            <!-- Replace with your actual booking link -->
-            <a href="https://linktr.ee" class="btn" target="_blank">Book an Appointment or Find a Pop-Up</a>
+            <form onsubmit="event.preventDefault(); alert('Your pop-up location has been broadcasted to the HennaLink radar!');">
+                <input type="text" placeholder="Artist / Business Name" required>
+                <input type="text" placeholder="Current Location / Booth Name (e.g., Smithtown Street Fair - Booth 4)" required>
+                <select required>
+                    <option value="">Select Status</option>
+                    <option value="active">Active Pop-Up Right Now (🔴)</option>
+                    <option value="weekend">Weekend Market / Fair (🔵)</option>
+                    <option value="walkin">Salon / Studio Walk-Ins Open (🟣)</option>
+                </select>
+                <textarea rows="3" placeholder="Paste your Booking Link (Linktree / Instagram DM / Website URL)" required></textarea>
+                <button type="submit" class="submit-btn">Publish My Live Radar Pin</button>
+            </form>
         </div>
+
     </div>
 
     <footer>
-        &copy; 2026 HennaLink &bull; Built with GitHub Pages
+        &copy; 2026 HennaLink &bull; Connecting Communities Through Body Art
     </footer>
 
 </body>
