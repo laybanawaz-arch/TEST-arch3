@@ -250,6 +250,8 @@
             text-decoration: none;
             font-weight: bold;
             font-size: 0.85rem;
+            border: none;
+            cursor: pointer;
             transition: background 0.2s;
         }
         .book-btn:hover {
@@ -339,6 +341,39 @@
         .submit-btn:hover {
             background-color: var(--primary-dark);
         }
+        /* Booking Modal Styling */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(44, 34, 30, 0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .modal-content {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            max-width: 450px;
+            width: 100%;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
         footer {
             text-align: center;
             padding: 25px;
@@ -375,7 +410,7 @@
         <main class="main-content">
             <header>
                 <h1>Find Live Henna Pop-Ups Near You</h1>
-                <p>Discover real-time local body art, check active paste types, and book instantly.</p>
+                <p>Discover real-time local body art, check active paste types, and book directly on the site.</p>
             </header>
 
             <!-- Section 1: Live Area Radar Map -->
@@ -410,7 +445,7 @@
                             <div class="thumb">Bridal</div>
                         </div>
                         <div class="action-row">
-                            <a href="https://linktr.ee" target="_blank" class="book-btn">Book Appointment</a>
+                            <button class="book-btn" onclick="openBookingModal('Henna By BiBi')">Book Appointment</button>
                             <button class="claim-btn" onclick="alert('Flash Design #1 Reserved! Show this code to BiBi at the booth.')">Claim Flash</button>
                         </div>
                     </div>
@@ -431,7 +466,7 @@
                             <div class="thumb">Stripes</div>
                         </div>
                         <div class="action-row">
-                            <a href="https://linktr.ee" target="_blank" class="book-btn">Book Appointment</a>
+                            <button class="book-btn" onclick="openBookingModal('Island Henna Studio')">Book Appointment</button>
                             <button class="claim-btn" onclick="alert('Flash Design #2 Reserved!')">Claim Flash</button>
                         </div>
                     </div>
@@ -488,7 +523,7 @@
                         <option value="weekend">Weekend Market / Fair (🔵)</option>
                         <option value="walkin">Salon / Studio Walk-Ins Open (🟣)</option>
                     </select>
-                    <textarea id="bookingLink" rows="2" placeholder="Paste your Booking Link (Linktree / Instagram)" required></textarea>
+                    <textarea id="customNote" rows="2" placeholder="Notes or special offers for clients..." required></textarea>
                     <button type="submit" class="submit-btn">Publish My Live Radar Pin & QR Code</button>
                 </form>
             </div>
@@ -497,6 +532,34 @@
                 &copy; 2026 HennaLink &bull; Connecting Communities Through Body Art
             </footer>
         </main>
+    </div>
+
+    <!-- Direct Booking Modal -->
+    <div class="modal-overlay" id="bookingModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeBookingModal()">&times;</span>
+            <h3 id="modalArtistTitle" style="margin-top: 0; font-family: serif; color: var(--primary);">Book Appointment</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Fill out your details below to schedule your session with this artist directly.</p>
+            <form id="directBookingForm">
+                <input type="text" id="clientName" placeholder="Your Full Name" required>
+                <input type="tel" id="clientPhone" placeholder="Phone Number (for appointment reminder)" required>
+                <select id="designChoice" required>
+                    <option value="">Select Design / Service</option>
+                    <option value="floral">Floral Strip / Hand Band ($25)</option>
+                    <option value="mandala">Detailed Mandala Palm ($40)</option>
+                    <option value="bridal">Full Bridal Suite ($120)</option>
+                </select>
+                <input type="date" id="appointmentDate" required>
+                <select id="appointmentTime" required>
+                    <option value="">Select Time Slot</option>
+                    <option value="11:00 AM">11:00 AM</option>
+                    <option value="1:00 PM">1:00 PM</option>
+                    <option value="3:00 PM">3:00 PM</option>
+                    <option value="5:00 PM">5:00 PM</option>
+                </select>
+                <button type="submit" class="submit-btn">Confirm Booking</button>
+            </form>
+        </div>
     </div>
 
     <!-- Leaflet JS Script for Interactive Map Logic -->
@@ -510,23 +573,43 @@
         }).addTo(map);
 
         var marker1 = L.marker([40.8173, -73.1251]).addTo(map);
-        marker1.bindPopup("<b>Henna By BiBi</b><br>📍 Ronkonkoma, NY<br>🌿 Organic Henna<br><a href='https://linktr.ee' target='_blank'>Book Appointment</a>");
+        marker1.bindPopup("<b>Henna By BiBi</b><br>📍 Ronkonkoma, NY<br>🌿 Organic Henna<br><button onclick='openBookingModal(\"Henna By BiBi\")' style='background:#7b1113; color:#fff; border:none; padding:5px 10px; border-radius:5px; margin-top:5px; cursor:pointer;'>Book Here</button>");
 
         var marker2 = L.marker([40.7289, -73.2161]).addTo(map);
-        marker2.bindPopup("<b>Island Henna Studio</b><br>📍 Islip, NY<br>🫐 Jagua Stain<br><a href='https://linktr.ee' target='_blank'>Book Appointment</a>");
+        marker2.bindPopup("<b>Island Henna Studio</b><br>📍 Islip, NY<br>🫐 Jagua Stain<br><button onclick='openBookingModal(\"Island Henna Studio\")' style='background:#7b1113; color:#fff; border:none; padding:5px 10px; border-radius:5px; margin-top:5px; cursor:pointer;'>Book Here</button>");
+
+        // Modal Control Functions
+        function openBookingModal(artistName) {
+            document.getElementById('modalArtistTitle').innerText = 'Book with ' + artistName;
+            document.getElementById('bookingModal').style.display = 'flex';
+        }
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').style.display = 'none';
+        }
+
+        document.getElementById('directBookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var name = document.getElementById('clientName').value;
+            var date = document.getElementById('appointmentDate').value;
+            var time = document.getElementById('appointmentTime').value;
+            
+            alert('Success! Your appointment is confirmed for ' + date + ' at ' + time + '. We sent a confirmation notice to the artist!');
+            closeBookingModal();
+            document.getElementById('directBookingForm').reset();
+        });
 
         document.getElementById('popupForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             var name = document.getElementById('artistName').value;
             var loc = document.getElementById('locationName').value;
-            var link = document.getElementById('bookingLink').value;
 
             var randomLat = 40.8173 + (Math.random() - 0.5) * 0.05;
             var randomLng = -73.1251 + (Math.random() - 0.5) * 0.05;
 
             var newMarker = L.marker([randomLat, randomLng]).addTo(map);
-            newMarker.bindPopup("<b>" + name + "</b><br>📍 " + loc + "<br>Status: Live Pop-Up!<br><a href='" + link + "' target='_blank'>Book / Visit</a>").openPopup();
+            newMarker.bindPopup("<b>" + name + "</b><br>📍 " + loc + "<br>Status: Live Pop-Up!<br><button onclick='openBookingModal(\"" + name + "\")' style='background:#7b1113; color:#fff; border:none; padding:5px 10px; border-radius:5px; margin-top:5px; cursor:pointer;'>Book Here</button>").openPopup();
 
             map.setView([randomLat, randomLng], 13);
 
