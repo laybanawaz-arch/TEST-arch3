@@ -10,13 +10,15 @@
     
     <style>
         :root {
-            --primary: #8b0000;
-            --primary-dark: #5c0000;
-            --bg-color: #fdfbf7;
-            --card-bg: #ffffff;
-            --text-main: #333333;
-            --text-muted: #666666;
-            --accent: #faf6f0;
+            --primary: #7b1113;         /* Deep Henna Maroon */
+            --primary-dark: #4a150b;    /* Rich Chestnut Brown */
+            --gold-accent: #c29b61;     /* Warm Gold / Brass */
+            --bg-color: #fbf7f2;        /* Warm Parchment Cream */
+            --card-bg: #fffcf8;         /* Soft Cream Card Background */
+            --text-main: #2c221e;       /* Deep Espresso Text */
+            --text-muted: #6b5b53;      /* Muted Warm Gray-Brown */
+            --border-color: #e6d7cc;    /* Soft Warm Border */
+            --accent-light: #f4ece1;    /* Light Cream Accent */
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -26,40 +28,101 @@
             padding: 0;
             line-height: 1.6;
         }
-        header {
+        /* Layout Structure with Sidebar */
+        .app-layout {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+        @media(min-width: 850px) {
+            .app-layout {
+                flex-direction: row;
+            }
+        }
+        /* Sidebar Styling */
+        sidebar {
             background-color: var(--card-bg);
+            width: 100%;
+            max-width: 280px;
             padding: 30px 20px;
+            border-right: 1px solid var(--border-color);
+            box-shadow: 4px 0 20px rgba(74, 21, 11, 0.03);
+            box-sizing: border-box;
+        }
+        sidebar h2 {
+            color: var(--primary);
+            font-size: 1.6rem;
+            font-family: serif;
+            letter-spacing: 0.5px;
+            margin-top: 0;
+            margin-bottom: 2px;
+        }
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 25px 0;
+        }
+        .sidebar-menu li {
+            margin-bottom: 10px;
+        }
+        .sidebar-menu a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            display: block;
+            padding: 10px 14px;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+        .sidebar-menu a:hover {
+            background: var(--accent-light);
+            color: var(--primary);
+            transform: translateX(4px);
+        }
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+            padding: 25px;
+            max-width: 950px;
+            margin: 0 auto;
+            box-sizing: border-box;
+            width: 100%;
+        }
+        header {
+            background: linear-gradient(135deg, var(--card-bg) 0%, var(--accent-light) 100%);
+            padding: 35px 25px;
             text-align: center;
-            border-bottom: 1px solid #eee;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(74, 21, 11, 0.04);
         }
         header h1 {
             color: var(--primary);
-            margin: 0 0 5px 0;
+            margin: 0 0 8px 0;
             font-size: 2.2rem;
+            font-family: serif;
         }
         header p {
             color: var(--text-muted);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             margin: 0;
-        }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
         }
         .section-card {
             background: var(--card-bg);
             border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(74, 21, 11, 0.03);
         }
-        h2 {
+        h3 {
             color: var(--primary);
-            font-size: 1.3rem;
+            font-size: 1.35rem;
+            font-family: serif;
             margin-top: 0;
-            border-bottom: 2px solid #f9f2f2;
-            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-light);
+            padding-bottom: 12px;
         }
         /* Filter Bar */
         .filter-bar {
@@ -67,31 +130,33 @@
             gap: 10px;
             overflow-x: auto;
             padding-bottom: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         .filter-chip {
-            background: var(--accent);
-            border: 1px solid #e0d4c3;
-            padding: 8px 14px;
-            border-radius: 20px;
+            background: var(--accent-light);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 25px;
             font-size: 0.85rem;
             cursor: pointer;
             white-space: nowrap;
             color: var(--text-main);
             font-weight: 500;
+            transition: all 0.2s;
         }
-        .filter-chip.active {
+        .filter-chip.active, .filter-chip:hover {
             background: var(--primary);
             color: white;
             border-color: var(--primary);
         }
         /* Real Interactive Map Styling */
         #map {
-            height: 330px;
+            height: 350px;
             width: 100%;
             border-radius: 12px;
             margin-top: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-color);
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.05);
         }
         /* Artist Cards Grid */
         .artist-grid {
@@ -106,10 +171,14 @@
             }
         }
         .artist-card {
-            background: var(--accent);
+            background: var(--accent-light);
             border-radius: 12px;
-            padding: 20px;
-            border: 1px solid #f0e6dc;
+            padding: 22px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s;
+        }
+        .artist-card:hover {
+            transform: translateY(-2px);
         }
         .artist-header {
             display: flex;
@@ -119,54 +188,57 @@
         }
         .artist-name {
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: var(--primary-dark);
             margin: 0;
+            font-family: serif;
         }
         .artist-location {
             font-size: 0.85rem;
             color: var(--text-muted);
         }
         .rating {
-            background: #fff;
-            padding: 4px 8px;
+            background: #ffffff;
+            padding: 4px 10px;
             border-radius: 8px;
             font-size: 0.85rem;
             font-weight: bold;
-            color: #d4a373;
+            color: var(--gold-accent);
+            border: 1px solid var(--border-color);
         }
         .paste-badge {
             display: inline-block;
-            background: #e6dfd5;
+            background: #e8d7c8;
             font-size: 0.75rem;
-            padding: 3px 8px;
+            padding: 4px 10px;
             border-radius: 6px;
-            margin-top: 4px;
+            margin-top: 6px;
             font-weight: 600;
-            color: #555;
+            color: var(--primary-dark);
         }
         .portfolio-preview {
             display: flex;
             gap: 8px;
-            margin: 12px 0;
+            margin: 14px 0;
         }
         .thumb {
-            width: 60px;
-            height: 60px;
-            background: #d8c9bc;
+            width: 65px;
+            height: 65px;
+            background: #eddccb;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 0.75rem;
-            color: #555;
+            color: var(--text-muted);
             text-align: center;
             font-weight: 500;
+            border: 1px solid var(--border-color);
         }
         .action-row {
             display: flex;
             gap: 8px;
-            margin-top: 12px;
+            margin-top: 15px;
         }
         .book-btn {
             flex: 1;
@@ -178,48 +250,57 @@
             text-decoration: none;
             font-weight: bold;
             font-size: 0.85rem;
+            transition: background 0.2s;
+        }
+        .book-btn:hover {
+            background-color: var(--primary-dark);
         }
         .claim-btn {
-            background-color: #d4a373;
+            background-color: var(--gold-accent);
             color: white;
             border: none;
-            padding: 10px 12px;
+            padding: 10px 14px;
             border-radius: 8px;
             font-weight: bold;
             font-size: 0.85rem;
             cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .claim-btn:hover {
+            opacity: 0.9;
         }
         /* Healed Stain Gallery Feed */
         .stain-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
             margin-top: 15px;
         }
         .stain-card {
-            background: var(--accent);
+            background: var(--accent-light);
             border-radius: 10px;
-            padding: 10px;
+            padding: 12px;
             text-align: center;
-            border: 1px solid #f0e6dc;
+            border: 1px solid var(--border-color);
         }
         .stain-img-placeholder {
-            height: 90px;
-            background: #d8c9bc;
+            height: 100px;
+            background: #eddccb;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 0.8rem;
-            color: #555;
-            margin-bottom: 6px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            border: 1px dashed var(--gold-accent);
         }
         /* QR Generator Box */
         .qr-box {
-            background: var(--accent);
-            border: 2px dashed #d8c9bc;
+            background: var(--accent-light);
+            border: 2px dashed var(--gold-accent);
             border-radius: 12px;
-            padding: 20px;
+            padding: 25px;
             text-align: center;
             margin-top: 15px;
         }
@@ -227,169 +308,196 @@
         form {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
+            margin-top: 15px;
         }
         input, select, textarea {
-            padding: 12px;
-            border: 1px solid #ddd;
+            padding: 14px;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             font-size: 0.95rem;
             font-family: inherit;
+            background: #ffffff;
+            color: var(--text-main);
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(123, 17, 19, 0.1);
         }
         .submit-btn {
             background-color: var(--primary);
             color: white;
             border: none;
-            padding: 14px;
+            padding: 15px;
             border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
             font-size: 1rem;
+            transition: background 0.2s;
+        }
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
         }
         footer {
             text-align: center;
-            padding: 20px;
+            padding: 25px;
             color: var(--text-muted);
             font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>HennaLink</h1>
-        <p>Find Live Henna Pop-Ups & Local Artists Near You</p>
-    </header>
-
-    <div class="container">
-
-        <!-- Section 1: Live Area Radar Map with Filters -->
-        <div class="section-card">
-            <h2>📍 Live Area Radar Map</h2>
+    <div class="app-layout">
+        <!-- Sidebar Navigation Menu -->
+        <sidebar>
+            <h2>HennaLink</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 25px;">Artist & Pop-Up Radar</p>
             
-            <!-- Paste & Feature Filters -->
-            <div class="filter-bar">
-                <div class="filter-chip active" onclick="alert('Showing All Active Pop-Ups')">🌐 All Artists</div>
-                <div class="filter-chip" onclick="alert('Filtered: 100% Organic Henna')">🌿 Organic Henna</div>
-                <div class="filter-chip" onclick="alert('Filtered: Jagua Dark Stain')">🫐 Jagua Stain</div>
-                <div class="filter-chip" onclick="alert('Filtered: Walk-Ins Open Now')">⚡ Walk-Ins Open</div>
+            <ul class="sidebar-menu">
+                <li><a href="#mapSection">📍 Live Radar Map</a></li>
+                <li><a href="#artistsSection">✨ Featured Artists</a></li>
+                <li><a href="#stainSection">🌿 Healed Stain Feed</a></li>
+                <li><a href="#qrSection">📱 Table QR Generator</a></li>
+                <li><a href="#broadcastSection">🎨 Broadcast Pop-Up</a></li>
+            </ul>
+
+            <div style="background: var(--accent-light); padding: 18px; border-radius: 12px; margin-top: 35px; border: 1px solid var(--border-color);">
+                <p style="font-size: 0.85rem; margin: 0 0 6px 0; font-weight: bold; color: var(--primary-dark); font-family: serif;">Are you an artist?</p>
+                <p style="font-size: 0.78rem; margin: 0; color: var(--text-muted); line-height: 1.5;">Broadcast your booth location in seconds and get local clients walking right up.</p>
+            </div>
+        </sidebar>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header>
+                <h1>Find Live Henna Pop-Ups Near You</h1>
+                <p>Discover real-time local body art, check active paste types, and book instantly.</p>
+            </header>
+
+            <!-- Section 1: Live Area Radar Map -->
+            <div class="section-card" id="mapSection">
+                <h3>📍 Live Area Radar Map</h3>
+                <div class="filter-bar">
+                    <div class="filter-chip active" onclick="alert('Showing All Active Pop-Ups')">🌐 All Artists</div>
+                    <div class="filter-chip" onclick="alert('Filtered: 100% Organic Henna')">🌿 Organic Henna</div>
+                    <div class="filter-chip" onclick="alert('Filtered: Jagua Dark Stain')">🫐 Jagua Stain</div>
+                    <div class="filter-chip" onclick="alert('Filtered: Walk-Ins Open Now')">⚡ Walk-Ins Open</div>
+                </div>
+                <div id="map"></div>
             </div>
 
-            <div id="map"></div>
-        </div>
-
-        <!-- Section 2: Featured Local Artists, Portfolios & Quick Claim -->
-        <div class="section-card">
-            <h2>✨ Featured Local Artists & Flash Menus</h2>
-            <div class="artist-grid">
-                <!-- Artist 1 -->
-                <div class="artist-card">
-                    <div class="artist-header">
-                        <div>
-                            <p class="artist-name">Henna By BiBi</p>
-                            <span class="artist-location">📍 Ronkonkoma, NY (Active)</span>
-                            <div><span class="paste-badge">🌿 100% Organic Henna</span></div>
+            <!-- Section 2: Featured Local Artists -->
+            <div class="section-card" id="artistsSection">
+                <h3>✨ Featured Local Artists & Flash Menus</h3>
+                <div class="artist-grid">
+                    <div class="artist-card">
+                        <div class="artist-header">
+                            <div>
+                                <p class="artist-name">Henna By BiBi</p>
+                                <span class="artist-location">📍 Ronkonkoma, NY (Active)</span>
+                                <div><span class="paste-badge">🌿 100% Organic Henna</span></div>
+                            </div>
+                            <div class="rating">⭐ 5.0</div>
                         </div>
-                        <div class="rating">⭐ 5.0 (48)</div>
-                    </div>
-                    <p style="font-size: 0.85rem; margin: 5px 0;">Specializes in bridal botanicals and geometric cuffs.</p>
-                    <div class="portfolio-preview">
-                        <div class="thumb">Floral</div>
-                        <div class="thumb">Mandala</div>
-                        <div class="thumb">Bridal</div>
-                    </div>
-                    <div class="action-row">
-                        <a href="https://linktr.ee" target="_blank" class="book-btn">Book Appointment</a>
-                        <button class="claim-btn" onclick="alert('Flash Design #1 Reserved! Show this code to BiBi at the booth.')">Claim Flash</button>
-                    </div>
-                </div>
-
-                <!-- Artist 2 -->
-                <div class="artist-card">
-                    <div class="artist-header">
-                        <div>
-                            <p class="artist-name">Island Henna Studio</p>
-                            <span class="artist-location">📍 Islip, NY (Walk-Ins)</span>
-                            <div><span class="paste-badge">🫐 Jagua Dark Stain</span></div>
+                        <p style="font-size: 0.85rem; margin: 8px 0; color: var(--text-muted);">Specializes in bridal botanicals and geometric cuffs.</p>
+                        <div class="portfolio-preview">
+                            <div class="thumb">Floral</div>
+                            <div class="thumb">Mandala</div>
+                            <div class="thumb">Bridal</div>
                         </div>
-                        <div class="rating">⭐ 4.9 (32)</div>
+                        <div class="action-row">
+                            <a href="https://linktr.ee" target="_blank" class="book-btn">Book Appointment</a>
+                            <button class="claim-btn" onclick="alert('Flash Design #1 Reserved! Show this code to BiBi at the booth.')">Claim Flash</button>
+                        </div>
                     </div>
-                    <p style="font-size: 0.85rem; margin: 5px 0;">Organic paste, custom finger bands, and weekend market stalls.</p>
-                    <div class="portfolio-preview">
-                        <div class="thumb">Stain</div>
-                        <div class="thumb">Cuffs</div>
-                        <div class="thumb">Stripes</div>
-                    </div>
-                    <div class="action-row">
-                        <a href="https://linktr.ee" target="_blank" class="book-btn">Book Appointment</a>
-                        <button class="claim-btn" onclick="alert('Flash Design #2 Reserved!')">Claim Flash</button>
+
+                    <div class="artist-card">
+                        <div class="artist-header">
+                            <div>
+                                <p class="artist-name">Island Henna Studio</p>
+                                <span class="artist-location">📍 Islip, NY (Walk-Ins)</span>
+                                <div><span class="paste-badge">🫐 Jagua Dark Stain</span></div>
+                            </div>
+                            <div class="rating">⭐ 4.9</div>
+                        </div>
+                        <p style="font-size: 0.85rem; margin: 8px 0; color: var(--text-muted);">Organic paste, custom finger bands, and weekend market stalls.</p>
+                        <div class="portfolio-preview">
+                            <div class="thumb">Stain</div>
+                            <div class="thumb">Cuffs</div>
+                            <div class="thumb">Stripes</div>
+                        </div>
+                        <div class="action-row">
+                            <a href="https://linktr.ee" target="_blank" class="book-btn">Book Appointment</a>
+                            <button class="claim-btn" onclick="alert('Flash Design #2 Reserved!')">Claim Flash</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Section 3: Healed Stain Gallery Feed (Social Proof) -->
-        <div class="section-card">
-            <h2>🌿 Community Healed Stain Feed</h2>
-            <p style="font-size: 0.85rem; color: var(--text-muted);">Real 48-hour dark stain results uploaded by local clients!</p>
-            
-            <div class="stain-grid">
-                <div class="stain-card">
-                    <div class="stain-img-placeholder">Stain Photo</div>
-                    <span style="font-size: 0.8rem; font-weight: bold;">@ Henna By BiBi</span>
-                </div>
-                <div class="stain-card">
-                    <div class="stain-img-placeholder">Stain Photo</div>
-                    <span style="font-size: 0.8rem; font-weight: bold;">@ Island Henna</span>
-                </div>
-                <div class="stain-card">
-                    <div class="stain-img-placeholder">Stain Photo</div>
-                    <span style="font-size: 0.8rem; font-weight: bold;">@ Henna By BiBi</span>
+            <!-- Section 3: Healed Stain Gallery Feed -->
+            <div class="section-card" id="stainSection">
+                <h3>🌿 Community Healed Stain Feed</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: -5px;">Real 48-hour dark stain results uploaded by local clients!</p>
+                <div class="stain-grid">
+                    <div class="stain-card">
+                        <div class="stain-img-placeholder">Stain Photo</div>
+                        <span style="font-size: 0.8rem; font-weight: bold; color: var(--primary-dark);">@ Henna By BiBi</span>
+                    </div>
+                    <div class="stain-card">
+                        <div class="stain-img-placeholder">Stain Photo</div>
+                        <span style="font-size: 0.8rem; font-weight: bold; color: var(--primary-dark);">@ Island Henna</span>
+                    </div>
+                    <div class="stain-card">
+                        <div class="stain-img-placeholder">Stain Photo</div>
+                        <span style="font-size: 0.8rem; font-weight: bold; color: var(--primary-dark);">@ Henna By BiBi</span>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Section 4: Artist QR Code Generator Tool -->
-        <div class="section-card">
-            <h2>📱 Artist Tool: Print Your Table QR Code</h2>
-            <p style="font-size: 0.85rem; color: var(--text-muted);">Artists can generate a unique QR code to display on their farmers market or booth table so clients can scan and view live flash menus instantly.</p>
-            <div class="qr-box">
-                <div style="font-size: 2.5rem; margin-bottom: 5px;">📷 [ QR CODE ]</div>
-                <p style="font-size: 0.85rem; margin: 0 0 10px 0; font-weight: bold;">Scan to View Live Radar & Flash Sheet</p>
-                <button class="claim-btn" onclick="alert('Generating printable QR code sheet...')">Download Printable QR Sign</button>
+            <!-- Section 4: Table QR Code Generator -->
+            <div class="section-card" id="qrSection">
+                <h3>📱 Artist Tool: Print Your Table QR Code</h3>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: -5px;">Generate a unique QR code for your market or booth table so clients can scan and view live flash menus instantly.</p>
+                <div class="qr-box">
+                    <div style="font-size: 2.2rem; margin-bottom: 5px; color: var(--primary);">📷 [ QR CODE ]</div>
+                    <p style="font-size: 0.85rem; margin: 0 0 12px 0; font-weight: bold; color: var(--primary-dark);">Scan to View Live Radar & Flash Sheet</p>
+                    <button class="claim-btn" onclick="alert('Generating printable QR code sheet...')">Download Printable QR Sign</button>
+                </div>
             </div>
-        </div>
 
-        <!-- Section 5: Artist Pop-Up Submission Form -->
-        <div class="section-card">
-            <h2>🎨 Broadcast Your Pop-Up & Upload Stain Photos</h2>
-            <p style="font-size: 0.9rem; color: var(--text-muted);">Fill out your details to drop your live pin and showcase your healed stain portfolio.</p>
-            
-            <form id="popupForm">
-                <input type="text" id="artistName" placeholder="Artist / Business Name" required>
-                <input type="text" id="locationName" placeholder="Location Name (e.g., Ronkonkoma Street Fair)" required>
-                <select id="pasteType" required>
-                    <option value="">Select Paste Type</option>
-                    <option value="organic">100% Organic Natural Henna (Red-Brown)</option>
-                    <option value="jagua">Jagua Gel (Blue-Black Stain)</option>
-                    <option value="both">Both Organic & Jagua</option>
-                </select>
-                <select id="popupType" required>
-                    <option value="">Select Status</option>
-                    <option value="active">Active Pop-Up Right Now (🔴)</option>
-                    <option value="weekend">Weekend Market / Fair (🔵)</option>
-                    <option value="walkin">Salon / Studio Walk-Ins Open (🟣)</option>
-                </select>
-                <textarea id="bookingLink" rows="2" placeholder="Paste your Booking Link (Linktree / Instagram)" required></textarea>
-                <button type="submit" class="submit-btn">Publish My Live Radar Pin & QR Code</button>
-            </form>
-        </div>
+            <!-- Section 5: Artist Pop-Up Submission Form -->
+            <div class="section-card" id="broadcastSection">
+                <h3>🎨 Broadcast Your Pop-Up & Upload Stain Photos</h3>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: -5px;">Fill out your details to drop your live pin and showcase your healed stain portfolio.</p>
+                <form id="popupForm">
+                    <input type="text" id="artistName" placeholder="Artist / Business Name" required>
+                    <input type="text" id="locationName" placeholder="Location Name (e.g., Ronkonkoma Street Fair)" required>
+                    <select id="pasteType" required>
+                        <option value="">Select Paste Type</option>
+                        <option value="organic">100% Organic Natural Henna (Red-Brown)</option>
+                        <option value="jagua">Jagua Gel (Blue-Black Stain)</option>
+                        <option value="both">Both Organic & Jagua</option>
+                    </select>
+                    <select id="popupType" required>
+                        <option value="">Select Status</option>
+                        <option value="active">Active Pop-Up Right Now (🔴)</option>
+                        <option value="weekend">Weekend Market / Fair (🔵)</option>
+                        <option value="walkin">Salon / Studio Walk-Ins Open (🟣)</option>
+                    </select>
+                    <textarea id="bookingLink" rows="2" placeholder="Paste your Booking Link (Linktree / Instagram)" required></textarea>
+                    <button type="submit" class="submit-btn">Publish My Live Radar Pin & QR Code</button>
+                </form>
+            </div>
 
+            <footer>
+                &copy; 2026 HennaLink &bull; Connecting Communities Through Body Art
+            </footer>
+        </main>
     </div>
-
-    <footer>
-        &copy; 2026 HennaLink &bull; Connecting Communities Through Body Art
-    </footer>
 
     <!-- Leaflet JS Script for Interactive Map Logic -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
